@@ -1,0 +1,23 @@
+{
+  "name": "cypress-automation",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "cy:open:staging": " npx cypress open --env configFile=staging --e2e --browser chrome",
+    "cy:open:prod": " npx cypress open --env configFile=prod --e2e --browser chrome",
+    "cy:open:preprod": " npx cypress open --env configFile=preprod --e2e --browser chrome",
+    "cy:open:rc": " npx cypress open --env configFile=rc --e2e --browser chrome",
+    "cy:open:dev": " npx cypress open --env configFile=dev --e2e --browser chrome"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/fs-extra": "^9.0.13",
+    "cypress": "^10.2.0"
+  },
+  "dependencies": {
+    "typescript": "^4.7.4"
+  }
+}

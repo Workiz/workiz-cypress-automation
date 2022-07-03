@@ -1,0 +1,46 @@
+{
+    "baseUrl": "https://rc.tests.workiz.com/",
+  "env": {
+    "environment": "rc"
+  },
+  "urlForOnlyDevEnvTests": "https://rc.tests.workiz.com/",
+  "email": "rc-automation@workiz.com",
+  "password": "Test123!",
+  "email2": "rc-automation2@workiz.com",
+  "password2": "Test123!",
+  "email3": "rc-automation4@workiz.com",
+  "password3": "Test123!",
+  "email4": "rc-automation5@workiz.com",
+  "password4": "Test123!",
+  "email5": "rc-automation6@workiz.com",
+  "password5": "Test123!",
+  "email6": "rc-automation7@workiz.com",
+  "password6": "Test123!",
+  "newjobaccountemail": "rc-automation3@workiz.com",
+  "newjobaccountpassword": "Test123!",
+  "runsInDocker": true,
+  "twilioPhoneNumber": "4844771297",
+  "dialingFrom": "3212042632",
+  "dialingTo": "9388887629",
+  "sunbitClient": "1479",
+  "driverType": "Chrome",
+  "database": {
+    "mySqlServer": "10.2.0.66",
+    "mySqlPort": "3306",
+    "mySqlUser": "g1_usr",
+    "mySqlpass": "KYrf<9G/wHqh92gn",
+    "mySqlDB": "sendajobprod"
+  },
+  "execTimeout": 18000,
+  "defaultCommandTimeout": 300000,
+  "requestTimeout": 10000,
+  "pageLoadTimeout": 30000,
+  "responseTimeout": 10000,
+  "viewportWidth": 1200,
+  "viewportHeight": 1200,
+  "videoUploadOnPasses": false,
+  "retries": {
+    "runMode": 1,
+    "openMode": 2
+  }
+}

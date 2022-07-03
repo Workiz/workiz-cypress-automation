@@ -1,0 +1,46 @@
+{
+    "baseUrl": "https://app.workiz.com/",
+  "env": {
+    "environment": "production"
+  },
+  "urlForOnlyDevEnvTests": "https://qa.workiz.com/",
+  "email": "automation@workiz.com",
+  "password": "Test123!",
+  "email2": "automation2@workiz.com",
+  "password2": "Test123!",
+  "email3": "automation4@workiz.com",
+  "password3": "Test123!",
+  "email4": "automation5@workiz.com",
+  "password4": "Test123!",
+  "email5": "automation6@workiz.com",
+  "password5": "Test123!",
+  "email6": "automation7@workiz.com",
+  "password6": "Test123!",
+  "newjobaccountemail": "automation3@workiz.com",
+  "newjobaccountpassword": "Test123!",
+  "runsInDocker": true,
+  "twilioPhoneNumber": "4844771297",
+  "dialingFrom": "3212042632",
+  "dialingTo": "6193146484",
+  "sunbitClient": "9950",
+  "driverType": "Chrome",
+  "database": {
+    "mySqlServer": "10.2.0.47",
+    "mySqlPort": "3306",
+    "mySqlUser": "framer",
+    "mySqlpass": "F1ame8ea6d8f!",
+    "mySqlDB": "sendajobprod"
+  },
+  "execTimeout": 18000,
+  "defaultCommandTimeout": 300000,
+  "requestTimeout": 10000,
+  "pageLoadTimeout": 30000,
+  "responseTimeout": 10000,
+  "viewportWidth": 1200,
+  "viewportHeight": 1200,
+  "videoUploadOnPasses": false,
+  "retries": {
+    "runMode": 1,
+    "openMode": 2
+  }
+}
