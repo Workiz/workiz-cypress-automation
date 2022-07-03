@@ -24,7 +24,6 @@ describe('Registration and login tests',() => {
     });
 
     it('left aside menu contains all defult labels after registration',() =>{
-        const pageRouter =  new PageRouter;
         const email = RandomFunctions.generateRandomEmail();
         let registrationPage = pageRouter.goToRegistrationPage();
         const fullName = RandomFunctions.generateRandomString(7);
