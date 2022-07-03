@@ -20,6 +20,7 @@ Cypress.Commands.add('logOut', () => {
     
  });
 
+
  Cypress.Commands.add('openSettingsMenu',() => {
-    cy.get('[data-testid="pop-menu-span"] > .lnr-cog').click();
+    cy.get('[data-testid="pop-menu-span"] > .lnr-cog',{ timeout: 10000 }).click({force: true});
  });
