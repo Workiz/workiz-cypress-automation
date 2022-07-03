@@ -1,12 +1,8 @@
 
 export class HomePage {
 
-    getAccountUserName(){
+    getAccountUserName(): Cypress.Chainable<string>{
         cy.openSettingsMenu();
-        cy.get('._popMenu._right .pName').then(elem => {
-           let user =  elem.text().trim(); 
-           console.log(user);           
-        })
-
+        return cy.get('._popMenu._right .pName').invoke("text");
     }  
 }

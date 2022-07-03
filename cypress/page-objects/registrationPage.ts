@@ -6,7 +6,7 @@ export class RegistrationPage {
         this.inputEmailAndPwd(email);
         this.inputDetails(fullName);
         this.fillInAdditionalDetails();
-        this.completeSignUp();
+        this.closeExperimentModal();
     }
 
     inputEmailAndPwd(email: string):void {
@@ -38,13 +38,12 @@ export class RegistrationPage {
         cy.get('.button.signUpCompleting-module__sFixedButtom___1sDA0').click();
     }
 
-    completeSignUp(): HomePage {
+    closeExperimentModal(): HomePage {
         //invite team member
         cy.get('.InviteTeamMemberModal-module__doItLaterButton___1sCJf').click();
         //create job
         cy.get('.InviteTeamMemberModal-module__doItLaterButton___1sCJf').click();
         cy.location('href').should('contain','home'); 
         return new HomePage;
-
     }
 }
