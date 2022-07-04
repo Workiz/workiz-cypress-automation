@@ -1,7 +1,7 @@
 
 export class HomePage {
     public get getDashboaredElements(): Cypress.Chainable<JQuery> {
-        return cy.get("div.dashboard-module__draggableFrame___1C2u2", { timeout: 10000 } );
+        return cy.get(".styles__title___1-_xq", { timeout: 10000 } );
     }
 
     
