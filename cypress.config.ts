@@ -10,9 +10,15 @@ const fetchConfigurationByFile = file => {
   );
 };
 
-module.exports = defineConfig({
+export default defineConfig({
   e2e: {
     specPattern: "cypress/tests/**/*/*.spec.{js,jsx,ts,tsx}",
+    viewportWidth: 1280,
+    viewportHeight: 800,
+    "retries": {
+      "runMode": 1,
+      "openMode": 1
+    },
     setupNodeEvents(on, config) {
       // implement node event listeners here
       const environment = config.env.configFile || "development";
