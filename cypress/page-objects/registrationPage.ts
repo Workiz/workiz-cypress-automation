@@ -2,11 +2,12 @@ import { RandomFunctions } from "../support/randomFunctions";
 import { HomePage } from "./homePage";
 
 export class RegistrationPage {
-    fullSignUp(email: string,fullName:string) {
+
+    fullSignUp(email: string,fullName:string): HomePage {
         this.inputEmailAndPwd(email);
         this.inputDetails(fullName);
         this.fillInAdditionalDetails();
-        this.closeExperimentModal();
+        return this.closeExperimentModal();
     }
 
     inputEmailAndPwd(email: string):void {
