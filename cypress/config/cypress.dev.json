@@ -29,17 +29,5 @@
     "mySqlUser": "root",
     "mySqlpass": "",
     "mySqlDB": "sendajobprod"
-  },
-  "execTimeout": 18000,
-  "defaultCommandTimeout": 300000,
-  "requestTimeout": 10000,
-  "pageLoadTimeout": 30000,
-  "responseTimeout": 10000,
-  "viewportWidth": 1200,
-  "viewportHeight": 1200,
-  "videoUploadOnPasses": false,
-  "retries": {
-    "runMode": 1,
-    "openMode": 0
   }
 }

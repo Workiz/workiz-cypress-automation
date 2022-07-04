@@ -29,10 +29,5 @@
     "mySqlUser": "g1_usr",
     "mySqlpass": "KYrf<9G/wHqh92gn",
     "mySqlDB": "sendajobprod"
-  },
-  "videoUploadOnPasses": false,
-  "retries": {
-    "runMode": 1,
-    "openMode": 0
   }
 }

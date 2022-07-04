@@ -19,6 +19,7 @@ export default defineConfig({
       "runMode": 1,
       "openMode": 1
     },
+    "videoUploadOnPasses": false,
     setupNodeEvents(on, config) {
       // implement node event listeners here
       const environment = config.env.configFile || "development";
