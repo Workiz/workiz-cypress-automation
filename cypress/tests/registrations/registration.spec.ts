@@ -7,7 +7,6 @@ describe('Registration and login tests',() => {
     let pageRouter:PageRouter;
 
     beforeEach(() => {
-        cy.viewport(1280, 800) // Set viewport to 550px x 750px
         pageRouter = new PageRouter;
     })
 
@@ -16,8 +15,8 @@ describe('Registration and login tests',() => {
         let registrationPage = pageRouter.goToRegistrationPage();
         const fullName = RandomFunctions.generateRandomString(7);
         registrationPage.fullSignUp(email,fullName);
-
         cy.logOut();
+        
         let loginPage = new LogInPage;
         let homePage = loginPage.logIn(email,'Test123!');
         
@@ -29,7 +28,7 @@ describe('Registration and login tests',() => {
         let registrationPage = pageRouter.goToRegistrationPage();
         const fullName = RandomFunctions.generateRandomString(7);
         let homePage = registrationPage.fullSignUp(email,fullName);
-        
+
         let leftMenuElements = homePage.getLeftMenuLabelsElements;
         leftMenuElements.each((item, index, list) => {
             expect(list).to.have.length(13);
