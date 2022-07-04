@@ -1,7 +1,7 @@
 import { LogInPage } from "../../page-objects/logInPage";
 import { PageRouter } from "../../page-objects/router";
 import { RandomFunctions } from "../../support/randomFunctions";
-import { MenuLabels } from "../../infrastructure/menuLabels";
+import { HomePageLabels } from "../../infrastructure/homePageLabels";
 
 describe('Registration and login tests',() => {
     let pageRouter:PageRouter;
@@ -32,8 +32,8 @@ describe('Registration and login tests',() => {
         let leftMenuElements = homePage.getLeftMenuLabelsElements;
         leftMenuElements.should('have.length', 13);
         leftMenuElements.each((item, index, list) => {
-            cy.wrap(item).should("contain.text", MenuLabels.listForNewAccountWithGettingStarted[index])
-        })
+            cy.wrap(item).should("contain.text", HomePageLabels.listForNewAccountWithGettingStarted[index])
+        });
     });
 
     it('Make sure all default widgets appears on dashboared',() =>{
@@ -47,6 +47,9 @@ describe('Registration and login tests',() => {
         let homePage = loginPage.logIn(email,'Test123!');
         let widgetsElements = homePage.getDashboaredElements;
         widgetsElements.should('have.length', 15);
+        widgetsElements.each((item,index,list) => {
+            cy.wrap(item).should('contain.text',HomePageLabels.listWidgetsForNewAccount[index])
+        });
     });
 });
 
