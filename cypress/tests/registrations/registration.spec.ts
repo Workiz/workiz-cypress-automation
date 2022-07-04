@@ -16,7 +16,7 @@ describe('Registration and login tests',() => {
         const fullName = RandomFunctions.generateRandomString(7);
         registrationPage.fullSignUp(email,fullName);
         cy.logOut();
-        
+
         let loginPage = new LogInPage;
         let homePage = loginPage.logIn(email,'Test123!');
         
@@ -30,12 +30,23 @@ describe('Registration and login tests',() => {
         let homePage = registrationPage.fullSignUp(email,fullName);
 
         let leftMenuElements = homePage.getLeftMenuLabelsElements;
-        leftMenuElements.each((item, index, list) => {
-            expect(list).to.have.length(13);
-        })
+        leftMenuElements.should('have.length', 13);
         leftMenuElements.each((item, index, list) => {
             cy.wrap(item).should("contain.text", MenuLabels.listForNewAccountWithGettingStarted[index])
         })
+    });
+
+    it('Make sure all default widgets appears on dashboared',() =>{
+        const email = RandomFunctions.generateRandomEmail();
+        let registrationPage = pageRouter.goToRegistrationPage();
+        const fullName = RandomFunctions.generateRandomString(7);
+        registrationPage.fullSignUp(email,fullName);
+        cy.logOut();
+
+        let loginPage = new LogInPage;
+        let homePage = loginPage.logIn(email,'Test123!');
+        let widgetsElements = homePage.getDashboaredElements;
+        widgetsElements.should('have.length', 15);
     });
 });
 

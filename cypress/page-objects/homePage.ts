@@ -1,5 +1,10 @@
 
 export class HomePage {
+    public get getDashboaredElements(): Cypress.Chainable<JQuery> {
+        return cy.get("div.dashboard-module__draggableFrame___1C2u2", { timeout: 10000 } );
+    }
+
+    
     public get getLeftMenuLabelsElements(): Cypress.Chainable<JQuery> {
         return cy.get("#big-menu li a");
     }
