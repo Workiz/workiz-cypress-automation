@@ -9,13 +9,19 @@
     "cy:open:prod": " npx cypress open --env configFile=prod --e2e --browser chrome",
     "cy:open:preprod": " npx cypress open --env configFile=preprod --e2e --browser chrome",
     "cy:open:rc": " npx cypress open --env configFile=rc --e2e --browser chrome",
-    "cy:open:dev": " npx cypress open --env configFile=dev --e2e --browser chrome"
+    "cy:open:dev": " npx cypress open --env configFile=dev --e2e --browser chrome",
+    "cy:run:staging": " npx cypress run --env configFile=staging --e2e --browser chrome",
+    "cy:run:prod": " npx cypress run --env configFile=prod --e2e --browser chrome",
+    "cy:run:preprod": " npx cypress run --env configFile=preprod --e2e --browser chrome",
+    "cy:run:rc": " npx cypress run --env configFile=rc --e2e --browser chrome",
+    "cy:run:dev": " npx cypress run --env configFile=dev --e2e --browser chrome"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@types/fs-extra": "^9.0.13",
-    "cypress": "^10.2.0"
+    "cypress": "^10.2.0",
+    "mysql": "^2.18.1"
   },
   "dependencies": {
     "typescript": "^4.7.4"

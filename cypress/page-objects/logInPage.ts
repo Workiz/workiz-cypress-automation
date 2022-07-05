@@ -1,6 +1,13 @@
 import { HomePage } from "./homePage";
 
 export class LogInPage {
+    logInWithAccount2() {
+        cy.visit('');
+        let email = Cypress.env("email2");
+        console.log(email);
+        let pwd = Cypress.env("password2");
+        this.logIn(email,pwd);
+    }
 
     logIn(email: string, pwd: string):HomePage {
         cy.get('#email').type(email);
