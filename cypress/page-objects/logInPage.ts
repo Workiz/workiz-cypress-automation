@@ -3,9 +3,7 @@ import { HomePage } from "./homePage";
 export class LogInPage {
     logInWithAccount2() {
         cy.visit('');
-        let email = Cypress.env("email2");
-        let pwd = Cypress.env("password2");
-        this.logIn(email,pwd);
+        this.logIn(Cypress.env("email2"),Cypress.env("password2"));
     }
 
     logIn(email: string, pwd: string):HomePage {
