@@ -9,8 +9,9 @@ export class TeamPage{
     createNewUserForTeam(email: string, fullName: string, phone: string, role: string) {
         this.clickAddNewUser();
         this.fillUserDetails(email, fullName, phone);
-        cy.get(':nth-child(6) > .validationSpan > :nth-child(1) > .react-select-container > .react-select__control').click();
-        cy.contains(role).click;
+        // cy.get(':nth-child(6) > .validationSpan > :nth-child(1) > .react-select-container > .react-select__control').click();
+        // cy.contains(role).click;
+        cy.selectFromDropDown('attr', "name='role_id'",role)
         cy.get('button').contains('Invite user').click();
     }
     

@@ -12,9 +12,8 @@ const fetchConfigurationByFile = file => {
 };
 
 function queryTestDb(query,config) {
-  const connection = mysql.createConnection(config.env.db);
+  const connection = mysql.createConnection(config.env.configFile.env.db);
   connection.connect();
-
 
 return new Promise((resolve,reject) => {
   connection.query(query,(error,results) => {
@@ -37,15 +36,14 @@ export default defineConfig({
     },
     "videoUploadOnPasses": false,
     setupNodeEvents(on, config) {
-      // implement node event listeners here
-      on("task", {
-        queryDb: (query) => {
-          return queryTestDb(query,config);
-        }
-      })
       const environment = config.env.configFile || "development";
       const configurationForEnvironment = fetchConfigurationByFile(environment);
-    
+      // implement node event listeners here
+      on("task", {
+        queryDb: query => {
+          return queryTestDb(query,config)
+        },
+      })
       return configurationForEnvironment || config;
       
     },

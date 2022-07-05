@@ -68,7 +68,7 @@ describe('Registration and login tests',() => {
     });
 });
 
-    it('User Can LogIn After Signup From Email Invitation',() => {
+    it.only('User Can LogIn After Signup From Email Invitation',() => {
         let loginPage = new LogInPage;
         loginPage.logInWithAccount2();
         const email = RandomFunctions.generateRandomEmail();
