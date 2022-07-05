@@ -2,7 +2,6 @@ import { LogInPage } from "../../page-objects/logInPage";
 import { PageRouter } from "../../page-objects/router";
 import { RandomFunctions } from "../../support/randomFunctions";
 import { HomePageLabels } from "../../infrastructure/homePageLabels";
-import { TeamPage } from "../../page-objects/teamPage";
 
 describe('Registration and login tests',() => {
     let pageRouter:PageRouter;
@@ -59,10 +58,11 @@ describe('Registration and login tests',() => {
         const email = RandomFunctions.generateRandomEmail();
         const fullName = RandomFunctions.generateRandomString(7);
         const phone = "0548107330";
+        const chooseUserType = "Subcontractor";
         let teamPage = pageRouter.goToTeamPage();
-        teamPage.createNewFreeUserForTeam(email,fullName,phone);
+        teamPage.createNewFreeUserForTeam(email,fullName,phone,chooseUserType);
         let teamPageAfterAddingNew = pageRouter.goToTeamPage();
-        let teamUsers = teamPageAfterAddingNew.getFreeTeamUsers(email);
+        let teamUsers = teamPageAfterAddingNew.getFreeTeamUsers(email,chooseUserType);
         teamUsers.invoke('text').then((text) => {
             expect(text).includes(email);
     });
