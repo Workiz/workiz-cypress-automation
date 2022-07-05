@@ -12,8 +12,8 @@ describe('Registration and login tests',() => {
 
     it('able to log in after registration',() =>{
         const email = RandomFunctions.generateRandomEmail();
-        let registrationPage = pageRouter.goToRegistrationPage();
         const fullName = RandomFunctions.generateRandomString(7);
+        let registrationPage = pageRouter.goToRegistrationPage();
         registrationPage.fullSignUp(email,fullName);
         cy.logOut();
 
@@ -25,8 +25,8 @@ describe('Registration and login tests',() => {
 
     it('left aside menu contains all defult labels after registration',() =>{
         const email = RandomFunctions.generateRandomEmail();
-        let registrationPage = pageRouter.goToRegistrationPage();
         const fullName = RandomFunctions.generateRandomString(7);
+        let registrationPage = pageRouter.goToRegistrationPage();
         let homePage = registrationPage.fullSignUp(email,fullName);
 
         let leftMenuElements = homePage.getLeftMenuLabelsElements;
@@ -38,8 +38,8 @@ describe('Registration and login tests',() => {
 
     it('Make sure all default widgets appears on dashboared',() =>{
         const email = RandomFunctions.generateRandomEmail();
-        let registrationPage = pageRouter.goToRegistrationPage();
         const fullName = RandomFunctions.generateRandomString(7);
+        let registrationPage = pageRouter.goToRegistrationPage();
         registrationPage.fullSignUp(email,fullName);
         cy.logOut();
 
@@ -50,6 +50,34 @@ describe('Registration and login tests',() => {
         widgetsElements.each((item,index,list) => {
             cy.wrap(item).should('contain.text',HomePageLabels.listWidgetsForNewAccount[index])
         });
+    });
+
+    it('After Creating Free User He Will Appear In free Users List',() => {
+        let loginPage = new LogInPage;
+        loginPage.logInWithAccount2();
+        const email = RandomFunctions.generateRandomEmail();
+        const fullName = RandomFunctions.generateRandomString(7);
+        const phone = "0548107330";
+        const chooseUserType = "Subcontractor";
+        let teamPage = pageRouter.goToTeamPage();
+        teamPage.createNewFreeUserForTeam(email,fullName,phone,chooseUserType);
+        let teamPageAfterAddingNew = pageRouter.goToTeamPage();
+        let teamUsers = teamPageAfterAddingNew.getFreeTeamUsers(email,chooseUserType);
+        teamUsers.invoke('text').then((text) => {
+            expect(text).includes(email);
+    });
+});
+
+    it.only('User Can LogIn After Signup From Email Invitation',() => {
+        let loginPage = new LogInPage;
+        loginPage.logInWithAccount2();
+        const email = RandomFunctions.generateRandomEmail();
+        const fullName = RandomFunctions.generateRandomString(7);
+        const phone = "0548107330";
+        const role = "tech";
+        let teamPage = pageRouter.goToTeamPage();
+        teamPage.createNewUserForTeam(email,fullName,phone,role);
+        teamPage.getUserInvitation(email);
     });
 });
 

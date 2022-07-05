@@ -16,7 +16,7 @@ export class RandomFunctions {
     }
 
     public static generateRandomPhone(): string {
-        let phone = (Math.floor(Math.random() * 1000000000)).toString();
+        let phone = (Math.floor(Math.random() * 100000000)).toString();
         return phone;
     }
 }

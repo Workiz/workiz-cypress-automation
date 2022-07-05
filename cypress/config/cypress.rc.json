@@ -1,8 +1,7 @@
 {
-    "baseUrl": "https://rc.tests.workiz.com/",
+  "baseUrl": "https://rc.tests.workiz.com/",
   "env": {
-    "environment": "rc"
-  },
+  "environment": "rc",
   "urlForOnlyDevEnvTests": "https://rc.tests.workiz.com/",
   "email": "rc-automation@workiz.com",
   "password": "Test123!",
@@ -30,5 +29,6 @@
     "mySqlUser": "g1_usr",
     "mySqlpass": "KYrf<9G/wHqh92gn",
     "mySqlDB": "sendajobprod"
+  }
   }
 }
