@@ -1,6 +1,15 @@
 import { HomePage } from "./homePage";
 
 export class LogInPage {
+
+    logInWithAccount1() {
+        cy.visit('');
+        let email = Cypress.env("email");
+        console.log(email);
+        let pwd = Cypress.env("password");
+        this.logIn(email,pwd);
+    }
+
     logInWithAccount2() {
         cy.visit('');
         let email = Cypress.env("email2");
