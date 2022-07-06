@@ -1,4 +1,4 @@
-import { ClientsReportPage } from './clientsReportPage';
+import { AllClientsPage as AllClientsPage } from './Clients/allClientsPage';
 import { RegistrationPage } from './registrationPage';
 import { TeamPage } from './teamPage';
 
@@ -19,11 +19,11 @@ export class PageRouter {
         return new RegistrationPage;        
     }
 
-    goToClientsPage ():ClientsReportPage  {
+    goToClientsPage ():AllClientsPage  {
         cy.visit('root/clients');
         cy.location().should((location) => {
             expect(location.href).to.contain('root/clients')
         });
-        return new ClientsReportPage;        
+        return new AllClientsPage;        
     }
 }

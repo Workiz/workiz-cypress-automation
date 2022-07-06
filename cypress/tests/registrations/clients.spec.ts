@@ -1,22 +1,22 @@
-import { ClientsReportPage } from "../../page-objects/clientsReportPage";
+import { AllClientsPage } from "../../page-objects/Clients/allClientsPage";
+import { HomePage } from "../../page-objects/homePage";
 import { LogInPage } from "../../page-objects/logInPage";
 import { PageRouter } from "../../page-objects/router";
 
 describe('Clients tests', () => {
-    let pageRouter:PageRouter;
+    let pageRouter: PageRouter;
     let logInPage: LogInPage;
-    let clientsPage: ClientsReportPage
+    let homePage: HomePage;
 
     beforeEach(() => {
         pageRouter = new PageRouter;
         logInPage = new LogInPage;
-        clientsPage = new ClientsReportPage
+        homePage =logInPage.logInWithAccount1();
     })
 
-
     it.only('WhenCreatingNewClientItAppearsInTheClinentsReport',() =>{
-        logInPage.logInWithAccount1();
-        pageRouter.goToClientsPage();
-        clientsPage.createClient();
+        let allClientsPage = pageRouter.goToClientsPage();
+        let clientPage = allClientsPage.createClient();
+        clientPage.getUrl();
     });
 })
