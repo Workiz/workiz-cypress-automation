@@ -12,14 +12,14 @@ let fetchConfigurationByFile = file => {
   );
 };
 
-function queryTestDb(query,confCon) {
+function queryTestDb(query) {
   //const config1 =  configurationForEnvironment;
   const connection = mysql.createConnection({
-    "host": confCon.host,
-    "port": confCon.port,
-    "user": confCon.user,
-    "password": confCon.password,
-    "database": confCon.database
+      "host": "104.198.246.80",
+      "port": "3306",
+      "user": "g1_usr",
+      "password": "KYrf<9G/wHqh92gn",
+      "database": "sendajobprod"
   });
   connection.connect();
 
@@ -48,20 +48,18 @@ export default defineConfig({
       // implement node event listeners here
       on('task', {
         queryDb: query => {
-          const environment = config.env.configFile || "development";
-          const configuForEnvironment = fetchConfigurationByFile(environment)
-          configuForEnvironment.then((result) => {
-            let confCon = result.env.db;
-            return queryTestDb(query,confCon)   
-          })                 
+          // const environment = config.env.configFile || "development";
+          // const configuForEnvironment = fetchConfigurationByFile(environment)
+          // configuForEnvironment.then((result) => {
+          //   let confCon = result.env.db;
+            console.log('query ', query);
+            return queryTestDb(query);
+          // })                 
         },
       })
       const environment = config.env.configFile || "development";
       const configurationForEnvironment = fetchConfigurationByFile(environment);
-      return configurationForEnvironment || config;
-      
+      return configurationForEnvironment || config;   
     },
-    
-
   },
 });

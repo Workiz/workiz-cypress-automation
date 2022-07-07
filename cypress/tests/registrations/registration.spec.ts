@@ -78,6 +78,9 @@ describe('Registration and login tests',() => {
         let teamPage = pageRouter.goToTeamPage();
         teamPage.createNewUserForTeam(email,fullName,phone,role);
         teamPage.getUserInvitation(email);
+        cy.get('@hash').then((hash) => {
+            console.log('from tst ', hash);
+        })
     });
 });
 
