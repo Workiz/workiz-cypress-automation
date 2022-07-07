@@ -1,13 +1,13 @@
 export class ClientPage {
 
-    constructor() {
-        this.setClientIdAsAlias();
+    constructor(idAlias: string) {
+        this.setClientIdAsAlias(idAlias);
     }
 
-        setClientIdAsAlias() {
+    setClientIdAsAlias(idAlias: string) {
         cy.location('href').should('contains', 'client').then((fullUrl) => { 
         const clientId = fullUrl.split('/')[5];
-        cy.wrap(clientId).as('clientId');
+        cy.wrap(clientId).as(`${idAlias}`);
         });
-      }
+    }
 }

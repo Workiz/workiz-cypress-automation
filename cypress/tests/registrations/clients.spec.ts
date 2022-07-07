@@ -1,6 +1,7 @@
 import { HomePage } from "../../page-objects/homePage";
 import { LogInPage } from "../../page-objects/logInPage";
 import { PageRouter } from "../../page-objects/router";
+import { RandomFunctions } from "../../support/randomFunctions";
 
 describe('Clients tests', () => {
     let pageRouter: PageRouter;
@@ -15,8 +16,10 @@ describe('Clients tests', () => {
 
     it.only('When creating new client it appears in the clients report',() =>{
         let allClientsPage = pageRouter.goToClientsPage();
-        let clientPage = allClientsPage.createClient();
-        cy.get('@clientId').then((clientId) =>{
+        let clientAliasName = RandomFunctions.generateRandomString(5);
+        allClientsPage.createClient(clientAliasName);
+        let alias = '\@' +`${clientAliasName}`;
+        cy.get(alias).then((clientId) =>{
         pageRouter.goToClientsPage().IsClientsTableContainsClientId(clientId);
         });
     });
