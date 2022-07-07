@@ -23,12 +23,12 @@
   "dialingTo": "9388887629",
   "sunbitClient": "1479",
   "driverType": "Chrome",
-  "database": {
-    "mySqlServer": "10.2.0.66",
-    "mySqlPort": "3306",
-    "mySqlUser": "g1_usr",
-    "mySqlpass": "KYrf<9G/wHqh92gn",
-    "mySqlDB": "sendajobprod"
+  "db": {
+    "host": "10.2.0.66",
+    "port": "3306",
+    "user": "g1_usr",
+    "password": "KYrf<9G/wHqh92gn",
+    "database": "sendajobprod"
   }
   }
 }

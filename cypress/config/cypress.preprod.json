@@ -1,8 +1,7 @@
 {
     "baseUrl": "https://preprod.workiz.com/",
   "env": {
-    "environment": "preprod"
-  },
+  "environment": "preprod",
   "email": "automation@workiz.com",
   "password": "Test123!",
   "email2": "automation2@workiz.com",
@@ -23,11 +22,12 @@
   "dialingTo": "6193146484",
   "sunbitClient": "9950",
   "driverType": "Chrome",
-  "database": {
-    "mySqlServer": "35.226.190.224",
-    "mySqlPort": "3306",
-    "mySqlUser": "framer",
-    "mySqlpass": "F1ame8ea6d8f!",
-    "mySqlDB": "sendajobprod"
+  "db": {
+    "host": "35.226.190.224",
+    "port": "3306",
+    "user": "framer",
+    "password": "F1ame8ea6d8f!",
+    "database": "sendajobprod"
   }
+}
 }

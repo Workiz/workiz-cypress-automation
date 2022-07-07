@@ -1,9 +1,9 @@
 export class SQLQueries {
-    static getInvitationHashByEmail(email: string) {
-        cy.task("queryDb", "SELECT requests.hash_id from requests desc limit 1;").then((result) => {
-            console.log(result);
-        })
-
+    static getInvitationHashByEmail() {
+        const query = `SELECT hash_id from sendajobprod.requests where id=4672;`;
+        cy.task("queryDb", query).as('res').then(() => {
+            console.log("This is result!!!: ",cy.get('@res'))
+        }) 
     }
-
 }
+
