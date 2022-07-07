@@ -5,7 +5,6 @@ export class LogInPage {
     logInWithAccount1(): HomePage {
         cy.visit('');
         let email = Cypress.env("email");
-        console.log(email);
         let pwd = Cypress.env("password");
         return this.logIn(email,pwd);
     }

@@ -19,6 +19,7 @@ export class CreateClientPage {
 
     save():ClientPage {
         cy.get('button').contains('Save').click();
+        cy.url().should('contain', 'client/')
         return new ClientPage;
     }
 

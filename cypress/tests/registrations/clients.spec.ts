@@ -1,3 +1,4 @@
+import cypress from "cypress";
 import { AllClientsPage } from "../../page-objects/Clients/allClientsPage";
 import { HomePage } from "../../page-objects/homePage";
 import { LogInPage } from "../../page-objects/logInPage";
@@ -17,6 +18,8 @@ describe('Clients tests', () => {
     it.only('WhenCreatingNewClientItAppearsInTheClinentsReport',() =>{
         let allClientsPage = pageRouter.goToClientsPage();
         let clientPage = allClientsPage.createClient();
-        clientPage.getUrl();
+        cy.get('@clientId').then((clientId) =>{
+        pageRouter.goToClientsPage().IsClientsTableContainsClientId(clientId);
+        });
     });
 })
