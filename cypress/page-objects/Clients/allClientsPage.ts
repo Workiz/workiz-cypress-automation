@@ -4,13 +4,13 @@ import { CreateClientPage } from "./createClientPage";
 
 export class AllClientsPage {
 
-    public createClient():ClientPage {
+    createClient():ClientPage {
         let createClientPage = this.clickOnCreateClient();
         createClientPage.fillClientsDetails();
         return createClientPage.save();
     }
 
-    clickOnCreateClient():CreateClientPage {
+    private clickOnCreateClient():CreateClientPage {
         cy.get('.float-right.iFfWBzvt7RjPTzzA73jT ', {timeout: 10000}).should('contain.text', 'Add Client').click();
         return new CreateClientPage;
     }

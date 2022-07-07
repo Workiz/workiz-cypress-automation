@@ -1,4 +1,4 @@
-import { AllClientsPage as AllClientsPage } from './Clients/allClientsPage';
+import { AllClientsPage } from './Clients/allClientsPage';
 import { RegistrationPage } from './registrationPage';
 import { TeamPage } from './teamPage';
 

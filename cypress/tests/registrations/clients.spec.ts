@@ -1,5 +1,3 @@
-import cypress from "cypress";
-import { AllClientsPage } from "../../page-objects/Clients/allClientsPage";
 import { HomePage } from "../../page-objects/homePage";
 import { LogInPage } from "../../page-objects/logInPage";
 import { PageRouter } from "../../page-objects/router";
@@ -15,7 +13,7 @@ describe('Clients tests', () => {
         homePage =logInPage.logInWithAccount1();
     })
 
-    it.only('WhenCreatingNewClientItAppearsInTheClinentsReport',() =>{
+    it.only('When creating new client it appears in the clients report',() =>{
         let allClientsPage = pageRouter.goToClientsPage();
         let clientPage = allClientsPage.createClient();
         cy.get('@clientId').then((clientId) =>{
