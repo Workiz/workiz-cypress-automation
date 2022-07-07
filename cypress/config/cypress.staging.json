@@ -2,7 +2,7 @@
     "baseUrl": "https://staging.workiz.com/",
   "env": {
     "db": {
-      "host": "10.2.0.11",
+      "host": "104.198.246.80",
       "port": "3306",
       "user": "g1_usr",
       "password": "KYrf<9G/wHqh92gn",
