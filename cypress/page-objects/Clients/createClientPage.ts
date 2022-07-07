@@ -21,10 +21,10 @@ export class CreateClientPage {
         })
     }
 
-    save(idAlias: string):ClientPage {
+    save(clientIdAlias: string):ClientPage {
         cy.get('button').contains('Save').click();
         cy.url().should('contain', 'client/');
-        return new ClientPage(idAlias);
+        return new ClientPage(clientIdAlias);
     }
 
 }

@@ -4,10 +4,10 @@ import { CreateClientPage } from "./createClientPage";
 
 export class AllClientsPage {
 
-    createClient(idAlias: string):ClientPage {
+    createClient(clientIdAlias: string):ClientPage {
         let createClientPage = this.clickOnCreateClient();
         createClientPage.fillClientsDetails();
-        return createClientPage.save(idAlias);
+        return createClientPage.save(clientIdAlias);
     }
 
     private clickOnCreateClient():CreateClientPage {
