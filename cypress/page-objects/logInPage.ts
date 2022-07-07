@@ -1,12 +1,22 @@
 import { HomePage } from "./homePage";
 
 export class LogInPage {
-    logInWithAccount2() {
+
+    logInWithAccount1(): HomePage {
         cy.visit('');
-        this.logIn(Cypress.env("email2"),Cypress.env("password2"));
+        let email = Cypress.env("email");
+        let pwd = Cypress.env("password");
+        return this.logIn(email,pwd);
     }
 
-    logIn(email: string, pwd: string):HomePage {
+    logInWithAccount2(): HomePage {
+        cy.visit('');
+        let email = Cypress.env("email2");
+        let pwd = Cypress.env("password2");
+        return this.logIn(email,pwd);
+    }
+
+    logIn(email: string, pwd: string): HomePage {
         cy.get('#email').type(email);
         cy.get('#password').type(pwd);
         cy.get('.button._loginBtn.signSubmit').click();

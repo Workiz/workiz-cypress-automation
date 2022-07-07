@@ -1,3 +1,4 @@
+import { AllClientsPage } from './Clients/allClientsPage';
 import { RegistrationPage } from './registrationPage';
 import { TeamPage } from './teamPage';
 
@@ -16,5 +17,13 @@ export class PageRouter {
             expect(location.href).to.contain('/sign/')
         });
         return new RegistrationPage;        
+    }
+
+    goToClientsPage ():AllClientsPage  {
+        cy.visit('root/clients');
+        cy.location().should((location) => {
+            expect(location.href).to.contain('root/clients')
+        });
+        return new AllClientsPage;        
     }
 }
