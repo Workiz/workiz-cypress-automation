@@ -9,7 +9,7 @@ export class CreateClientPage {
     fillClientsDetails():void{
         let firstName: string = RandomFunctions.generateRandomString(8);
         cy.get(`${CreateClientPage.firstNameLocator}`).type(firstName);
-        cy.get('[name="address_serach"]').type(Constans.ADDRESS);
+        cy.get('[name="address_serach"]').type(Constans.ADDRESS, {delay: 200});
         cy.get('.relative .sajComplete .sajComplete-suggestion', {timeout: 10000}).click({force: true});
         cy.get('[name="zipcode"]').type(Constans.ZIPCODE);
         if(cy.get(`${CreateClientPage.firstNameLocator}`).should('not.match', firstName)){
