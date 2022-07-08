@@ -2,6 +2,7 @@ import { LogInPage } from "../../page-objects/logInPage";
 import { PageRouter } from "../../page-objects/router";
 import { RandomFunctions } from "../../support/randomFunctions";
 import { HomePageLabels } from "../../infrastructure/homePageLabels";
+import { Constans } from "./../../infrastructure/consts"
 
 describe('Registration and login tests',() => {
     let pageRouter:PageRouter;
@@ -12,7 +13,7 @@ describe('Registration and login tests',() => {
 
     it('able to log in after registration',() =>{
         const email = RandomFunctions.generateRandomEmail();
-        const fullName = RandomFunctions.generateRandomString(7);
+        const fullName = RandomFunctions.generateFullName();
         let registrationPage = pageRouter.goToRegistrationPage();
         registrationPage.fullSignUp(email,fullName);
         cy.logOut();
@@ -40,11 +41,8 @@ describe('Registration and login tests',() => {
         const email = RandomFunctions.generateRandomEmail();
         const fullName = RandomFunctions.generateRandomString(7);
         let registrationPage = pageRouter.goToRegistrationPage();
-        registrationPage.fullSignUp(email,fullName);
-        cy.logOut();
-
-        let loginPage = new LogInPage;
-        let homePage = loginPage.logIn(email,'Test123!');
+        let homePage = registrationPage.fullSignUp(email,fullName);
+  
         let widgetsElements = homePage.getDashboaredElements;
         widgetsElements.should('have.length', 15);
         widgetsElements.each((item,index,list) => {
@@ -52,7 +50,7 @@ describe('Registration and login tests',() => {
         });
     });
 
-    it('After Creating Free User He Will Appear In free Users List',() => {
+    it.only('After Creating Free User He Will Appear In free Users List',() => {
         let loginPage = new LogInPage;
         loginPage.logInWithAccount2();
         const email = RandomFunctions.generateRandomEmail();
@@ -68,19 +66,23 @@ describe('Registration and login tests',() => {
     });
 });
 
-    it.only('User Can LogIn After Signup From Email Invitation',() => {
+    it('User Can LogIn After Signup From Email Invitation',() => {
         let loginPage = new LogInPage;
         loginPage.logInWithAccount2();
         const email = RandomFunctions.generateRandomEmail();
-        const fullName = RandomFunctions.generateRandomString(7);
-        const phone = "0548107330";
+        const fullName = RandomFunctions.generateFullName();
+
         const role = "tech";
         let teamPage = pageRouter.goToTeamPage();
-        teamPage.createNewUserForTeam(email,fullName,phone,role);
+        teamPage.createNewUserForTeam(email,fullName,role);
         teamPage.getUserInvitation(email);
-        cy.get('@hash').then((hash) => {
-            console.log('from tst ', hash);
-        })
+        let invitationPage = pageRouter.goToInvitationPage();
+        invitationPage.completeRegistaration();
+        cy.clearCookies();
+        cy.visit('login/')
+        let homePage = loginPage.logIn(email, Constans.defaultPasswprdForInvintation);
+
+        homePage.getAccountUserName.should('equal',fullName);
     });
 });
 

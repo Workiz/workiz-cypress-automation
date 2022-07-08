@@ -13,24 +13,14 @@ let fetchConfigurationByFile = file => {
 };
 
 function queryTestDb(query,envVars) {
-  //const config1 =  configurationForEnvironment;
-  console.log("This is ENV_VAR!!!!!: ",envVars);
   const connection = mysql.createConnection(envVars);
-      // "host": "104.198.246.80",
-      // "port": "3306",
-      // "user": "g1_usr",
-      // "password": "KYrf<9G/wHqh92gn",
-      // "database": "sendajobprod"
-      console.log("This is ENV_VAR: ",envVars);
-
   connection.connect();
 
   return new Promise((resolve,reject) => {
     connection.query(query,(error,results) => {
       if(error) reject(error);
       else{
-        connection.end(); 
-        console.log("results!:",(results[0].hash_id));     
+        connection.end();    
         return resolve(results);
       } 
     });
@@ -50,14 +40,7 @@ export default defineConfig({
       // implement node event listeners here
       on('task', {
         queryDb: ({query,envVars}) => {
-          // const environment = config.env.configFile || "development";
-          // const configuForEnvironment = fetchConfigurationByFile(environment)
-          // configuForEnvironment.then((result) => {
-          //   let confCon = result.env.db;
-            console.log('query ', query);
-            console.log("envVars on task ", envVars)
-            return queryTestDb(query,envVars);
-          // })                 
+            return queryTestDb(query,envVars);               
         },
       })
       const environment = config.env.configFile || "development";
