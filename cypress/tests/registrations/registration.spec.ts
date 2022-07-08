@@ -50,18 +50,18 @@ describe('Registration and login tests',() => {
         });
     });
 
-    it.only('After Creating Free User He Will Appear In free Users List',() => {
+    it('After Creating Free User He Will Appear In free Users List',() => {
         let loginPage = new LogInPage;
         loginPage.logInWithAccount2();
+
         const email = RandomFunctions.generateRandomEmail();
         const fullName = RandomFunctions.generateRandomString(7);
-        const phone = "0548107330";
-        const chooseUserType = "Subcontractor";
         let teamPage = pageRouter.goToTeamPage();
-        teamPage.createNewFreeUserForTeam(email,fullName,phone,chooseUserType);
+        teamPage.createNewFreeUserForTeam(email,fullName);
+
         let teamPageAfterAddingNew = pageRouter.goToTeamPage();
-        let teamUsers = teamPageAfterAddingNew.getFreeTeamUsers(email,chooseUserType);
-        teamUsers.invoke('text').then((text) => {
+        let teamFreeUsers = teamPageAfterAddingNew.getFreeTeamUsers(email);
+        teamFreeUsers.invoke('text').then((text) => {
             expect(text).includes(email);
     });
 });
@@ -69,15 +69,17 @@ describe('Registration and login tests',() => {
     it('User Can LogIn After Signup From Email Invitation',() => {
         let loginPage = new LogInPage;
         loginPage.logInWithAccount2();
+        
         const email = RandomFunctions.generateRandomEmail();
         const fullName = RandomFunctions.generateFullName();
-
         const role = "tech";
         let teamPage = pageRouter.goToTeamPage();
         teamPage.createNewUserForTeam(email,fullName,role);
+
         teamPage.getUserInvitation(email);
         let invitationPage = pageRouter.goToInvitationPage();
         invitationPage.completeRegistaration();
+
         cy.clearCookies();
         cy.visit('login/')
         let homePage = loginPage.logIn(email, Constans.defaultPasswprdForInvintation);
