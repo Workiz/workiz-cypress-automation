@@ -27,7 +27,7 @@ export class PageRouter {
     goToClientsPage ():AllClientsPage  {
         cy.visit('root/clients');
         cy.location().should((location) => {
-            expect(location.href).to.contain('root/clients')
+            expect(location.href).to.contain('root/clients');
         });
         return new AllClientsPage;        
     }
