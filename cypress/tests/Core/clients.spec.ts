@@ -26,8 +26,8 @@ describe('Clients tests', () => {
         let allClientsPage = pageRouter.goToClientsPage();
         let client = allClientsPage.createClient();
         let job = client.CreateJobToNewJobPag();
-        // cy.get(client.alias).then((clientId) =>{
-        // pageRouter.goToClientsPage().IsClientsTableContainsClientId(clientId);
-        // });
+        cy.get(job.alias).then((jobId) =>{
+        pageRouter.goToJobsPage().IsJobsTableContainsJobId(jobId);
+        });
     });
 })

@@ -2,8 +2,10 @@ import { AllClientsPage } from './Clients/allClientsPage';
 import { RegistrationPage } from './registrationPage';
 import { TeamPage } from './teamPage';
 import { InvitationPage } from './invitationPage';
+import { AllJobsPage } from './Job/allJobsPage';
 
 export class PageRouter {
+
     goToInvitationPage(): InvitationPage {
     cy.get('@hash').then((hash) => {
         cy.visit(`invite/${hash}/`)
@@ -11,12 +13,12 @@ export class PageRouter {
         return new InvitationPage;
     }
 
-    goToTeamPage():TeamPage{
+    goToTeamPage(): TeamPage{
         cy.visit('/root/team/')
         return new TeamPage;
     }
-    
-    goToRegistrationPage ():RegistrationPage  {
+
+    goToRegistrationPage(): RegistrationPage {
         cy.visit('/sign/');
         cy.location().should((location) => {
             expect(location.href).to.contain('/sign/')
@@ -24,11 +26,19 @@ export class PageRouter {
         return new RegistrationPage;        
     }
 
-    goToClientsPage ():AllClientsPage  {
+    goToClientsPage(): AllClientsPage {
         cy.visit('root/clients');
         cy.location().should((location) => {
             expect(location.href).to.contain('root/clients');
         });
         return new AllClientsPage;        
+    }
+
+    goToJobsPage(): AllJobsPage {
+        cy.visit('root/jobs');
+        cy.location().should((location) => {
+            expect(location.href).to.contain('root/jobs');
+        });
+        return new AllJobsPage;        
     }
 }
