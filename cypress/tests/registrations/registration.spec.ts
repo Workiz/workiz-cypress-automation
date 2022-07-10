@@ -66,7 +66,7 @@ describe('Registration and login tests',() => {
     });
 });
 
-    it.only('user can logIn after signup from email invitation',() => {
+    it('user can logIn after signup from email invitation',() => {
         let loginPage = new LogInPage;
         loginPage.logInWithAccount2();
         
@@ -84,6 +84,23 @@ describe('Registration and login tests',() => {
         cy.visit('login/')
         let homePage = loginPage.logIn(email, Constans.defaultPasswprdForInvintation);
 
+        homePage.getAccountUserName.should('equal',fullName);
+    });
+
+    it.only('user can login after reseting password', () => {
+        const email = RandomFunctions.generateRandomEmail();
+        const fullName = RandomFunctions.generateFullName();
+        let registrationPage = pageRouter.goToRegistrationPage();
+        registrationPage.fullSignUp(email,fullName);
+        cy.logOut();
+
+        let loginPage = new LogInPage;
+        let resetPassword = loginPage.forgotPassword();
+        resetPassword.sendResetEmail(email);
+        resetPassword.getResetInvitation(email);
+        let invitationPage = pageRouter.goToInvitationPage();
+        invitationPage.setNewPassword(Constans.defaultPasswprdForInvintation);
+        let homePage = loginPage.logIn(email,Constans.defaultPasswprdForInvintation);
         homePage.getAccountUserName.should('equal',fullName);
     });
 });
