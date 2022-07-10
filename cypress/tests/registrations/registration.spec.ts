@@ -2,6 +2,7 @@ import { LogInPage } from "../../page-objects/logInPage";
 import { PageRouter } from "../../page-objects/router";
 import { RandomFunctions } from "../../support/randomFunctions";
 import { HomePageLabels } from "../../infrastructure/homePageLabels";
+import { Constans } from "./../../infrastructure/consts"
 
 describe('Registration and login tests',() => {
     let pageRouter:PageRouter;
@@ -12,7 +13,7 @@ describe('Registration and login tests',() => {
 
     it('able to log in after registration',() =>{
         const email = RandomFunctions.generateRandomEmail();
-        const fullName = RandomFunctions.generateRandomString(7);
+        const fullName = RandomFunctions.generateFullName();
         let registrationPage = pageRouter.goToRegistrationPage();
         registrationPage.fullSignUp(email,fullName);
         cy.logOut();
@@ -25,7 +26,7 @@ describe('Registration and login tests',() => {
 
     it('left aside menu contains all defult labels after registration',() =>{
         const email = RandomFunctions.generateRandomEmail();
-        const fullName = RandomFunctions.generateRandomString(7);
+        const fullName = RandomFunctions.generateFullName();
         let registrationPage = pageRouter.goToRegistrationPage();
         let homePage = registrationPage.fullSignUp(email,fullName);
 
@@ -36,15 +37,12 @@ describe('Registration and login tests',() => {
         });
     });
 
-    it('Make sure all default widgets appears on dashboared',() =>{
+    it('make sure all default widgets appears on dashboared',() =>{
         const email = RandomFunctions.generateRandomEmail();
-        const fullName = RandomFunctions.generateRandomString(7);
+        const fullName = RandomFunctions.generateFullName();
         let registrationPage = pageRouter.goToRegistrationPage();
-        registrationPage.fullSignUp(email,fullName);
-        cy.logOut();
-
-        let loginPage = new LogInPage;
-        let homePage = loginPage.logIn(email,'Test123!');
+        let homePage = registrationPage.fullSignUp(email,fullName);
+  
         let widgetsElements = homePage.getDashboaredElements;
         widgetsElements.should('have.length', 15);
         widgetsElements.each((item,index,list) => {
@@ -52,32 +50,41 @@ describe('Registration and login tests',() => {
         });
     });
 
-    it('After Creating Free User He Will Appear In free Users List',() => {
+    it('after creating free user he will appear in free users list',() => {
         let loginPage = new LogInPage;
         loginPage.logInWithAccount2();
+
         const email = RandomFunctions.generateRandomEmail();
-        const fullName = RandomFunctions.generateRandomString(7);
-        const phone = "0548107330";
-        const chooseUserType = "Subcontractor";
+        const fullName = RandomFunctions.generateFullName();
         let teamPage = pageRouter.goToTeamPage();
-        teamPage.createNewFreeUserForTeam(email,fullName,phone,chooseUserType);
+        teamPage.createNewFreeUserForTeam(email,fullName);
+
         let teamPageAfterAddingNew = pageRouter.goToTeamPage();
-        let teamUsers = teamPageAfterAddingNew.getFreeTeamUsers(email,chooseUserType);
-        teamUsers.invoke('text').then((text) => {
+        let teamFreeUsers = teamPageAfterAddingNew.getFreeTeamUsers(email);
+        teamFreeUsers.invoke('text').then((text) => {
             expect(text).includes(email);
     });
 });
 
-    it.only('User Can LogIn After Signup From Email Invitation',() => {
+    it.only('user can logIn after signup from email invitation',() => {
         let loginPage = new LogInPage;
         loginPage.logInWithAccount2();
+        
         const email = RandomFunctions.generateRandomEmail();
-        const fullName = RandomFunctions.generateRandomString(7);
-        const phone = "0548107330";
+        const fullName = RandomFunctions.generateFullName();
         const role = "tech";
         let teamPage = pageRouter.goToTeamPage();
-        teamPage.createNewUserForTeam(email,fullName,phone,role);
+        teamPage.createNewUserForTeam(email,fullName,role);
+
         teamPage.getUserInvitation(email);
+        let invitationPage = pageRouter.goToInvitationPage();
+        invitationPage.completeRegistaration();
+
+        cy.clearCookies();
+        cy.visit('login/')
+        let homePage = loginPage.logIn(email, Constans.defaultPasswprdForInvintation);
+
+        homePage.getAccountUserName.should('equal',fullName);
     });
 });
 
