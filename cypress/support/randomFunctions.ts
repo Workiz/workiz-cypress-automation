@@ -23,4 +23,8 @@ export class RandomFunctions {
         let phone = (Math.floor(Math.random() * 100000000)).toString();
         return phone;
     }
+
+    public static generateRandomAliasName(alisaName: string): string {
+        return '\@' +`${alisaName}`;
+    }
 }

@@ -4,23 +4,26 @@ import { ClientPage } from "./clientPage";
 
 export class CreateClientPage {
 
-    static readonly firstNameLocator: string = "[name='first_name']";
+    readonly firstNameLocator: string = "[name='first_name']";
     
     fillClientsDetails():void{
         let firstName: string = RandomFunctions.generateRandomString(8);
-        cy.get(`${CreateClientPage.firstNameLocator}`).type(firstName);
+        cy.get(`${this.firstNameLocator}`).type(firstName);
         cy.get('[name="address_serach"]').type(Constans.ADDRESS);
+        cy.get('[name="address_serach"]').type(' r', {delay: 2000});
         cy.get('.relative .sajComplete .sajComplete-suggestion', {timeout: 10000}).click({force: true});
         cy.get('[name="zipcode"]').type(Constans.ZIPCODE);
-        if(cy.get(`${CreateClientPage.firstNameLocator}`).should('not.match', firstName)){
-            cy.get(`${CreateClientPage.firstNameLocator}`).clear().type(firstName);
-        }
+        cy.get(`${this.firstNameLocator}`).invoke('attr', 'value').then((firstNameValue) => {
+            if(firstNameValue !== firstName){
+                cy.get(`${this.firstNameLocator}`).clear().type(firstName);
+            }
+        })
     }
 
-    save():ClientPage {
+    save(): ClientPage {
         cy.get('button').contains('Save').click();
-        cy.url().should('contain', 'client/')
-        return new ClientPage;
+        cy.url().should('contain', 'client/');
+        return new ClientPage();
     }
 
 }
