@@ -1,13 +1,6 @@
 {
     "baseUrl": "https://staging.workiz.com/",
   "env": {
-    "db": {
-      "host": "104.198.246.80",
-      "port": "3306",
-      "user": "g1_usr",
-      "password": "KYrf<9G/wHqh92gn",
-      "database": "sendajobprod"
-    },
     "environment": "staging",
     "email": "automation@workiz.com",
     "password": "Test123!",
@@ -28,7 +21,13 @@
     "dialingFrom": "3212042632",
     "dialingTo": "6196519496",
     "sunbitClient": "9950",
-    "driverType": "Chrome"
+    "driverType": "Chrome",
+    "db": {
+      "host": "104.198.246.80",
+      "port": "3306",
+      "user": "g1_usr",
+      "password": "KYrf<9G/wHqh92gn",
+      "database": "sendajobprod"
+    }
   }
-
 }

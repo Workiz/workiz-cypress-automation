@@ -26,7 +26,7 @@ describe('Registration and login tests',() => {
 
     it('left aside menu contains all defult labels after registration',() =>{
         const email = RandomFunctions.generateRandomEmail();
-        const fullName = RandomFunctions.generateRandomString(7);
+        const fullName = RandomFunctions.generateFullName();
         let registrationPage = pageRouter.goToRegistrationPage();
         let homePage = registrationPage.fullSignUp(email,fullName);
 
@@ -37,9 +37,9 @@ describe('Registration and login tests',() => {
         });
     });
 
-    it('Make sure all default widgets appears on dashboared',() =>{
+    it('make sure all default widgets appears on dashboared',() =>{
         const email = RandomFunctions.generateRandomEmail();
-        const fullName = RandomFunctions.generateRandomString(7);
+        const fullName = RandomFunctions.generateFullName();
         let registrationPage = pageRouter.goToRegistrationPage();
         let homePage = registrationPage.fullSignUp(email,fullName);
   
@@ -50,12 +50,12 @@ describe('Registration and login tests',() => {
         });
     });
 
-    it('After Creating Free User He Will Appear In free Users List',() => {
+    it('after creating free user he will appear in free users list',() => {
         let loginPage = new LogInPage;
         loginPage.logInWithAccount2();
 
         const email = RandomFunctions.generateRandomEmail();
-        const fullName = RandomFunctions.generateRandomString(7);
+        const fullName = RandomFunctions.generateFullName();
         let teamPage = pageRouter.goToTeamPage();
         teamPage.createNewFreeUserForTeam(email,fullName);
 
@@ -66,7 +66,7 @@ describe('Registration and login tests',() => {
     });
 });
 
-    it('User Can LogIn After Signup From Email Invitation',() => {
+    it.only('user can logIn after signup from email invitation',() => {
         let loginPage = new LogInPage;
         loginPage.logInWithAccount2();
         

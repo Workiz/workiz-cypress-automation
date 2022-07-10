@@ -1,8 +1,7 @@
 {
     "baseUrl": "https://app.workiz.com/",
   "env": {
-    "environment": "production"
-  },
+  "environment": "production",
   "urlForOnlyDevEnvTests": "https://qa.workiz.com/",
   "email": "automation@workiz.com",
   "password": "Test123!",
@@ -30,5 +29,6 @@
     "mySqlUser": "framer",
     "mySqlpass": "F1ame8ea6d8f!",
     "mySqlDB": "sendajobprod"
+  }
   }
 }

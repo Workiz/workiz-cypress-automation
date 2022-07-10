@@ -1,7 +1,7 @@
 import { AllClientsPage } from './Clients/allClientsPage';
 import { RegistrationPage } from './registrationPage';
 import { TeamPage } from './teamPage';
-import { InvitationPage } from './InvitationPage';
+import { InvitationPage } from './invitationPage';
 
 export class PageRouter {
     goToInvitationPage(): InvitationPage {
