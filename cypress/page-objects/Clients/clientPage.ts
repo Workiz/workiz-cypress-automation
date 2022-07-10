@@ -1,7 +1,14 @@
+import { RandomFunctions } from "../../support/randomFunctions";
+
 export class ClientPage {
 
-    constructor(clientIdAlias: string) {
-        this.setClientIdAsAlias(clientIdAlias);
+    private static clientCounter: number = 0;
+    alias: string;
+
+    constructor() {
+        this.alias = 'client' + ++ClientPage.clientCounter;
+        this.setClientIdAsAlias(this.alias);
+        this.alias = RandomFunctions.generateRandomAliasName(this.alias);
     }
 
     setClientIdAsAlias(clientIdAlias: string) {
@@ -10,4 +17,5 @@ export class ClientPage {
         cy.wrap(clientId).as(`${clientIdAlias}`);
         });
     }
+
 }

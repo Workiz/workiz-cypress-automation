@@ -16,10 +16,8 @@ describe('Clients tests', () => {
 
     it.only('When creating new client it appears in the clients report',() =>{
         let allClientsPage = pageRouter.goToClientsPage();
-        let clientAliasName = RandomFunctions.generateRandomString(5);
-        allClientsPage.createClient(clientAliasName);
-        let alias = RandomFunctions.generateRandomAliasName(clientAliasName);;
-        cy.get(alias).then((clientId) =>{
+        let client = allClientsPage.createClient();
+        cy.get(client.alias).then((clientId) =>{
         pageRouter.goToClientsPage().IsClientsTableContainsClientId(clientId);
         });
     });
