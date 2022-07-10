@@ -1,5 +1,6 @@
 import { RandomFunctions } from "../support/randomFunctions";
 import { HomePage } from "./homePage";
+import { Constans } from "../infrastructure/consts";
 
 export class RegistrationPage {
 
@@ -18,7 +19,7 @@ export class RegistrationPage {
 
     inputDetails(fullName: string):void {
         cy.get('#full_name').type(fullName);
-        cy.get('#phone_number').type(RandomFunctions.generateRandomPhone());
+        cy.get('#phone_number').type(Constans.PHONE);
         cy.get('#business_name').type(RandomFunctions.generateRandomString(5));
         cy.get('.signUpCompleting-module__sButton___3RyhP').click();
     }    
