@@ -7,7 +7,7 @@ export class RandomFunctions {
         for ( let i = 0; i < length; i++ ) {
             result += characters.charAt(Math.floor(Math.random() * charactersLength));
         }
-        return result;
+                return result;
     }
 
     public static generateRandomEmail(): string {
@@ -18,5 +18,9 @@ export class RandomFunctions {
     public static generateRandomPhone(): string {
         let phone = (Math.floor(Math.random() * 100000000)).toString();
         return phone;
+    }
+
+    public static generateRandomAliasName(alisaName: string): string {
+        return '\@' +`${alisaName}`;
     }
 }

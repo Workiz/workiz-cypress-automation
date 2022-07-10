@@ -18,7 +18,7 @@ describe('Clients tests', () => {
         let allClientsPage = pageRouter.goToClientsPage();
         let clientAliasName = RandomFunctions.generateRandomString(5);
         allClientsPage.createClient(clientAliasName);
-        let alias = '\@' +`${clientAliasName}`;
+        let alias = RandomFunctions.generateRandomAliasName(clientAliasName);;
         cy.get(alias).then((clientId) =>{
         pageRouter.goToClientsPage().IsClientsTableContainsClientId(clientId);
         });
