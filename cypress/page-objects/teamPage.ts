@@ -1,4 +1,5 @@
 import { SQLQueries } from "../support/dbRequests";
+import { Constans } from "./../infrastructure/consts"
 
 export class TeamPage{
 
@@ -6,26 +7,24 @@ export class TeamPage{
         SQLQueries.getInvitationHashByEmail(email);
     }
 
-    createNewUserForTeam(email: string, fullName: string, phone: string, role: string) {
+    createNewUserForTeam(email: string, fullName: string,role: string) {
         this.clickAddNewUser();
-        this.fillUserDetails(email, fullName, phone);
-        // cy.get(':nth-child(6) > .validationSpan > :nth-child(1) > .react-select-container > .react-select__control').click();
-        // cy.contains(role).click;
+        this.fillUserDetails(email, fullName, Constans.PHONE);
         cy.selectFromDropDown('attr', "name='role_id'",role)
         cy.get('button').contains('Invite user').click();
     }
     
-    getFreeTeamUsers(email:string,chooseFromDropdown: string): Cypress.Chainable<JQuery> {
+    getFreeTeamUsers(email:string): Cypress.Chainable<JQuery> {
         this.cleanTeamFilter();
-        this.addFilterFromDropDown(chooseFromDropdown);
+        this.addFilterFromDropDown('Subcontractor');
         cy.get('#searchString').type(email);
         return cy.get('._tblLbl');
     }
 
-    createNewFreeUserForTeam(email: string, fullName: string, phone: string,chooseFromDropdown:string): void {
+    createNewFreeUserForTeam(email: string, fullName: string): void {
         this.clickAddNewUser();
-        cy.contains(chooseFromDropdown).click();
-        this.fillUserDetails(email, fullName, phone);
+        cy.contains('Subcontractor').click();
+        this.fillUserDetails(email, fullName, Constans.PHONE);
         cy.get('button').contains('Add user').click();
         cy.location('href').should('contain','/user/');
     }

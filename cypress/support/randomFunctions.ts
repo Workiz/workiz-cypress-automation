@@ -1,13 +1,17 @@
 export class RandomFunctions {
-
+    
     public static generateRandomString(length:number): string {
         const characters ='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
-        let result = ' ';
+        let result = '';
         const charactersLength = characters.length;
         for ( let i = 0; i < length; i++ ) {
             result += characters.charAt(Math.floor(Math.random() * charactersLength));
         }
                 return result;
+    }
+
+    static generateFullName():string {
+        return this.generateRandomString(7) + ' ' + this.generateRandomString(7);
     }
 
     public static generateRandomEmail(): string {

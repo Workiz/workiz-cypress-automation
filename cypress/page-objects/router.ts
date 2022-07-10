@@ -1,13 +1,18 @@
 import { AllClientsPage } from './Clients/allClientsPage';
 import { RegistrationPage } from './registrationPage';
 import { TeamPage } from './teamPage';
+import { InvitationPage } from './invitationPage';
 
 export class PageRouter {
+    goToInvitationPage(): InvitationPage {
+    cy.get('@hash').then((hash) => {
+        cy.visit(`invite/${hash}/`)
+        });
+        return new InvitationPage;
+    }
 
     goToTeamPage():TeamPage{
         cy.visit('/root/team/')
-        // cy.get('.teamLink > a').should('have.attr','title','Team').click();
-        // cy.location('href').should('contain','/root/team');
         return new TeamPage;
     }
     

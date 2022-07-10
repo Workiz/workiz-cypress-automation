@@ -1,8 +1,7 @@
 {
     "baseUrl": "https://app.workiz.com/",
   "env": {
-    "environment": "production"
-  },
+  "environment": "production",
   "urlForOnlyDevEnvTests": "https://qa.workiz.com/",
   "email": "automation@workiz.com",
   "password": "Test123!",
@@ -25,10 +24,11 @@
   "sunbitClient": "9950",
   "driverType": "Chrome",
   "database": {
-    "mySqlServer": "10.2.0.47",
+    "mySqlServer": "35.246.190.224",
     "mySqlPort": "3306",
     "mySqlUser": "framer",
     "mySqlpass": "F1ame8ea6d8f!",
     "mySqlDB": "sendajobprod"
+  }
   }
 }

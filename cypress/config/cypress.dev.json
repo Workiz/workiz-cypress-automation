@@ -1,8 +1,7 @@
 {
     "baseUrl": "https://dev.workiz.com/",
   "env": {
-    "environment": "development"
-  },
+  "environment": "development",
   "email": "ido.adler@workiz.com",
   "password": "Test123!",
   "email2": "automation2@workiz.com",
@@ -30,4 +29,5 @@
     "mySqlpass": "",
     "mySqlDB": "sendajobprod"
   }
+}
 }
