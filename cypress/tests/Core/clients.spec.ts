@@ -14,11 +14,20 @@ describe('Clients tests', () => {
         homePage =logInPage.logInWithAccount1();
     })
 
-    it.only('When creating new client it appears in the clients report',() =>{
+    it('When creating new client it appears in the clients report',() =>{
         let allClientsPage = pageRouter.goToClientsPage();
         let client = allClientsPage.createClient();
         cy.get(client.alias).then((clientId) =>{
         pageRouter.goToClientsPage().IsClientsTableContainsClientId(clientId);
         });
+    });
+
+    it.only('When creating new job from client it appears in the jobs report',() =>{
+        let allClientsPage = pageRouter.goToClientsPage();
+        let client = allClientsPage.createClient();
+        let job = client.CreateJobToNewJobPag();
+        // cy.get(client.alias).then((clientId) =>{
+        // pageRouter.goToClientsPage().IsClientsTableContainsClientId(clientId);
+        // });
     });
 })
