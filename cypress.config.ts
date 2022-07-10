@@ -35,6 +35,7 @@ export default defineConfig({
       "runMode": 1,
       "openMode": 0
     },
+    userAgent: "workiz-automation-user-agent",
     "videoUploadOnPasses": false,
     setupNodeEvents(on, config) {
       // implement node event listeners here

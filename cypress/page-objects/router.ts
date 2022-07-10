@@ -2,8 +2,15 @@ import { AllClientsPage } from './Clients/allClientsPage';
 import { RegistrationPage } from './registrationPage';
 import { TeamPage } from './teamPage';
 import { InvitationPage } from './invitationPage';
+import { AccountPage } from './accountPage';
 
 export class PageRouter {
+
+    goToAccountPage() {
+        cy.visit('root/account');
+        cy.get('._clickToUpload').should('contain','Company Logo');
+        return new AccountPage;
+    }
     goToInvitationPage(): InvitationPage {
     cy.get('@hash').then((hash) => {
         cy.visit(`invite/${hash}/`)

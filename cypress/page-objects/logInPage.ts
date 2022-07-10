@@ -1,5 +1,5 @@
 import { HomePage } from "./homePage";
-
+import { ResetPasswordPage } from "./resetPasswordpage";
 export class LogInPage {
 
     logInWithAccount1(): HomePage {
@@ -21,5 +21,10 @@ export class LogInPage {
         cy.get('#password').type(pwd);
         cy.get('.button._loginBtn.signSubmit').click();
         return new HomePage;
+    }
+
+    forgotPassword() {
+        cy.get('._mt > ._pink').click();
+        return new ResetPasswordPage;
     }
 }
