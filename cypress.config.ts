@@ -31,11 +31,13 @@ export default defineConfig({
     specPattern: "cypress/tests/**/*/*.spec.{js,jsx,ts,tsx}",
     viewportWidth: 1280,
     viewportHeight: 800,
+    watchForFileChanges: false,
     "retries": {
       "runMode": 1,
       "openMode": 0
     },
     userAgent: "workiz-automation-user-agent",
+    "numTestsKeptInMemory": 0,
     "videoUploadOnPasses": false,
     setupNodeEvents(on, config) {
       // implement node event listeners here
