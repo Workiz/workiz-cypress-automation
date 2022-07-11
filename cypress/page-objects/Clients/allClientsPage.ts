@@ -1,5 +1,3 @@
-import cypress from "cypress";
-import { contains } from "cypress/types/jquery";
 import {ClientPage} from "./clientPage"
 import { CreateClientPage } from "./createClientPage";
 
@@ -18,6 +16,6 @@ export class AllClientsPage {
 
     IsClientsTableContainsClientId(clientId: JQuery<HTMLElement>)
     {
-        cy.elementsContainsText('.rt-tbody .rt-td:nth-child(1)', 'ido')
+        cy.elementsContainsText('.rt-tbody .rt-td:nth-child(1)', clientId.toString());
     };
 }
