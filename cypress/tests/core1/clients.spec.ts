@@ -20,4 +20,4 @@ describe('Clients tests', () => {
         pageRouter.goToClientsPage().IsClientsTableContainsClientId(clientId);
         });
     });
-})
+});

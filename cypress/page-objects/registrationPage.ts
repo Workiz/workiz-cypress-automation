@@ -4,9 +4,9 @@ import { Constans } from "../infrastructure/consts";
 
 export class RegistrationPage {
 
-    fullSignUp(email: string,fullName:string,companyName:string): HomePage {
+    fullSignUp(email: string,fullName:string,companyName?:string): HomePage {
         this.inputEmailAndPwd(email);
-        this.inputDetails(fullName,companyName);
+        typeof companyName == 'undefined' ? this.inputDetails(fullName) : this.inputDetails(fullName,companyName);
         this.fillInAdditionalDetails();
         return this.closeExperimentModal();
     }
@@ -17,10 +17,10 @@ export class RegistrationPage {
         cy.get('.button._loginBtn.signSubmit').click();
     }
 
-    inputDetails(fullName: string,companyName:string):void {
+    inputDetails(fullName: string,companyName?:string):void {
         cy.get('#full_name').type(fullName);
         cy.get('#phone_number').type(Constans.PHONE);
-        cy.get('#business_name').type(companyName);
+        typeof companyName !== 'undefined' ? cy.get('#business_name').type(companyName) : cy.get('#business_name').type(RandomFunctions.generateRandomString(5))
         cy.get('.signUpCompleting-module__sButton___3RyhP').click();
     }    
 

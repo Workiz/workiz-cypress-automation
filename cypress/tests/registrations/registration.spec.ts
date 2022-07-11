@@ -14,10 +14,9 @@ describe('Registration and login tests',() => {
     it('able to log in after registration',() =>{
         const email = RandomFunctions.generateRandomEmail();
         const fullName = RandomFunctions.generateFullName();
-        const companyName = RandomFunctions.generateRandomString(5);
 
         let registrationPage = pageRouter.goToRegistrationPage();
-        registrationPage.fullSignUp(email,fullName,companyName);
+        registrationPage.fullSignUp(email,fullName);
         cy.logOut();
 
         let loginPage = new LogInPage;
@@ -29,10 +28,9 @@ describe('Registration and login tests',() => {
     it('left aside menu contains all defult labels after registration',() =>{
         const email = RandomFunctions.generateRandomEmail();
         const fullName = RandomFunctions.generateFullName();
-        const companyName = RandomFunctions.generateRandomString(5);
 
         let registrationPage = pageRouter.goToRegistrationPage();
-        let homePage = registrationPage.fullSignUp(email,fullName,companyName);
+        let homePage = registrationPage.fullSignUp(email,fullName);
 
         let leftMenuElements = homePage.getLeftMenuLabelsElements;
         leftMenuElements.should('have.length', 13);
@@ -44,10 +42,9 @@ describe('Registration and login tests',() => {
     it('make sure all default widgets appears on dashboared',() =>{
         const email = RandomFunctions.generateRandomEmail();
         const fullName = RandomFunctions.generateFullName();
-        const companyName = RandomFunctions.generateRandomString(5);
 
         let registrationPage = pageRouter.goToRegistrationPage();
-        let homePage = registrationPage.fullSignUp(email,fullName,companyName);
+        let homePage = registrationPage.fullSignUp(email,fullName);
   
         let widgetsElements = homePage.getDashboaredElements;
         widgetsElements.should('have.length', 15);
@@ -93,13 +90,12 @@ describe('Registration and login tests',() => {
         homePage.getAccountUserName.should('equal',fullName);
     });
 
-    it.only('user can login after reseting password', () => {
+    it('user can login after reseting password', () => {
         const email = RandomFunctions.generateRandomEmail();
         const fullName = RandomFunctions.generateFullName();
-        const companyName = RandomFunctions.generateRandomString(5);
 
         let registrationPage = pageRouter.goToRegistrationPage();
-        registrationPage.fullSignUp(email,fullName,companyName);
+        registrationPage.fullSignUp(email,fullName);
         cy.logOut();
 
         let loginPage = new LogInPage;
