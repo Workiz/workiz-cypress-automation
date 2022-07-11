@@ -32,7 +32,7 @@ describe('Clients tests', () => {
         });
     });
 
-    it.only('When creating new lead from client it appears in the leads report',() =>{
+    it('When creating new lead from client it appears in the leads report',() =>{
         let allClientsPage = pageRouter.goToClientsPage();
         let client = allClientsPage.createClient();
         let lead = client.CreateLeadToNewLeadPage();
