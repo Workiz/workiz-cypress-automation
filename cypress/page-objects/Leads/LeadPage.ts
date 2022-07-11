@@ -12,7 +12,7 @@ export class LeadPage{
 
     setJobIdAsAlias(jobIdAlias: string) {
         cy.get('.flexCont ._clLink').invoke('text').then((text) => { 
-        const clientId = text.split(' ')[2].slice(1, text.split(' ')[2].length);
+        const clientId = text.split(' ')[1].slice(1, text.split(' ')[1].length);
         cy.wrap(clientId).as(`${jobIdAlias}`);
         });
     }
