@@ -3,7 +3,7 @@ export class AccountPage {
     changeRegion(region: string) {
         cy.get('h4.fieldTitle').contains('Account Region').parent().find('.react-select__single-value').invoke('text').then((accountRegion) => {
             if(accountRegion !== region) {
-                accountRegion = region;
+                cy.selectFromDropDown('attr','name="region"',region);                
                 this.clickOnSaveButton();
             }
         });

@@ -108,7 +108,7 @@ describe('Registration and login tests',() => {
         homePage.getAccountUserName.should('equal',fullName);
     });
 
-    it.only('validate that connecting to Gls via web will open request PopUp',() => {
+    it('validate that connecting to Gls via web will open request PopUp',() => {
         const email = RandomFunctions.generateRandomEmail();
         const fullName = RandomFunctions.generateFullName();
         const companyName = RandomFunctions.generateRandomString(5);
@@ -123,6 +123,8 @@ describe('Registration and login tests',() => {
         jobTypesPage.addJobType("Repair");
 
         let googleLocalServicePage = pageRouter.goToGoogleLocalServicesPage();
+        googleLocalServicePage.fillAllDetailsAndSchedule();
+        cy.get('h3').should('contain','Request Sent!');        
     });
 });
 
