@@ -22,12 +22,14 @@ describe('Clients tests', () => {
         });
     });
 
-    it.only('When creating new job from client it appears in the jobs report',() =>{
+    it('When creating new job from client it appears in the jobs report',() =>{
         let allClientsPage = pageRouter.goToClientsPage();
         let client = allClientsPage.createClient();
         let job = client.CreateJobToNewJobPag();
         cy.get(job.alias).then((jobId) =>{
-        pageRouter.goToJobsPage().IsJobsTableContainsJobId(jobId);
+        let jobsPage = pageRouter.goToJobsPage();
+        jobsPage.sortClientTableById(false);
+        jobsPage.IsJobsTableContainsJobId(jobId);
         });
     });
 })
