@@ -22,7 +22,7 @@ describe('Clients tests', () => {
         });
     });
 
-    it.only('When creating new job from client it appears in the jobs report',() =>{
+    it('When creating new job from client it appears in the jobs report',() =>{
         let allClientsPage = pageRouter.goToClientsPage();
         let client = allClientsPage.createClient();
         let job = client.CreateJobToNewJobPag();
