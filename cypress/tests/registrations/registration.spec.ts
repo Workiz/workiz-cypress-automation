@@ -107,6 +107,25 @@ describe('Registration and login tests',() => {
         let homePage = loginPage.logIn(email,Constans.defaulPwdAfterReset);
         homePage.getAccountUserName.should('equal',fullName);
     });
+
+    it('validate that connecting to Gls via web will open request PopUp',() => {
+        const email = RandomFunctions.generateRandomEmail();
+        const fullName = RandomFunctions.generateFullName();
+        const companyName = RandomFunctions.generateRandomString(5);
+
+        let registrationPage = pageRouter.goToRegistrationPage();
+        registrationPage.fullSignUp(email,fullName,companyName);
+
+        let accountPage = pageRouter.goToAccountPage();
+        accountPage.changeRegion("United States");
+
+        let jobTypesPage = pageRouter.goToJobTypesPage();
+        jobTypesPage.addJobType("Repair");
+
+        let googleLocalServicePage = pageRouter.goToGoogleLocalServicesPage();
+        googleLocalServicePage.fillAllDetailsAndSchedule();
+        cy.get('h3').should('contain','Request Sent!');        
+    });
 });
 
 

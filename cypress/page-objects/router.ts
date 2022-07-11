@@ -3,8 +3,22 @@ import { RegistrationPage } from './registrationPage';
 import { TeamPage } from './teamPage';
 import { InvitationPage } from './invitationPage';
 import { AccountPage } from './accountPage';
+import { JobTypesPage } from './jobTypesPage';
+import { GoogleLocalServicesPage } from './googleLocalServicesPage';
 
 export class PageRouter {
+
+    goToGoogleLocalServicesPage(): GoogleLocalServicesPage {
+        cy.visit('root/googleLocal');
+        cy.get('h2.thin').should('contain', 'Local Services Ads');
+        return new GoogleLocalServicesPage;
+    }
+
+    goToJobTypesPage(): JobTypesPage {
+        cy.visit('root/jobTypes');
+        cy.get('.historyWrap > span').should('contain','Job Admin');
+        return new JobTypesPage;
+    }
 
     goToAccountPage() {
         cy.visit('root/account');
