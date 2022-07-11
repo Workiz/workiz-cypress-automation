@@ -5,18 +5,16 @@ export class AllJobsPage {
     {
         const idToSearch = jobId.toString();
         cy.get('.rt-tbody .rt-td:nth-child(2) .jobs-module__quickJob___3NbDw', {timeout: 10000}).should('contain.text',idToSearch).each(($el, index, $list) => {
-            console.log('checking for index ' + index);
-                if($el.text() == idToSearch)
+
+            if($el.text() == idToSearch + 'Quick view')
             {
-                    console.log('im on first if my index is ' + index)
-                    expect($el.text()).to.be.eq(idToSearch);
-                    return false;
+                expect($el.text()).to.be.eq(idToSearch + 'Quick view');
+                return false;
             }
-                else if (index == $list.length-1)
-                {
-                    console.log('im on the last else if my index is ' + index)
-                    expect($el.text()).to.be.eq(idToSearch);
-                }
+            else if (index == $list.length-1)
+            {
+                expect($el.text()).to.be.eq(idToSearch + 'Quick view');
+            }
         })
     }
 
