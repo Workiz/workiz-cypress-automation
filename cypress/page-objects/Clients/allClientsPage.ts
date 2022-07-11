@@ -30,4 +30,11 @@ export class AllClientsPage {
             }
         });
     }
+
+    sortClientTableById(acSort: boolean){
+        cy.get('div').contains('Job ID').click();
+        if (!acSort){
+            cy.get('div').contains('Job ID').click();
+        }
+    }
 }

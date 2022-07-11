@@ -1,7 +1,6 @@
 import { HomePage } from "./homePage";
 import { ResetPasswordPage } from "./resetPasswordPage";
 
-
 export class LogInPage {
 
     logInWithAccount1(): HomePage {
