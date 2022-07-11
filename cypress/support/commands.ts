@@ -49,7 +49,7 @@ Cypress.Commands.add('logOut', () => {
 
  Cypress.Commands.add('elementsContainsText',(selector: string, textToContain: string) => {
   new Promise((res,rej) => {
-    cy.get(selector, {timeout:10000}).should('contain.text', 'ido').each(($el, index, $list) => {
+    cy.get(selector, {timeout:10000}).should('contain.text', textToContain).each(($el, index, $list) => {
         if ($el.text() == textToContain)
         {
            res(true);
