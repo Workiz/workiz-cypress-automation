@@ -126,6 +126,18 @@ describe('Registration and login tests',() => {
         googleLocalServicePage.fillAllDetailsAndSchedule();
         cy.get('h3').should('contain','Request Sent!');        
     });
+
+    it('connecting to angi link works properly',() => {
+        const email = RandomFunctions.generateRandomEmail();
+        const fullName = RandomFunctions.generateFullName();
+
+        let registrationPage = pageRouter.goToRegistrationPage();
+        registrationPage.fullSignUp(email,fullName);
+        let marketPlacePage = pageRouter.goToMarketPlacePage();
+        let angiPage = marketPlacePage.goToAngiIntergationPage();
+        angiPage.clickOnActivateAngi();
+        cy.get('div.angiRegistration__confirmModal___135pH').should('be.visible');
+    });
 });
 
 
