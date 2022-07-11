@@ -9,6 +9,7 @@ export class CreateClientPage {
     fillClientsDetails():void{
         let firstName: string = RandomFunctions.generateRandomString(8);
         cy.get(`${this.firstNameLocator}`).type(firstName);
+        cy.get('[name="primary_phone"]').type(Constans.PHONE);
         cy.get('[name="address_serach"]').type(Constans.ADDRESS);
         cy.get('[name="address_serach"]').type(' r', {delay: 2000});
         cy.get('.relative .sajComplete .sajComplete-suggestion', {timeout: 10000}).click({force: true});

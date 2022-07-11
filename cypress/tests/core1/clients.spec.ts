@@ -21,15 +21,7 @@ describe('Clients tests', () => {
         });
     });
 
-    it.only('When creating new lead from client it appears in the leads report',() =>{
-        let allClientsPage = pageRouter.goToClientsPage();
-        let client = allClientsPage.createClient();
-        cy.get(client.alias).then((clientId) =>{
-        pageRouter.goToClientsPage().IsClientsTableContainsClientId(clientId);
-        });
-    });
-
-    it.only('When creating new job from client it appears in the jobs report',() =>{
+    it('When creating new job from client it appears in the jobs report',() =>{
         let allClientsPage = pageRouter.goToClientsPage();
         let client = allClientsPage.createClient();
         let job = client.CreateJobToNewJobPage();
@@ -37,6 +29,16 @@ describe('Clients tests', () => {
         let jobsPage = pageRouter.goToJobsPage();
         jobsPage.sortJobTableById(false);
         jobsPage.IsJobsTableContainsJobId(jobId);
+        });
+    });
+
+    it.only('When creating new lead from client it appears in the leads report',() =>{
+        let allClientsPage = pageRouter.goToClientsPage();
+        let client = allClientsPage.createClient();
+        let lead = client.CreateLeadToNewLeadPage();
+        cy.get(lead.alias).then((leadId) =>{
+        let leadsPage = pageRouter.goToLeadsPage();
+        leadsPage.IsLeadsTableContainsJobId(leadId);
         });
     });
 })

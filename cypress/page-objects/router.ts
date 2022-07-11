@@ -56,10 +56,10 @@ export class PageRouter {
         return new AllClientsPage;        
     }
 
-    goToLeadssPage (): AllLeadsPage  {
-        cy.visit('root/clients');
+    goToLeadsPage (): AllLeadsPage  {
+        cy.visit('root/leads');
         cy.location().should((location) => {
-            expect(location.href).to.contain('root/clients');
+            expect(location.href).to.contain('root/leads');
         });
         return new AllLeadsPage; 
     }  
