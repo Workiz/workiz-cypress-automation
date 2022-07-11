@@ -31,6 +31,7 @@ export default defineConfig({
     specPattern: "cypress/tests/**/*/*.spec.{js,jsx,ts,tsx}",
     viewportWidth: 1280,
     viewportHeight: 800,
+    pageLoadTimeout: 10000,
     "retries": {
       "runMode": 1,
       "openMode": 0
