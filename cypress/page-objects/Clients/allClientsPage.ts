@@ -18,4 +18,11 @@ export class AllClientsPage {
     {
         cy.elementsContainsText('.rt-tbody .rt-td:nth-child(1)', clientId.toString());
     };
+
+    sortClientTableById(acSort: boolean){
+        cy.get('div').contains('Job ID').click();
+        if (!acSort){
+            cy.get('div').contains('Job ID').click();
+        }
+    }
 }
