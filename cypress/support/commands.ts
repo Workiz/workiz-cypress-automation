@@ -10,7 +10,6 @@ declare global {
          logOut(): void
          openSettingsMenu(): void
          selectFromDropDown(by:string, element:string, valueToChoose: string): void
-         elementsContainsText(selector:string, textToContain:string): void
       }
     }
   }
@@ -46,28 +45,5 @@ Cypress.Commands.add('logOut', () => {
       }
     }
  })
-
- Cypress.Commands.add('elementsContainsText',(selector: string, textToContain: string) => {
-  new Promise((res,rej) => {
-    cy.get(selector, {timeout:10000}).should('contain.text', textToContain).each(($el, index, $list) => {
-        if ($el.text() == textToContain)
-        {
-           res(true);
-           //the return false just stops the each loop, still the res is true
-           return false;
-        }
-        else{
-            if(index == $list.length -1 )
-            {
-                res(false);
-            }
-        };
-    });
-  })
-  .then((resolvedValue) => {
-    expect(resolvedValue).to.be.true;
-  }) 
-
-});
 
  
