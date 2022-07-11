@@ -1,5 +1,18 @@
 export class AccountPage {
-    
+
+    changeRegion(region: string) {
+        cy.get('h4.fieldTitle').contains('Account Region').parent().find('.react-select__single-value').invoke('text').then((accountRegion) => {
+            if(accountRegion !== region) {
+                accountRegion = region;
+                this.clickOnSaveButton();
+            }
+        });
+    }
+
+    clickOnSaveButton() {
+        cy.get('.button').contains('Save').click();
+    }
+
     getAccountPreferencesToggles():Cypress.Chainable<number> {
         let count = cy.get('.react-switch-slider').its('length');
         return count;
