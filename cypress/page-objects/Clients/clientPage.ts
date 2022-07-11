@@ -2,6 +2,8 @@ import { JobTypeConsts } from "../../infrastructure/jobTypeConsts";
 import { RandomFunctions } from "../../support/randomFunctions";
 import { CreateJobPage } from "../Job/createJobPage";
 import { JobPage } from "../Job/jobPage";
+import { CreateLeadPage } from "../Leads/createLeadPage";
+import { LeadPage } from "../Leads/LeadPage";
 
 export class ClientPage {
 
@@ -31,9 +33,20 @@ export class ClientPage {
         return new CreateJobPage();
     }
 
+    private ClickCreateLead(): CreateLeadPage{
+        this.ClickActionMenu();
+        cy.get('a').contains('Create Lead').click();
+        return new CreateLeadPage();
+    }
+
     CreateJobToNewJobPage(): JobPage{
        let createJobPage =  this.ClickCreateJob();
        createJobPage.jobType = JobTypeConsts.SERVICE;
        return createJobPage.SubmitToJob();
     }
+
+    CreateLeadToNewLeadPage(): LeadPage{
+        let createLeadPage =  this.ClickCreateLead();
+        return createLeadPage.SubmitToLead();
+     }
 }
