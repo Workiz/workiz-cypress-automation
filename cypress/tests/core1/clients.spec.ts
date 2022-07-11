@@ -13,7 +13,15 @@ describe('Clients tests', () => {
         homePage =logInPage.logInWithAccount1();
     })
 
-    it.only('When creating new client it appears in the clients report',() =>{
+    it('When creating new client it appears in the clients report',() =>{
+        let allClientsPage = pageRouter.goToClientsPage();
+        let client = allClientsPage.createClient();
+        cy.get(client.alias).then((clientId) =>{
+        pageRouter.goToClientsPage().IsClientsTableContainsClientId(clientId);
+        });
+    });
+
+    it.only('When creating new lead from client it appears in the leads report',() =>{
         let allClientsPage = pageRouter.goToClientsPage();
         let client = allClientsPage.createClient();
         cy.get(client.alias).then((clientId) =>{
