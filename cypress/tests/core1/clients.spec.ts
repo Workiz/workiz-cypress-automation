@@ -21,13 +21,13 @@ describe('Clients tests', () => {
         });
     });
 
-    it('When creating new job from client it appears in the jobs report',() =>{
+    it.only('When creating new job from client it appears in the jobs report',() =>{
         let allClientsPage = pageRouter.goToClientsPage();
         let client = allClientsPage.createClient();
-        let job = client.CreateJobToNewJobPag();
+        let job = client.CreateJobToNewJobPage();
         cy.get(job.alias).then((jobId) =>{
         let jobsPage = pageRouter.goToJobsPage();
-        jobsPage.sortClientTableById(false);
+        jobsPage.sortJobTableById(false);
         jobsPage.IsJobsTableContainsJobId(jobId);
         });
     });

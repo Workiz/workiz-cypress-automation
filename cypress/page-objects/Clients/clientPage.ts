@@ -31,7 +31,7 @@ export class ClientPage {
         return new CreateJobPage();
     }
 
-    CreateJobToNewJobPag(): JobPage{
+    CreateJobToNewJobPage(): JobPage{
        let createJobPage =  this.ClickCreateJob();
        createJobPage.jobType = JobTypeConsts.SERVICE;
        return createJobPage.SubmitToJob();
