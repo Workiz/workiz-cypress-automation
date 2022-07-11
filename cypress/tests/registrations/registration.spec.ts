@@ -14,6 +14,7 @@ describe('Registration and login tests',() => {
     it('able to log in after registration',() =>{
         const email = RandomFunctions.generateRandomEmail();
         const fullName = RandomFunctions.generateFullName();
+
         let registrationPage = pageRouter.goToRegistrationPage();
         registrationPage.fullSignUp(email,fullName);
         cy.logOut();
@@ -27,6 +28,7 @@ describe('Registration and login tests',() => {
     it('left aside menu contains all defult labels after registration',() =>{
         const email = RandomFunctions.generateRandomEmail();
         const fullName = RandomFunctions.generateFullName();
+
         let registrationPage = pageRouter.goToRegistrationPage();
         let homePage = registrationPage.fullSignUp(email,fullName);
 
@@ -40,6 +42,7 @@ describe('Registration and login tests',() => {
     it('make sure all default widgets appears on dashboared',() =>{
         const email = RandomFunctions.generateRandomEmail();
         const fullName = RandomFunctions.generateFullName();
+
         let registrationPage = pageRouter.goToRegistrationPage();
         let homePage = registrationPage.fullSignUp(email,fullName);
   
@@ -87,20 +90,21 @@ describe('Registration and login tests',() => {
         homePage.getAccountUserName.should('equal',fullName);
     });
 
-    it.only('user can login after reseting password', () => {
+    it('user can login after reseting password', () => {
         const email = RandomFunctions.generateRandomEmail();
         const fullName = RandomFunctions.generateFullName();
+
         let registrationPage = pageRouter.goToRegistrationPage();
         registrationPage.fullSignUp(email,fullName);
         cy.logOut();
 
         let loginPage = new LogInPage;
-        let resetPassword = loginPage.forgotPassword();
-        resetPassword.sendResetEmail(email);
-        resetPassword.getResetInvitation(email);
+        let resetPasswordPage = loginPage.forgotPassword();
+        resetPasswordPage.sendResetEmail(email);
+        resetPasswordPage.getResetInvitation(email);
         let invitationPage = pageRouter.goToInvitationPage();
-        invitationPage.setNewPassword(Constans.defaultPasswprdForInvintation);
-        let homePage = loginPage.logIn(email,Constans.defaultPasswprdForInvintation);
+        invitationPage.setNewPassword(Constans.defaulPwdAfterReset);
+        let homePage = loginPage.logIn(email,Constans.defaulPwdAfterReset);
         homePage.getAccountUserName.should('equal',fullName);
     });
 });
