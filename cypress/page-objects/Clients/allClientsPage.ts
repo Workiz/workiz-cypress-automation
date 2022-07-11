@@ -1,4 +1,3 @@
-import { contains } from "cypress/types/jquery";
 import {ClientPage} from "./clientPage"
 import { CreateClientPage } from "./createClientPage";
 
@@ -17,17 +16,20 @@ export class AllClientsPage {
 
     IsClientsTableContainsClientId(clientId: JQuery<HTMLElement>)
     {
-        let elementText: string;
-        let fieldText: string;
-        cy.get('.rt-tbody .rt-td:nth-child(1)', {timeout:10000}).should('have.length', 10).each(($el, index, $list) => {
-            elementText = $el.text();
-            if ($el.text() == clientId.toString())
+        const idToSearch = clientId.toString();
+        cy.get('.rt-tbody .rt-td:nth-child(1)', {timeout: 10000}).should('contain.text',idToSearch).each(($el, index, $list) => {
+            console.log('checking for index ' + index);
+                if($el.text() == idToSearch)
             {
-                cy.get(".rt-tbody .rt-td:nth-child(1)").eq(index).then(function (Field) {
-                    fieldText = Field.text();
-                    expect(Field.text()).to.equal(clientId.toString());
-            });
+                    console.log('im on first if my index is ' + index)
+                    expect($el.text()).to.be.eq(idToSearch);
+                    return false;
             }
-        });
-    }
+                else if (index == $list.length-1)
+                {
+                    console.log('im on the last else if my index is ' + index)
+                    expect($el.text()).to.be.eq(idToSearch);
+                }
+        })
+    };
 }
