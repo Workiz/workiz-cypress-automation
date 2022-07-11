@@ -3,6 +3,7 @@ import { RegistrationPage } from './registrationPage';
 import { TeamPage } from './teamPage';
 import { InvitationPage } from './invitationPage';
 import { AccountPage } from './accountPage';
+import { AllLeadsPage } from './Leads/allLeadsPage';
 
 export class PageRouter {
 
@@ -37,5 +38,13 @@ export class PageRouter {
             expect(location.href).to.contain('root/clients');
         });
         return new AllClientsPage;        
+    }
+
+    goToLeadssPage (): AllLeadsPage  {
+        cy.visit('root/clients');
+        cy.location().should((location) => {
+            expect(location.href).to.contain('root/clients');
+        });
+        return new AllLeadsPage;        
     }
 }
