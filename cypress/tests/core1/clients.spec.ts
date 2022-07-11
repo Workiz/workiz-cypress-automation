@@ -1,7 +1,6 @@
 import { HomePage } from "../../page-objects/homePage";
 import { LogInPage } from "../../page-objects/logInPage";
 import { PageRouter } from "../../page-objects/router";
-import { RandomFunctions } from "../../support/randomFunctions";
 
 describe('Clients tests', () => {
     let pageRouter: PageRouter;
@@ -21,4 +20,4 @@ describe('Clients tests', () => {
         pageRouter.goToClientsPage().IsClientsTableContainsClientId(clientId);
         });
     });
-})
+});
