@@ -12,8 +12,8 @@ export class JobPage{
 
     setJobIdAsAlias(jobIdAlias: string) {
         cy.get('._jobInfoCard ._clLink').invoke('text').then((text) => { 
-        const clientId = text.split(' ')[1].slice(1, text.split(' ')[1].length);
-        cy.wrap(clientId).as(`${jobIdAlias}`);
+        const jobId = text.split(' ')[1].slice(1, text.split(' ')[1].length);
+        cy.wrap(jobId).as(`${jobIdAlias}`);
         });
     }
 }

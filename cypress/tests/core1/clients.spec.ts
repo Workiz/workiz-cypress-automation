@@ -31,4 +31,14 @@ describe('Clients tests', () => {
         jobsPage.IsJobsTableContainsJobId(jobId);
         });
     });
+
+    it('When creating new lead from client it appears in the leads report',() =>{
+        let allClientsPage = pageRouter.goToClientsPage();
+        let client = allClientsPage.createClient();
+        let lead = client.CreateLeadToNewLeadPage();
+        cy.get(lead.alias).then((leadId) =>{
+        let leadsPage = pageRouter.goToLeadsPage();
+        leadsPage.IsLeadsTableContainsJobId(leadId);
+        });
+    });
 })

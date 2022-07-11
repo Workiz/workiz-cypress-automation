@@ -3,6 +3,7 @@ import { RegistrationPage } from './registrationPage';
 import { TeamPage } from './teamPage';
 import { InvitationPage } from './invitationPage';
 import { AccountPage } from './accountPage';
+import { AllLeadsPage } from './Leads/allLeadsPage';
 import { AllJobsPage } from './Job/allJobsPage';
 import { JobTypesPage } from './jobTypesPage';
 import { GoogleLocalServicesPage } from './googleLocalServicesPage';
@@ -54,6 +55,14 @@ export class PageRouter {
         });
         return new AllClientsPage;        
     }
+
+    goToLeadsPage (): AllLeadsPage  {
+        cy.visit('root/leads');
+        cy.location().should((location) => {
+            expect(location.href).to.contain('root/leads');
+        });
+        return new AllLeadsPage; 
+    }  
 
     goToJobsPage(): AllJobsPage {
         cy.visit('root/jobs');
