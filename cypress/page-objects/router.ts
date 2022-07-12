@@ -3,12 +3,13 @@ import { RegistrationPage } from './registrationPage';
 import { TeamPage } from './teamPage';
 import { InvitationPage } from './invitationPage';
 import { AccountPage } from './accountPage';
-import { AllLeadsPage } from './Leads/allLeadsPage';
+import { AllLeadsPage } from './Lead/allLeadsPage';
 import { AllJobsPage } from './Job/allJobsPage';
 import { JobTypesPage } from './Job/jobTypesPage';
 import { GoogleLocalServicesPage } from './googleLocalServicesPage';
 import { MarketPlacePage } from './marketPlacePage';
 import { AllInvoicesPage } from './Invoice/allInvoicesPage';
+import { AllEstimatesPage } from './Estimate/allEstimatesPage';
 
 export class PageRouter {
 

@@ -4,8 +4,8 @@ import { CreateInvoicePage } from "../Invoice/createInvoicePage";
 import { InvoicePage } from "../Invoice/invoicePage";
 import { CreateJobPage } from "../Job/createJobPage";
 import { JobPage } from "../Job/jobPage";
-import { CreateLeadPage } from "../Leads/createLeadPage";
-import { LeadPage } from "../Leads/LeadPage";
+import { CreateLeadPage } from "../Lead/createLeadPage";
+import { LeadPage } from "../Lead/LeadPage";
 
 export class ClientPage {
 
