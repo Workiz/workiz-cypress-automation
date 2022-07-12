@@ -42,7 +42,7 @@ describe('Clients tests', () => {
         });
     });
 
-    it.only('When creating new invoice from client it appears in the invoices report',() =>{
+    it('When creating new invoice from client it appears in the invoices report',() =>{
         let allClientsPage = pageRouter.goToClientsPage();
         let client = allClientsPage.createClient();
         let invoice = client.CreateInvoiceToNewInvoicePage();
@@ -50,5 +50,15 @@ describe('Clients tests', () => {
         let InvoicesPage = pageRouter.goToInvoicePage();
         InvoicesPage.IsInvoiceTableContainsInvoiceId(invoiceId);
         });
+    });
+
+    it.only('When creating new estimate from client it appears in the estimates report',() =>{
+        let allClientsPage = pageRouter.goToClientsPage();
+        let client = allClientsPage.createClient();
+        let invoice = client.CreateEstimateToNewEstimatePage();
+        // cy.get(invoice.alias).then((invoiceId) =>{
+        // let InvoicesPage = pageRouter.goToInvoicePage();
+        // InvoicesPage.IsInvoiceTableContainsInvoiceId(invoiceId);
+        // });
     });
 })

@@ -1,10 +1,10 @@
 export class AllEstimatesPage {
 
-    IsLeadsTableContainsJobId(leadId: JQuery<HTMLElement>)
+    IsLeadsTableContainsJobId(estimateId: JQuery<HTMLElement>)
     {
         //Need to find a better solution to get text without the texts of the child element!!!
-        const idToSearch = leadId.toString()+'Quick view';
-        cy.get('.rt-td .leads-module__quickJob___365MB', {timeout: 10000}).should('contain.text',idToSearch).each(($el, index, $list) => {
+        const idToSearch = estimateId.toString()+'Quick view';
+        cy.get('.rt-tbody .rt-td:nth-child(2)', {timeout: 10000}).should('contain.text',idToSearch).each(($el, index, $list) => {
 
             if($el.text() == idToSearch)
             {

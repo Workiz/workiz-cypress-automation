@@ -1,19 +1,19 @@
 import { RandomFunctions } from "../../support/randomFunctions";
 
 export class EstimatePage{
-    private static leadCounter: number = 0;
+    private static estimateCounter: number = 0;
     alias: string;
 
     constructor() {
-        this.alias = 'lead' + ++EstimatePage.leadCounter;
-        this.setLeadIdAsAlias(this.alias);
+        this.alias = 'lead' + ++EstimatePage.estimateCounter;
+        this.setEstimateIdAsAlias(this.alias);
         this.alias = RandomFunctions.generateRandomAliasName(this.alias);
     }
 
-    setLeadIdAsAlias(jobIdAlias: string) {
+    setEstimateIdAsAlias(estimateIdAlias: string) {
         cy.get('.flexCont ._clLink').invoke('text').then((text) => { 
-        const leadId = text.split(' ')[1].slice(1, text.split(' ')[1].length);
-        cy.wrap(leadId).as(`${jobIdAlias}`);
+        const estimateId = text.split(' ')[1].slice(1, text.split(' ')[1].length);
+        cy.wrap(estimateId).as(`${estimateIdAlias}`);
         });
     }
 } 

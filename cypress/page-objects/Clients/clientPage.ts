@@ -1,5 +1,7 @@
 import { JobTypeConsts } from "../../infrastructure/jobTypeConsts";
 import { RandomFunctions } from "../../support/randomFunctions";
+import { CreateEstimatePage } from "../Estimate/createEstimatePage";
+import { EstimatePage } from "../Estimate/EstimatePage";
 import { CreateInvoicePage } from "../Invoice/createInvoicePage";
 import { InvoicePage } from "../Invoice/invoicePage";
 import { CreateJobPage } from "../Job/createJobPage";
@@ -47,6 +49,12 @@ export class ClientPage {
         return new CreateInvoicePage();
     }
 
+    private ClickCreateEstimate(): CreateEstimatePage{
+        this.ClickActionMenu();
+        cy.get('a').contains('Create Estimate').click();
+        return new CreateEstimatePage();
+    }
+
     CreateJobToNewJobPage(): JobPage{
        let createJobPage =  this.ClickCreateJob();
        createJobPage.jobType = JobTypeConsts.SERVICE;
@@ -61,5 +69,10 @@ export class ClientPage {
      CreateInvoiceToNewInvoicePage(): InvoicePage{
         let createInvoicePage =  this.ClickCreateInvoice();
         return createInvoicePage.SubmitToInvoice();
+     }
+
+     CreateEstimateToNewEstimatePage(): EstimatePage{
+        let createEstiamtePage =  this.ClickCreateEstimate();
+        return createEstiamtePage.SubmitToEstimate();
      }
 }
