@@ -10,6 +10,7 @@ declare global {
          logOut(): void
          openSettingsMenu(): void
          selectFromDropDown(by:string, element:string, valueToChoose: string): void
+         validateTextAppearInElements(selector:string, textToFind:string): void
       }
     }
   }
@@ -44,6 +45,27 @@ Cypress.Commands.add('logOut', () => {
         break;
       }
     }
- })
+ });
+
+ Cypress.Commands.add('validateTextAppearInElements',(selector:string, textToFind:string) => {
+
+  let allElementsText = new Array<string>;
+  cy.get(selector, {timeout: 10000}).should('contain.text',textToFind).each(($el, index, $list) => {
+    allElementsText.push($el.text());
+    if($el.text() == textToFind)
+      {
+        expect($el.text()).to.be.eq(textToFind);
+        return false;
+      }
+    else if (index == $list.length-1)
+    {
+      console.log(`these are all the texes were in the elements and didnt equal to text: ${allElementsText}`)
+      expect($el.text()).to.be.eq(textToFind);
+    }
+  })
+});
+
+
+
 
  
