@@ -1,5 +1,7 @@
 import { JobTypeConsts } from "../../infrastructure/jobTypeConsts";
 import { RandomFunctions } from "../../support/randomFunctions";
+import { CreateInvoicePage } from "../Invoice/createInvoicePage";
+import { InvoicePage } from "../Invoice/invoicePage";
 import { CreateJobPage } from "../Job/createJobPage";
 import { JobPage } from "../Job/jobPage";
 import { CreateLeadPage } from "../Leads/createLeadPage";
@@ -39,6 +41,12 @@ export class ClientPage {
         return new CreateLeadPage();
     }
 
+    private ClickCreateInvoice(): CreateInvoicePage{
+        this.ClickActionMenu();
+        cy.get('a').contains('Create Invoice').click();
+        return new CreateInvoicePage();
+    }
+
     CreateJobToNewJobPage(): JobPage{
        let createJobPage =  this.ClickCreateJob();
        createJobPage.jobType = JobTypeConsts.SERVICE;
@@ -48,5 +56,10 @@ export class ClientPage {
     CreateLeadToNewLeadPage(): LeadPage{
         let createLeadPage =  this.ClickCreateLead();
         return createLeadPage.SubmitToLead();
+     }
+
+     CreateInvoiceToNewInvoicePage(): InvoicePage{
+        let createInvoicePage =  this.ClickCreateInvoice();
+        return createInvoicePage.SubmitToInvoice();
      }
 }
