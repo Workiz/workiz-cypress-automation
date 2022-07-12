@@ -3,11 +3,13 @@ import { RegistrationPage } from './registrationPage';
 import { TeamPage } from './teamPage';
 import { InvitationPage } from './invitationPage';
 import { AccountPage } from './accountPage';
-import { AllLeadsPage } from './Leads/allLeadsPage';
+import { AllLeadsPage } from './Lead/allLeadsPage';
 import { AllJobsPage } from './Job/allJobsPage';
 import { JobTypesPage } from './Job/jobTypesPage';
 import { GoogleLocalServicesPage } from './googleLocalServicesPage';
 import { MarketPlacePage } from './marketPlacePage';
+import { AllInvoicesPage } from './Invoice/allInvoicesPage';
+import { AllEstimatesPage } from './Estimate/allEstimatesPage';
 
 export class PageRouter {
 
@@ -77,5 +79,21 @@ export class PageRouter {
             expect(location.href).to.contain('root/jobs');
         });
         return new AllJobsPage;        
+    }
+
+    goToInvoicePage(): AllInvoicesPage {
+        cy.visit('root/invoices');
+        cy.location().should((location) => {
+            expect(location.href).to.contain('root/invoices');
+        });
+        return new AllInvoicesPage;        
+    }
+
+    goToEstimatePage(): AllEstimatesPage {
+        cy.visit('root/estimates');
+        cy.location().should((location) => {
+            expect(location.href).to.contain('root/estimates');
+        });
+        return new AllEstimatesPage;        
     }
 }

@@ -1,6 +1,7 @@
 import { RandomFunctions } from "../../support/randomFunctions";
 
 export class LeadPage{
+    
     private static leadCounter: number = 0;
     alias: string;
 

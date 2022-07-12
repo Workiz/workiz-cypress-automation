@@ -41,4 +41,24 @@ describe('Clients tests', () => {
         leadsPage.IsLeadsTableContainsJobId(leadId);
         });
     });
+
+    it('When creating new invoice from client it appears in the invoices report',() =>{
+        let allClientsPage = pageRouter.goToClientsPage();
+        let client = allClientsPage.createClient();
+        let invoice = client.CreateInvoiceToNewInvoicePage();
+        cy.get(invoice.alias).then((invoiceId) =>{
+        let invoicesPage = pageRouter.goToInvoicePage();
+        invoicesPage.IsInvoiceTableContainsInvoiceId(invoiceId);
+        });
+    });
+
+    it('When creating new estimate from client it appears in the estimates report',() =>{
+        let allClientsPage = pageRouter.goToClientsPage();
+        let client = allClientsPage.createClient();
+        let estimate = client.CreateEstimateToNewEstimatePage();
+        cy.get(estimate.alias).then((estimateId) =>{
+        let estiamtesPage = pageRouter.goToEstimatePage();
+        estiamtesPage.IsEstimatesTableContainsJobId(estimateId);
+        });
+    });
 })
