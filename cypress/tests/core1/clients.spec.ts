@@ -46,9 +46,9 @@ describe('Clients tests', () => {
         let allClientsPage = pageRouter.goToClientsPage();
         let client = allClientsPage.createClient();
         let invoice = client.CreateInvoiceToNewInvoicePage();
-        // cy.get(invoice.alias).then((invoiceId) =>{
-        // let InvoicesPage = pageRouter.goToLeadsPage();
-        // InvoicesPage.IsLeadsTableContainsJobId(invoiceId);
-        // });
+        cy.get(invoice.alias).then((invoiceId) =>{
+        let InvoicesPage = pageRouter.goToInvoicePage();
+        InvoicesPage.IsInvoiceTableContainsInvoiceId(invoiceId);
+        });
     });
 })

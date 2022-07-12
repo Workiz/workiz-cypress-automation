@@ -3,11 +3,11 @@ import { CreateInvoicePage } from "./createInvoicePage";
 
 export class AllInvoicesPage {
 
-    IsInvoiceTableContainsJobId(invoiceId: JQuery<HTMLElement>)
+    IsInvoiceTableContainsInvoiceId(invoiceId: JQuery<HTMLElement>)
     {
         //Need to find a better solution to get text without the texts of the child element!!!
-        const idToSearch = invoiceId.toString()+'Quick view';
-        cy.get('.rt-tbody .rt-td:nth-child(2) .jobs-module__quickJob___3NbDw', {timeout: 10000}).should('contain.text',idToSearch).each(($el, index, $list) => {
+        const idToSearch = invoiceId.toString();
+        cy.get('.rt-tbody .rt-td:nth-child(2)', {timeout: 10000}).should('contain.text',idToSearch).each(($el, index, $list) => {
 
             if($el.text() == idToSearch)
             {
