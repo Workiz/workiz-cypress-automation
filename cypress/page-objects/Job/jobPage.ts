@@ -1,6 +1,7 @@
 import { RandomFunctions } from "../../support/randomFunctions";
 
 export class JobPage{
+    
     private static jobCounter: number = 0;
     alias: string;
 

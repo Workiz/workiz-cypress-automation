@@ -1,11 +1,12 @@
 import { RandomFunctions } from "../../support/randomFunctions";
 
 export class EstimatePage{
+    
     private static estimateCounter: number = 0;
     alias: string;
 
     constructor() {
-        this.alias = 'lead' + ++EstimatePage.estimateCounter;
+        this.alias = 'estimate' + ++EstimatePage.estimateCounter;
         this.setEstimateIdAsAlias(this.alias);
         this.alias = RandomFunctions.generateRandomAliasName(this.alias);
     }

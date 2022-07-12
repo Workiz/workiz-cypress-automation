@@ -1,4 +1,5 @@
 export class JobTypesPage {
+    
     addJobType(jobType: string) {
         cy.get('.rt-tbody .rt-tr .rt-td:nth-child(1)').should('have.length.at.least',1).invoke('text').then((jobTypesNames) => {
             if(!jobTypesNames.includes(jobType)){
