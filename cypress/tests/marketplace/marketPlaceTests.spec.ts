@@ -26,4 +26,23 @@ describe('Clients tests', () => {
         const allWidgetElements = marketPlacePage.getAllWidgetsElements;
         allWidgetElements.its('length').should('eq', 36);
     });
+
+    it.only('SearchValuesInSearchBarAndValidateTheResults',() =>{
+        let marketPlacePage = pageRouter.goToMarketPlacePage();
+        marketPlacePage.SearchForValueInSearchBar('quickBooks');
+        marketPlacePage.getAllActiveWidgetsList.first().then(($el) => {
+            expect($el.text()).to.equal('QuickBooks Online');
+        });
+
+        marketPlacePage.ClearSearchBar();
+        marketPlacePage.SearchForValueInSearchBar('Online Booking');
+        marketPlacePage.getAllActiveWidgetsList.first().then(($el) => {
+            expect($el.text()).to.equal('Online Booking');
+        });
+    });
+
+
+
+
+    
 });

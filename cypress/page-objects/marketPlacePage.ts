@@ -1,6 +1,14 @@
 import { AngiPage } from "./angiIntegrationPage";
 
 export class MarketPlacePage {
+    ClearSearchBar() {
+        cy.get(".lnr.lnr-close").click();
+    }
+
+    SearchForValueInSearchBar(textToSearch: string): void {
+        cy.get('i.lnr.lnr-magnifier').click();
+        cy.get("input[placeholder='Search...']").type(textToSearch);
+    }
 
     public get getAllWidgetsElements(): Cypress.Chainable<JQuery> {
         return cy.get('section.FeatureCard-module__card___12rzT');
