@@ -5,15 +5,25 @@ import { PageRouter } from "../../page-objects/router";
 describe('Clients tests', () => {
     let pageRouter: PageRouter;
     let logInPage: LogInPage;
-    let homePage: HomePage;
 
     beforeEach(() => {
         pageRouter = new PageRouter;
         logInPage = new LogInPage;
-        homePage =logInPage.logInWithAccount6();
+        logInPage.logInWithAccount6();
     })
 
-    it('When creating new client it appears in the clients report',() =>{
+    it('ValidateTheNumberOfPressedAndUnPressedFiltersInMarketPlacePage',() =>{
+        let marketPlacePage = pageRouter.goToMarketPlacePage();
+        const unPressedButtonElements = marketPlacePage.getUnpressedButtonElements;
+        unPressedButtonElements.its('length').should('eq', 4);
+        const pressedButtonElements = marketPlacePage.pressedButtonElements;
+        pressedButtonElements.its('length').should('eq', 1);
 
+    });
+
+    it('ValidateTheNumberOfWidgetsInMarketPlacePage',() =>{
+        let marketPlacePage = pageRouter.goToMarketPlacePage();
+        const allWidgetElements = marketPlacePage.getAllWidgetsElements;
+        allWidgetElements.its('length').should('eq', 36);
     });
 });

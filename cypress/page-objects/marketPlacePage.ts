@@ -2,7 +2,19 @@ import { AngiPage } from "./angiIntegrationPage";
 
 export class MarketPlacePage {
 
-    public get countActiveWidgets(): Cypress.Chainable<JQuery> {
+    public get getAllWidgetsElements(): Cypress.Chainable<JQuery> {
+        return cy.get('section.FeatureCard-module__card___12rzT');
+    }
+
+    public get pressedButtonElements():Cypress.Chainable<JQuery> {
+        return cy.get('span.MarketplacePage-module__current___1xBlY');
+    }
+    
+    public get getUnpressedButtonElements(): Cypress.Chainable<JQuery> {
+        return cy.get('span[class="MarketplacePage-module__category_item___25HXd"]');
+    }
+        
+    public get getActiveWidgetsElements(): Cypress.Chainable<JQuery> {
         return cy.get('img[src$="/svg/activated_feature_ok.svg"]');
     }
 
