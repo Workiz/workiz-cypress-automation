@@ -78,4 +78,12 @@ export class PageRouter {
         });
         return new AllJobsPage;        
     }
+
+    goToInvoicePage(): AllJobsPage {
+        cy.visit('root/invoices');
+        cy.location().should((location) => {
+            expect(location.href).to.contain('root/invoices');
+        });
+        return new AllJobsPage;        
+    }
 }

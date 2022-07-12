@@ -39,6 +39,12 @@ export class ClientPage {
         return new CreateLeadPage();
     }
 
+    private ClickCreateInvoice(): CreateLeadPage{
+        this.ClickActionMenu();
+        cy.get('a').contains('Create Invoice').click();
+        return new CreateLeadPage();
+    }
+
     CreateJobToNewJobPage(): JobPage{
        let createJobPage =  this.ClickCreateJob();
        createJobPage.jobType = JobTypeConsts.SERVICE;
@@ -47,6 +53,10 @@ export class ClientPage {
 
     CreateLeadToNewLeadPage(): LeadPage{
         let createLeadPage =  this.ClickCreateLead();
+        return createLeadPage.SubmitToLead();
+     }
+     CreateInvoiceToNewInvoicePage(): LeadPage{
+        let createLeadPage =  this.ClickCreateInvoice();
         return createLeadPage.SubmitToLead();
      }
 }
