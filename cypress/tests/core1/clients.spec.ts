@@ -42,7 +42,7 @@ describe('Clients tests', () => {
         });
     });
 
-    it.only('When creating new invoice from client it appears in the invoices report',() =>{
+    it('When creating new invoice from client it appears in the invoices report',() =>{
         let allClientsPage = pageRouter.goToClientsPage();
         let client = allClientsPage.createClient();
         let invoice = client.CreateInvoiceToNewInvoicePage();
