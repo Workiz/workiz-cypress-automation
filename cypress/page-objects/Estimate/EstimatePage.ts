@@ -11,8 +11,8 @@ export class EstimatePage{
     }
 
     setEstimateIdAsAlias(estimateIdAlias: string) {
-        cy.get('.flexCont ._clLink').invoke('text').then((text) => { 
-        const estimateId = text.split(' ')[1].slice(1, text.split(' ')[1].length);
+        cy.contains('div', 'Estimate:').siblings('div').invoke('text').then((text) => { 
+        const estimateId = text.trim();
         cy.wrap(estimateId).as(`${estimateIdAlias}`);
         });
     }
