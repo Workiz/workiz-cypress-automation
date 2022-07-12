@@ -51,20 +51,18 @@ Cypress.Commands.add('logOut', () => {
 
   let allElementsText = new Array<string>;
   cy.get(selector, {timeout: 10000}).should('contain.text',textToFind).each(($el, index, $list) => {
-    
     allElementsText.push($el.text());
-
-        if($el.text() == textToFind)
+    if($el.text() == textToFind)
+      {
+        expect($el.text()).to.be.eq(textToFind);
+        return false;
+      }
+    else if (index == $list.length-1)
     {
-            expect($el.text()).to.be.eq(textToFind);
-            return false;
+      console.log(`these are all the texes were in the elements and didnt equal to text: ${allElementsText}`)
+      expect($el.text()).to.be.eq(textToFind);
     }
-        else if (index == $list.length-1)
-        {
-            console.log(`these are all the texes were in the elements and didnt equal to text: ${allElementsText}`)
-            expect($el.text()).to.be.eq(textToFind);
-        }
-})
+  })
 });
 
 
