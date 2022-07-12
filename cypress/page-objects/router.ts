@@ -87,4 +87,12 @@ export class PageRouter {
         });
         return new AllInvoicesPage;        
     }
+
+    goToEstimatePage(): AllEstimatesPage {
+        cy.visit('root/estimates');
+        cy.location().should((location) => {
+            expect(location.href).to.contain('root/estimates');
+        });
+        return new AllEstimatesPage;        
+    }
 }
