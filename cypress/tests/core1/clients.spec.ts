@@ -41,4 +41,14 @@ describe('Clients tests', () => {
         leadsPage.IsLeadsTableContainsJobId(leadId);
         });
     });
+
+    it.only('When creating new invoice from client it appears in the invoices report',() =>{
+        let allClientsPage = pageRouter.goToClientsPage();
+        let client = allClientsPage.createClient();
+        let invoice = client.CreateInvoiceToNewInvoicePage();
+        cy.get(invoice.alias).then((invoiceId) =>{
+        let InvoicesPage = pageRouter.goToInvoicePage();
+        InvoicesPage.IsInvoiceTableContainsInvoiceId(invoiceId);
+        });
+    });
 })
