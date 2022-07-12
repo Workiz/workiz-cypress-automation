@@ -3,6 +3,7 @@ import { PageRouter } from "../../page-objects/router";
 import { RandomFunctions } from "../../support/randomFunctions";
 import { HomePageLabels } from "../../infrastructure/homePageLabels";
 import { Constans } from "./../../infrastructure/consts"
+import { MarketPlaceLabels } from "../../infrastructure/marketPlaceLabels";
 
 describe('Registration and login tests',() => {
     let pageRouter:PageRouter;
@@ -137,6 +138,24 @@ describe('Registration and login tests',() => {
         let angiPage = marketPlacePage.goToAngiIntergationPage();
         angiPage.clickOnActivateAngi();
         cy.get('div.angiRegistration__confirmModal___135pH').should('be.visible');
+    });
+
+    it.only('validate number and names of active widgets on NewUser',() => {
+        const email = RandomFunctions.generateRandomEmail();
+        const fullName = RandomFunctions.generateFullName();
+
+        let registrationPage = pageRouter.goToRegistrationPage();
+        registrationPage.fullSignUp(email,fullName);
+
+        let accountPage = pageRouter.goToAccountPage();
+        accountPage.changeRegion("United States");
+
+        let marketPlacePage = pageRouter.goToMarketPlacePage();
+        let widgetsElements = marketPlacePage.getAllActiveWidgetsList;
+        widgetsElements.each((item,index,list) => {
+            expect(item.text()).to.be.oneOf(MarketPlaceLabels.allActiveWidgetsLabelsList);
+        });
+        marketPlacePage.countActiveWidgets.should('have.length',15);
     });
 });
 
