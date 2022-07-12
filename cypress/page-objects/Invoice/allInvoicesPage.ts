@@ -5,7 +5,6 @@ export class AllInvoicesPage {
 
     IsInvoiceTableContainsInvoiceId(invoiceId: JQuery<HTMLElement>)
     {
-        //Need to find a better solution to get text without the texts of the child element!!!
         const idToSearch = invoiceId.toString();
         cy.get('.rt-tbody .rt-td:nth-child(2)', {timeout: 10000}).should('contain.text',idToSearch).each(($el, index, $list) => {
             if($el.text() == idToSearch)
