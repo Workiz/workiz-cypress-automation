@@ -13,7 +13,7 @@ describe('Clients tests', () => {
         homePage =logInPage.logInWithAccount1();
     })
 
-    it.only('When creating new client it appears in the clients report',() =>{
+    it('When creating new client it appears in the clients report',() =>{
         let allClientsPage = pageRouter.goToClientsPage();
         let client = allClientsPage.createClient();
         cy.get(client.alias).then((clientId) =>{
@@ -42,7 +42,7 @@ describe('Clients tests', () => {
         });
     });
 
-    it.only('When creating new invoice from client it appears in the invoices report',() =>{
+    it('When creating new invoice from client it appears in the invoices report',() =>{
         let allClientsPage = pageRouter.goToClientsPage();
         let client = allClientsPage.createClient();
         let invoice = client.CreateInvoiceToNewInvoicePage();
