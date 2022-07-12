@@ -13,7 +13,7 @@ describe('Clients tests', () => {
         homePage =logInPage.logInWithAccount1();
     })
 
-    it('When creating new client it appears in the clients report',() =>{
+    it.only('When creating new client it appears in the clients report',() =>{
         let allClientsPage = pageRouter.goToClientsPage();
         let client = allClientsPage.createClient();
         cy.get(client.alias).then((clientId) =>{
