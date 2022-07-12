@@ -47,8 +47,18 @@ describe('Clients tests', () => {
         let client = allClientsPage.createClient();
         let invoice = client.CreateInvoiceToNewInvoicePage();
         cy.get(invoice.alias).then((invoiceId) =>{
-        let InvoicesPage = pageRouter.goToInvoicePage();
-        InvoicesPage.IsInvoiceTableContainsInvoiceId(invoiceId);
+        let invoicesPage = pageRouter.goToInvoicePage();
+        invoicesPage.IsInvoiceTableContainsInvoiceId(invoiceId);
+        });
+    });
+
+    it('When creating new estimate from client it appears in the estimates report',() =>{
+        let allClientsPage = pageRouter.goToClientsPage();
+        let client = allClientsPage.createClient();
+        let estimate = client.CreateEstimateToNewEstimatePage();
+        cy.get(estimate.alias).then((estimateId) =>{
+        let estiamtesPage = pageRouter.goToEstimatePage();
+        estiamtesPage.IsEstimatesTableContainsJobId(estimateId);
         });
     });
 })
