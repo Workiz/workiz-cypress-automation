@@ -42,13 +42,13 @@ describe('Clients tests', () => {
         });
     });
 
-    it('When creating new invoice from client it appears in the invoices report',() =>{
+    it.only('When creating new invoice from client it appears in the invoices report',() =>{
         let allClientsPage = pageRouter.goToClientsPage();
         let client = allClientsPage.createClient();
-        let lead = client.CreateLeadToNewLeadPage();
-        cy.get(lead.alias).then((leadId) =>{
-        let leadsPage = pageRouter.goToLeadsPage();
-        leadsPage.IsLeadsTableContainsJobId(leadId);
-        });
+        let invoice = client.CreateInvoiceToNewInvoicePage();
+        // cy.get(invoice.alias).then((invoiceId) =>{
+        // let InvoicesPage = pageRouter.goToLeadsPage();
+        // InvoicesPage.IsLeadsTableContainsJobId(invoiceId);
+        // });
     });
 })
