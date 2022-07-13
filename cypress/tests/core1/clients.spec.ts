@@ -17,48 +17,48 @@ describe('Clients tests', () => {
         let allClientsPage = pageRouter.goToClientsPage();
         let client = allClientsPage.createClient();
         cy.get(client.alias).then((clientId) =>{
-        pageRouter.goToClientsPage().IsClientsTableContainsClientId(clientId);
+        pageRouter.goToClientsPage().isClientsTableContainsClientId(clientId);
         });
     });
 
     it('When creating new job from client it appears in the jobs report',() =>{
         let allClientsPage = pageRouter.goToClientsPage();
         let client = allClientsPage.createClient();
-        let job = client.CreateJobToNewJobPage();
+        let job = client.createJobToNewJobPage();
         cy.get(job.alias).then((jobId) =>{
         let jobsPage = pageRouter.goToJobsPage();
         jobsPage.sortJobTableById(false);
-        jobsPage.IsJobsTableContainsJobId(jobId);
+        jobsPage.isJobsTableContainsJobId(jobId);
         });
     });
 
     it('When creating new lead from client it appears in the leads report',() =>{
         let allClientsPage = pageRouter.goToClientsPage();
         let client = allClientsPage.createClient();
-        let lead = client.CreateLeadToNewLeadPage();
+        let lead = client.createLeadToNewLeadPage();
         cy.get(lead.alias).then((leadId) =>{
         let leadsPage = pageRouter.goToLeadsPage();
-        leadsPage.IsLeadsTableContainsJobId(leadId);
+        leadsPage.isLeadsTableContainsJobId(leadId);
         });
     });
 
     it('When creating new invoice from client it appears in the invoices report',() =>{
         let allClientsPage = pageRouter.goToClientsPage();
         let client = allClientsPage.createClient();
-        let invoice = client.CreateInvoiceToNewInvoicePage();
+        let invoice = client.createInvoiceToNewInvoicePage();
         cy.get(invoice.alias).then((invoiceId) =>{
         let invoicesPage = pageRouter.goToInvoicePage();
-        invoicesPage.IsInvoiceTableContainsInvoiceId(invoiceId);
+        invoicesPage.isInvoiceTableContainsInvoiceId(invoiceId);
         });
     });
 
     it('When creating new estimate from client it appears in the estimates report',() =>{
         let allClientsPage = pageRouter.goToClientsPage();
         let client = allClientsPage.createClient();
-        let estimate = client.CreateEstimateToNewEstimatePage();
+        let estimate = client.createEstimateToNewEstimatePage();
         cy.get(estimate.alias).then((estimateId) =>{
         let estiamtesPage = pageRouter.goToEstimatePage();
-        estiamtesPage.IsEstimatesTableContainsJobId(estimateId);
+        estiamtesPage.isEstimatesTableContainsJobId(estimateId);
         });
     });
 })

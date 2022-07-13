@@ -67,8 +67,8 @@ describe('Registration and login tests',() => {
         let teamFreeUsers = teamPageAfterAddingNew.getFreeTeamUsers(email);
         teamFreeUsers.invoke('text').then((text) => {
             expect(text).includes(email);
+        });
     });
-});
 
     it('user can logIn after signup from email invitation',() => {
         let loginPage = new LogInPage;
@@ -140,7 +140,7 @@ describe('Registration and login tests',() => {
         cy.get('div.angiRegistration__confirmModal___135pH').should('be.visible');
     });
 
-    it.only('validate number and names of active widgets on NewUser',() => {
+    it('validate number and names of active widgets on NewUser',() => {
         const email = RandomFunctions.generateRandomEmail();
         const fullName = RandomFunctions.generateFullName();
 
