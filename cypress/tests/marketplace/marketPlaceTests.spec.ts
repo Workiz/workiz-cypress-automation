@@ -68,23 +68,4 @@ describe('Clients tests', () => {
         marketPlacePage.GoToCustomFieldsByJobLinkFromCustomFieldsAddOnPage();
         cy.url().should('include', '3092163-setting-up-custom-fields-by-job-type');
     });
-
-
-
-
-    
-
-
-
-    
-
-
-
-
-    
-
-
-
-
-    
 });
