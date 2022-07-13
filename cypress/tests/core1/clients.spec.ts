@@ -61,4 +61,11 @@ describe('Clients tests', () => {
         estiamtesPage.IsEstimatesTableContainsJobId(estimateId);
         });
     });
+
+    it('After adding note to client it will appear in client page notes',() =>{
+        let allClientsPage = pageRouter.goToClientsPage();
+        let client = allClientsPage.createClient();
+        let estimate = client.CreateEstimateToNewEstimatePage();
+        
+    });
 })

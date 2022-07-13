@@ -75,4 +75,11 @@ export class ClientPage {
         let createEstiamtePage =  this.ClickCreateEstimate();
         return createEstiamtePage.SubmitToEstimate();
      }
+
+     addNoteToClient(note: string){
+        cy.scrollTo('bottom');
+        cy.get('button').contains('Add Note');
+        cy.get('data-editor="editor"').type(note);
+        cy.get('button compact float-right iFfWBzvt7RjPTzzA73jT ').click();
+     }
 }
