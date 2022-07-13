@@ -63,7 +63,7 @@ describe('Clients tests', () => {
         cy.url().should('include', '2246776-how-to-create-custom-fields-for-jobs-and-clients');
     });
 
-    it.only('UsingCustomFieldsLinkWorksProperlyInCustomFields',() =>{
+    it('UsingCustomFieldsLinkWorksProperlyInCustomFields',() =>{
         let marketPlacePage = pageRouter.goToMarketPlacePage();
         marketPlacePage.GoToCustomFieldsByJobLinkFromCustomFieldsAddOnPage();
         cy.url().should('include', '3092163-setting-up-custom-fields-by-job-type');
