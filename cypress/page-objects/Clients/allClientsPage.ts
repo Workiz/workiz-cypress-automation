@@ -14,7 +14,7 @@ export class AllClientsPage {
         return new CreateClientPage;
     }
 
-    IsClientsTableContainsClientId(clientId: JQuery<HTMLElement>)
+    isClientsTableContainsClientId(clientId: JQuery<HTMLElement>)
     {
         cy.validateTextAppearInElements('.rt-tbody .rt-td:nth-child(1)', clientId.toString());
     };

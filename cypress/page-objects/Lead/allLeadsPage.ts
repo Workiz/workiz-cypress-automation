@@ -1,6 +1,6 @@
 export class AllLeadsPage {
 
-    IsLeadsTableContainsJobId(leadId: JQuery<HTMLElement>)
+    isLeadsTableContainsJobId(leadId: JQuery<HTMLElement>)
     {
         //Need to find a better solution to get text without the texts of the child element!!!
         const idToSearch = leadId.toString()+'Quick view';
