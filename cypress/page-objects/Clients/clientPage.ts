@@ -8,6 +8,7 @@ import { CreateJobPage } from "../Job/createJobPage";
 import { JobPage } from "../Job/jobPage";
 import { CreateLeadPage } from "../Lead/createLeadPage";
 import { LeadPage } from "../Lead/LeadPage";
+import { AllClientsPage } from "./allClientsPage";
 
 export class ClientPage {
 
@@ -55,6 +56,13 @@ export class ClientPage {
         return new CreateEstimatePage();
     }
 
+    private ClickDeleteClient(): AllClientsPage{
+        this.ClickActionMenu();
+        cy.get('a').contains('Delete Client').click();
+        cy.get('button').contains('Yes delete it').click();
+        return new AllClientsPage();
+    }
+
     CreateJobToNewJobPage(): JobPage{
        let createJobPage =  this.ClickCreateJob();
        createJobPage.jobType = JobTypeConsts.SERVICE;
@@ -74,5 +82,9 @@ export class ClientPage {
      CreateEstimateToNewEstimatePage(): EstimatePage{
         let createEstiamtePage =  this.ClickCreateEstimate();
         return createEstiamtePage.SubmitToEstimate();
+     }
+
+     DeleteClient(): AllClientsPage{
+        return this.ClickDeleteClient();
      }
 }

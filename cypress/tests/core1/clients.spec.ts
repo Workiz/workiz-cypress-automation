@@ -61,4 +61,13 @@ describe('Clients tests', () => {
         estiamtesPage.IsEstimatesTableContainsJobId(estimateId);
         });
     });
+
+    it.only('After deleting client it will not appear in the client report',() =>{
+        let allClientsPage = pageRouter.goToClientsPage();
+        let client = allClientsPage.createClient();
+        allClientsPage =client.DeleteClient();
+        cy.get(client.alias).then((clientId) =>{
+        let isClientExist = allClientsPage.IsClientsTableContainsClientId(clientId)
+        });
+    });
 })
