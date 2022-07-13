@@ -10,8 +10,15 @@ import { GoogleLocalServicesPage } from './googleLocalServicesPage';
 import { MarketPlacePage } from './marketPlacePage';
 import { AllInvoicesPage } from './Invoice/allInvoicesPage';
 import { AllEstimatesPage } from './Estimate/allEstimatesPage';
+import { CustomDocumentsPage } from './customDocumentsPage';
 
 export class PageRouter {
+
+    goToCustomDocumentsPage(): CustomDocumentsPage {
+        cy.visit('root/documents/');
+        cy.get('h2.thin').should('contain','Document templates');
+        return new CustomDocumentsPage;
+    }
 
     goToMarketPlacePage(): MarketPlacePage {
         cy.visit('root/marketplace');
