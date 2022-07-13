@@ -1,6 +1,29 @@
 import { AngiPage } from "./angiIntegrationPage";
 
 export class MarketPlacePage {
+    
+    readonly VisibleWidgets = 'div.FeatureCard-module__title___1KBvT';
+
+    GoToCustomFieldsByJobLinkFromCustomFieldsAddOnPage() {
+        cy.get("section[data-testid='customFields_feature_card']").click();
+        cy.get("a").contains('Custom fields by job type').invoke('removeAttr', 'target').click();   
+    }
+    
+    GoToHowToCreateCutsomFieldsLinkFromCustomFieldsAddOnPage() {
+        cy.get("section[data-testid='customFields_feature_card']").click();
+        cy.get("a").contains('How to create custom fields for jobs and clients').invoke('removeAttr', 'target').click();
+    }
+
+    public get getOnlyIntegrationType(): Cypress.Chainable<JQuery> {
+        cy.get("span").contains('Integration').click();
+        return cy.get(this.VisibleWidgets);
+    }
+    
+    public get getOnlyAddOnsType(): Cypress.Chainable<JQuery> {
+        cy.get("span").contains('Add-Ons').click();
+        return cy.get(this.VisibleWidgets);
+    }
+
     ClearSearchBar() {
         cy.get(".lnr.lnr-close").click();
     }
@@ -28,7 +51,7 @@ export class MarketPlacePage {
 
      public get getAllActiveWidgetsList(): Cypress.Chainable<JQuery> {
          this.clickOnCurrentlyActive();
-         return cy.get('div.FeatureCard-module__title___1KBvT');
+         return cy.get(this.VisibleWidgets);
      }
 
     clickOnCurrentlyActive() {

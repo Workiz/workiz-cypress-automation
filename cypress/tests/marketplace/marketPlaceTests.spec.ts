@@ -1,6 +1,6 @@
-import { HomePage } from "../../page-objects/homePage";
 import { LogInPage } from "../../page-objects/logInPage";
 import { PageRouter } from "../../page-objects/router";
+import { MarketPlaceLabels } from "../../infrastructure/marketPlaceLabels";
 
 describe('Clients tests', () => {
     let pageRouter: PageRouter;
@@ -27,7 +27,7 @@ describe('Clients tests', () => {
         allWidgetElements.its('length').should('eq', 36);
     });
 
-    it.only('SearchValuesInSearchBarAndValidateTheResults',() =>{
+    it('SearchValuesInSearchBarAndValidateTheResults',() =>{
         let marketPlacePage = pageRouter.goToMarketPlacePage();
         marketPlacePage.SearchForValueInSearchBar('quickBooks');
         marketPlacePage.getAllActiveWidgetsList.first().then(($el) => {
@@ -40,6 +40,48 @@ describe('Clients tests', () => {
             expect($el.text()).to.equal('Online Booking');
         });
     });
+
+    it('ValidateThatOnlyAddOnsTypesWidgetsAppearWhenClickingOnAddOnsFilter',() =>{
+        let marketPlacePage = pageRouter.goToMarketPlacePage();
+        let adoonsWidgets = marketPlacePage.getOnlyAddOnsType;
+        adoonsWidgets.each((item,index,list) => {
+            expect(item.text()).to.be.oneOf(MarketPlaceLabels.allAddOnsLabelsList);
+        });
+    });
+
+    it('ValidateThatOnlyIntegrationsWidgetsAppearWhenClickingOnIntegrationFilter',() =>{
+        let marketPlacePage = pageRouter.goToMarketPlacePage();
+        let integrationsWidgets = marketPlacePage.getOnlyIntegrationType;
+        integrationsWidgets.each((item,index,list) => {
+            expect(item.text()).to.be.oneOf(MarketPlaceLabels.allIntegrationsLabelsList);
+        });
+    });
+
+    it('UsingCustomFieldsLinkWorksProperlyInCustomFields',() =>{
+        let marketPlacePage = pageRouter.goToMarketPlacePage();
+        marketPlacePage.GoToHowToCreateCutsomFieldsLinkFromCustomFieldsAddOnPage();
+        cy.url().should('include', '2246776-how-to-create-custom-fields-for-jobs-and-clients');
+    });
+
+    it.only('UsingCustomFieldsLinkWorksProperlyInCustomFields',() =>{
+        let marketPlacePage = pageRouter.goToMarketPlacePage();
+        marketPlacePage.GoToCustomFieldsByJobLinkFromCustomFieldsAddOnPage();
+        cy.url().should('include', '3092163-setting-up-custom-fields-by-job-type');
+    });
+
+
+
+
+    
+
+
+
+    
+
+
+
+
+    
 
 
 
