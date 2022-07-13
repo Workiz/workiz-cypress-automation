@@ -1,6 +1,7 @@
 import { HomePage } from "../../page-objects/homePage";
 import { LogInPage } from "../../page-objects/logInPage";
 import { PageRouter } from "../../page-objects/router";
+import { RandomFunctions } from "../../support/randomFunctions";
 
 describe('Clients tests', () => {
     let pageRouter: PageRouter;
@@ -62,10 +63,10 @@ describe('Clients tests', () => {
         });
     });
 
-    it('After adding note to client it will appear in client page notes',() =>{
+    it.only('After adding note to client it will appear in client page notes',() =>{
+        let note = RandomFunctions.generateRandomString(7);
         let allClientsPage = pageRouter.goToClientsPage();
         let client = allClientsPage.createClient();
-        let estimate = client.CreateEstimateToNewEstimatePage();
-        
+        client.addNoteToClient(note);
     });
 })

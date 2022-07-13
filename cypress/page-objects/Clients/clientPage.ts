@@ -78,8 +78,8 @@ export class ClientPage {
 
      addNoteToClient(note: string){
         cy.scrollTo('bottom');
-        cy.get('button').contains('Add Note');
-        cy.get('data-editor="editor"').type(note);
-        cy.get('button compact float-right iFfWBzvt7RjPTzzA73jT ').click();
+        cy.get('button').contains('Add Note').click();
+        cy.get("div[data-editor='editor']").type(note);
+        cy.get(".clientNotes-module__note___2-SM_ button").click();
      }
 }
