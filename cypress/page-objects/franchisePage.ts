@@ -13,7 +13,6 @@ export class FranchisePage {
     sendFranchiseInvitation(email: string) {
         this.deleteAllExistingFranchises();
         this.inviteAccount(email);
-
     }
 
     deleteAllExistingFranchises() {
