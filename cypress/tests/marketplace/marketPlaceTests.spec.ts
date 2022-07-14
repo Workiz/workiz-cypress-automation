@@ -2,7 +2,7 @@ import { LogInPage } from "../../page-objects/logInPage";
 import { PageRouter } from "../../page-objects/router";
 import { MarketPlaceLabels } from "../../infrastructure/marketPlaceLabels";
 
-describe('Clients tests', () => {
+describe('MarketPlace tests', () => {
     let pageRouter: PageRouter;
     let logInPage: LogInPage;
 
