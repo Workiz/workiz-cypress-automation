@@ -4,12 +4,12 @@ export class MarketPlacePage {
     
     readonly VisibleWidgets = 'div.FeatureCard-module__title___1KBvT';
 
-    GoToCustomFieldsByJobLinkFromCustomFieldsAddOnPage() {
+    goToCustomFieldsByJobLinkFromCustomFieldsAddOnPage() {
         cy.get("section[data-testid='customFields_feature_card']").click();
         cy.get("a").contains('Custom fields by job type').invoke('removeAttr', 'target').click();   
     }
     
-    GoToHowToCreateCutsomFieldsLinkFromCustomFieldsAddOnPage() {
+    goToHowToCreateCutsomFieldsLinkFromCustomFieldsAddOnPage() {
         cy.get("section[data-testid='customFields_feature_card']").click();
         cy.get("a").contains('How to create custom fields for jobs and clients').invoke('removeAttr', 'target').click();
     }
@@ -24,11 +24,11 @@ export class MarketPlacePage {
         return cy.get(this.VisibleWidgets);
     }
 
-    ClearSearchBar() {
+    clearSearchBar() {
         cy.get(".lnr.lnr-close").click();
     }
 
-    SearchForValueInSearchBar(textToSearch: string): void {
+    searchForValueInSearchBar(textToSearch: string): void {
         cy.get('i.lnr.lnr-magnifier').click();
         cy.get("input[placeholder='Search...']").type(textToSearch);
     }

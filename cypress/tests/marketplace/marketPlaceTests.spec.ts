@@ -29,13 +29,13 @@ describe('MarketPlace tests', () => {
 
     it('Search values in search bar and validate the results',() =>{
         let marketPlacePage = pageRouter.goToMarketPlacePage();
-        marketPlacePage.SearchForValueInSearchBar('quickBooks');
+        marketPlacePage.searchForValueInSearchBar('quickBooks');
         marketPlacePage.getAllActiveWidgetsList.first().then(($el) => {
             expect($el.text()).to.equal('QuickBooks Online');
         });
 
-        marketPlacePage.ClearSearchBar();
-        marketPlacePage.SearchForValueInSearchBar('Online Booking');
+        marketPlacePage.clearSearchBar();
+        marketPlacePage.searchForValueInSearchBar('Online Booking');
         marketPlacePage.getAllActiveWidgetsList.first().then(($el) => {
             expect($el.text()).to.equal('Online Booking');
         });
@@ -59,13 +59,13 @@ describe('MarketPlace tests', () => {
 
     it('Using custom fields link works properly in custom fields',() =>{
         let marketPlacePage = pageRouter.goToMarketPlacePage();
-        marketPlacePage.GoToHowToCreateCutsomFieldsLinkFromCustomFieldsAddOnPage();
+        marketPlacePage.goToHowToCreateCutsomFieldsLinkFromCustomFieldsAddOnPage();
         cy.url().should('include', '2246776-how-to-create-custom-fields-for-jobs-and-clients');
     });
 
     it('Using custom fields link works properly in custom fields',() =>{
         let marketPlacePage = pageRouter.goToMarketPlacePage();
-        marketPlacePage.GoToCustomFieldsByJobLinkFromCustomFieldsAddOnPage();
+        marketPlacePage.goToCustomFieldsByJobLinkFromCustomFieldsAddOnPage();
         cy.url().should('include', '3092163-setting-up-custom-fields-by-job-type');
     });
 });
