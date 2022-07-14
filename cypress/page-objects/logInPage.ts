@@ -2,6 +2,12 @@ import { HomePage } from "./homePage";
 import { ResetPasswordPage } from "./resetPasswordPage";
 
 export class LogInPage {
+    logInWithAccount6(): HomePage {
+        cy.visit('');
+        let email = Cypress.env("email6");
+        let pwd = Cypress.env("password6");
+        return this.logIn(email,pwd);
+    }
 
     logInWithAccount1(): HomePage {
         cy.visit('');

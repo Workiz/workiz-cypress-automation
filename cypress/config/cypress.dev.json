@@ -2,11 +2,11 @@
     "baseUrl": "https://dev.workiz.com/",
   "env": {
   "environment": "development",
-  "email": "ido.adler@workiz.com",
+  "email": "automation@workiz.com",
   "password": "Test123!",
   "email2": "automation2@workiz.com",
   "password2": "Test123!",
-  "email3": "ido.adler+3@workiz.com",
+  "email3": "automation3@workiz.com",
   "password3": "Test123!",
   "email4": "automation4@workiz.com",
   "password4": "Test123!",

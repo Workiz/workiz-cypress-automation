@@ -155,7 +155,7 @@ describe('Registration and login tests',() => {
         widgetsElements.each((item,index,list) => {
             expect(item.text()).to.be.oneOf(MarketPlaceLabels.allActiveWidgetsLabelsList);
         });
-        marketPlacePage.countActiveWidgets.should('have.length',15);
+        marketPlacePage.getActiveWidgetsElements.should('have.length',15);
     });
 });
 
