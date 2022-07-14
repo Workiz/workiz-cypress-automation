@@ -12,7 +12,7 @@ describe('MarketPlace tests', () => {
         logInPage.logInWithAccount6();
     })
 
-    it('ValidateTheNumberOfPressedAndUnPressedFiltersInMarketPlacePage',() =>{
+    it('Validate the number of pressed and  unpressed filters in MarketPlacePage',() =>{
         let marketPlacePage = pageRouter.goToMarketPlacePage();
         const unPressedButtonElements = marketPlacePage.getUnpressedButtonElements;
         unPressedButtonElements.its('length').should('eq', 4);
@@ -21,13 +21,13 @@ describe('MarketPlace tests', () => {
 
     });
 
-    it('ValidateTheNumberOfWidgetsInMarketPlacePage',() =>{
+    it('Validate the number of widgets in marketPlace page',() =>{
         let marketPlacePage = pageRouter.goToMarketPlacePage();
         const allWidgetElements = marketPlacePage.getAllWidgetsElements;
         allWidgetElements.its('length').should('eq', 36);
     });
 
-    it('SearchValuesInSearchBarAndValidateTheResults',() =>{
+    it('Search values in search bar and validate the results',() =>{
         let marketPlacePage = pageRouter.goToMarketPlacePage();
         marketPlacePage.SearchForValueInSearchBar('quickBooks');
         marketPlacePage.getAllActiveWidgetsList.first().then(($el) => {
@@ -41,7 +41,7 @@ describe('MarketPlace tests', () => {
         });
     });
 
-    it('ValidateThatOnlyAddOnsTypesWidgetsAppearWhenClickingOnAddOnsFilter',() =>{
+    it('Validate that only add-ons types widgets appear when clicking on add-ons filter',() =>{
         let marketPlacePage = pageRouter.goToMarketPlacePage();
         let adoonsWidgets = marketPlacePage.getOnlyAddOnsType;
         adoonsWidgets.each((item,index,list) => {
@@ -49,7 +49,7 @@ describe('MarketPlace tests', () => {
         });
     });
 
-    it('ValidateThatOnlyIntegrationsWidgetsAppearWhenClickingOnIntegrationFilter',() =>{
+    it('Validate that only integrations types widgets appear when clicking on integrations filter',() =>{
         let marketPlacePage = pageRouter.goToMarketPlacePage();
         let integrationsWidgets = marketPlacePage.getOnlyIntegrationType;
         integrationsWidgets.each((item,index,list) => {
@@ -57,13 +57,13 @@ describe('MarketPlace tests', () => {
         });
     });
 
-    it('UsingCustomFieldsLinkWorksProperlyInCustomFields',() =>{
+    it('Using custom fields link works properly in custom fields',() =>{
         let marketPlacePage = pageRouter.goToMarketPlacePage();
         marketPlacePage.GoToHowToCreateCutsomFieldsLinkFromCustomFieldsAddOnPage();
         cy.url().should('include', '2246776-how-to-create-custom-fields-for-jobs-and-clients');
     });
 
-    it('UsingCustomFieldsLinkWorksProperlyInCustomFields',() =>{
+    it('Using custom fields link works properly in custom fields',() =>{
         let marketPlacePage = pageRouter.goToMarketPlacePage();
         marketPlacePage.GoToCustomFieldsByJobLinkFromCustomFieldsAddOnPage();
         cy.url().should('include', '3092163-setting-up-custom-fields-by-job-type');
