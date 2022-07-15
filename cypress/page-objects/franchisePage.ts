@@ -16,6 +16,7 @@ export class FranchisePage {
     }
 
     deleteAllExistingFranchises() {
+        cy.wait(500);
         cy.get('.rt-tbody .rt-td:nth-child(1)').should('have.length', 5).invoke('text').then((text) => {
             if (text != '     ') {
                 cy.get('.rt-tr-group.pointer').each(($el, index, $list) => {
