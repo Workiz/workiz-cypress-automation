@@ -11,8 +11,16 @@ import { MarketPlacePage } from './marketPlacePage';
 import { AllInvoicesPage } from './Invoice/allInvoicesPage';
 import { AllEstimatesPage } from './Estimate/allEstimatesPage';
 import { CustomDocumentsPage } from './customDocumentsPage';
+import { FranchisePage } from './franchisePage';
 
 export class PageRouter {
+
+    goToFranchisePage(): FranchisePage {
+        cy.get('#title-bar span[data-testid="pop-menu-span"]').click();
+        cy.get('.franchise_pane footer a').click({force:true});
+        cy.location('href').should('contain','/franchises');
+        return new FranchisePage;
+    }
 
     goToCustomDocumentsPage(): CustomDocumentsPage {
         cy.visit('root/documents/');
