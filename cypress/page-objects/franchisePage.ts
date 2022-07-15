@@ -16,20 +16,18 @@ export class FranchisePage {
     }
 
     deleteAllExistingFranchises() {
-        cy.get('.rt-tbody .rt-td:nth-child(1)').invoke('text').then((text) => {
+        cy.get('.rt-tbody .rt-td:nth-child(1)').should('have.length', 5).invoke('text').then((text) => {
             if (text != '     ') {
-                cy.get('.rt-tr-group.pointer').then((count) => {
-                    let conter = count.length;
-                    let i = 0;
-                    while (i < conter) {
-                        cy.get('.rt-tr-group.pointer').click();
+                cy.get('.rt-tr-group.pointer').each(($el, index, $list) => {
+                        cy.get('.rt-tr-group.pointer').first().click();
                         cy.get('.lnr-trash').click();
                         cy.get('.button').contains('Remove sub account').click();
-                        i++
-                    }
-                    cy.get('.toastr').should('not.be.visible', {
-                        setTimeout: 3000
-                    });
+                        cy.get('.toastr').should('be.visible', {
+                            setTimeout: 4000
+                        });
+                        cy.get('.toastr').should('not.exist', {
+                            setTimeout: 5000
+                        });
                 });
             }
         });
