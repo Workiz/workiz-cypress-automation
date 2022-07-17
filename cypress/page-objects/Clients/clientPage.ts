@@ -13,11 +13,16 @@ export class ClientPage {
 
     private static clientCounter: number = 0;
     alias: string;
+    private _note: string | undefined;
 
     constructor() {
         this.alias = 'client' + ++ClientPage.clientCounter;
         this.setClientIdAsAlias(this.alias);
         this.alias = RandomFunctions.generateRandomAliasName(this.alias);
+    }
+
+    get note(): Cypress.Chainable<JQuery>{
+        return cy.get(".clientNotes-module__flexCol___2xSY_ div:nth-child(2)");
     }
 
     setClientIdAsAlias(clientIdAlias: string) {
@@ -74,5 +79,12 @@ export class ClientPage {
      createEstimateToNewEstimatePage(): EstimatePage{
         let createEstiamtePage =  this.ClickCreateEstimate();
         return createEstiamtePage.SubmitToEstimate();
+     }
+
+     addNoteToClient(note: string){
+        cy.scrollTo('bottom');
+        cy.get('button').contains('Add Note').click();
+        cy.get("div[data-editor='editor']").type(note);
+        cy.get(".clientNotes-module__note___2-SM_ button").click();
      }
 }

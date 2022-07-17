@@ -1,6 +1,7 @@
 import { HomePage } from "../../page-objects/homePage";
 import { LogInPage } from "../../page-objects/logInPage";
 import { PageRouter } from "../../page-objects/router";
+import { RandomFunctions } from "../../support/randomFunctions";
 
 describe('Clients tests', () => {
     let pageRouter: PageRouter;
@@ -57,8 +58,24 @@ describe('Clients tests', () => {
         let client = allClientsPage.createClient();
         let estimate = client.createEstimateToNewEstimatePage();
         cy.get(estimate.alias).then((estimateId) =>{
-        let estiamtesPage = pageRouter.goToEstimatePage();
-        estiamtesPage.isEstimatesTableContainsJobId(estimateId);
+        let estimatesPage = pageRouter.goToEstimatePage();
+        estimatesPage.isEstimatesTableContainsJobId(estimateId);
         });
+    });
+
+    it('After adding note to client it will appear in client page notes',() =>{
+        let note = RandomFunctions.generateRandomString(7);
+        let allClientsPage = pageRouter.goToClientsPage();
+        let client = allClientsPage.createClient();
+        client.addNoteToClient(note);
+        let noteElement = client.note;
+        noteElement.should('contain.text', note).then((el) => {
+            expect(el.text()).to.be.equal(note);
+        })
+        cy.reload()
+        noteElement = client.note;
+        noteElement.should('contain.text', note).then((el) => {
+            expect(el.text()).to.be.equal(note);
+        })
     });
 })
