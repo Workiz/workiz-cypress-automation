@@ -60,23 +60,23 @@ export class ClientPage {
         return new CreateEstimatePage();
     }
 
-    CreateJobToNewJobPage(): JobPage{
+    createJobToNewJobPage(): JobPage{
        let createJobPage =  this.ClickCreateJob();
        createJobPage.jobType = JobTypeConsts.SERVICE;
        return createJobPage.SubmitToJob();
     }
 
-    CreateLeadToNewLeadPage(): LeadPage{
+    createLeadToNewLeadPage(): LeadPage{
         let createLeadPage =  this.ClickCreateLead();
         return createLeadPage.SubmitToLead();
      }
 
-     CreateInvoiceToNewInvoicePage(): InvoicePage{
+     createInvoiceToNewInvoicePage(): InvoicePage{
         let createInvoicePage =  this.ClickCreateInvoice();
         return createInvoicePage.SubmitToInvoice();
      }
 
-     CreateEstimateToNewEstimatePage(): EstimatePage{
+     createEstimateToNewEstimatePage(): EstimatePage{
         let createEstiamtePage =  this.ClickCreateEstimate();
         return createEstiamtePage.SubmitToEstimate();
      }
