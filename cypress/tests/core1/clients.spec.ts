@@ -58,15 +58,24 @@ describe('Clients tests', () => {
         let client = allClientsPage.createClient();
         let estimate = client.CreateEstimateToNewEstimatePage();
         cy.get(estimate.alias).then((estimateId) =>{
-        let estiamtesPage = pageRouter.goToEstimatePage();
-        estiamtesPage.IsEstimatesTableContainsJobId(estimateId);
+        let estimatesPage = pageRouter.goToEstimatePage();
+        estimatesPage.IsEstimatesTableContainsJobId(estimateId);
         });
     });
 
-    it.only('After adding note to client it will appear in client page notes',() =>{
+    it('After adding note to client it will appear in client page notes',() =>{
         let note = RandomFunctions.generateRandomString(7);
         let allClientsPage = pageRouter.goToClientsPage();
         let client = allClientsPage.createClient();
         client.addNoteToClient(note);
+        let noteElement = client.note;
+        noteElement.should('contain.text', note).then((el) => {
+            expect(el.text()).to.be.equal(note);
+        })
+        cy.reload()
+        noteElement = client.note;
+        noteElement.should('contain.text', note).then((el) => {
+            expect(el.text()).to.be.equal(note);
+        })
     });
 })

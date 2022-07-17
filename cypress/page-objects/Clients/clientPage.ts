@@ -13,11 +13,16 @@ export class ClientPage {
 
     private static clientCounter: number = 0;
     alias: string;
+    private _note: string | undefined;
 
     constructor() {
         this.alias = 'client' + ++ClientPage.clientCounter;
         this.setClientIdAsAlias(this.alias);
         this.alias = RandomFunctions.generateRandomAliasName(this.alias);
+    }
+
+    get note(): Cypress.Chainable<JQuery>{
+        return cy.get(".clientNotes-module__flexCol___2xSY_ div:nth-child(2)");
     }
 
     setClientIdAsAlias(clientIdAlias: string) {
