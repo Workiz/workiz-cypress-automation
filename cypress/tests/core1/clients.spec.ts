@@ -87,6 +87,8 @@ describe('Clients tests', () => {
         client.addExitingTag(tag)
         cy.reload();
         client.isClientTagContainsTag(tag);
-        pageRouter.goToClientsPage();
+        cy.get(client.alias).then((clientId) =>{
+            pageRouter.goToClientsPage().isClientContainsTag(clientId, tag);
+        });
     });
 })

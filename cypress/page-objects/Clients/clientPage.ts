@@ -112,8 +112,6 @@ export class ClientPage {
 
     isClientTagContainsTag(tag: string)
     {
-        this.openTagDialog();
         cy.validateTextAppearInElements('.tag.tag-module__tag___36uWb', tag);
     };
-
 }
