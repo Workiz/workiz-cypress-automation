@@ -87,4 +87,11 @@ export class ClientPage {
         cy.get("div[data-editor='editor']").type(note);
         cy.get(".clientNotes-module__note___2-SM_ button").click();
      }
+
+     addContact(contactName: string, phoneNumber: string){
+        cy.get('.clientContacts-module__wrapper___2kQuz button').click();
+        cy.get('.right-pane-content #first_name').type(contactName);
+        cy.get('.right-pane-content #primary_phone').type(phoneNumber);
+        cy.get('button').contains('Add contact').click();
+     }
 }

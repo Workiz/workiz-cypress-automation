@@ -2,6 +2,7 @@ import { HomePage } from "../../page-objects/homePage";
 import { LogInPage } from "../../page-objects/logInPage";
 import { PageRouter } from "../../page-objects/router";
 import { RandomFunctions } from "../../support/randomFunctions";
+import {Constans} from "../../infrastructure/consts";
 
 describe('Clients tests', () => {
     let pageRouter: PageRouter;
@@ -77,5 +78,14 @@ describe('Clients tests', () => {
         noteElement.should('contain.text', note).then((el) => {
             expect(el.text()).to.be.equal(note);
         })
+    });
+
+    it('After adding contact to client it will appear in client contacts',() =>{
+        let name = RandomFunctions.generateRandomString(7);
+        let allClientsPage = pageRouter.goToClientsPage();
+        let client = allClientsPage.createClient();
+        client.addContact(name, Constans.PHONE);
+        cy.reload();
+
     });
 })
