@@ -89,9 +89,14 @@ export class ClientPage {
      }
 
      addContact(contactName: string, phoneNumber: string){
-        cy.get('.clientContacts-module__wrapper___2kQuz button').click();
+        cy.get('.clientContacts-module__wrapper___2kQuz .button.float-right').click();
         cy.get('.right-pane-content #first_name').type(contactName);
         cy.get('.right-pane-content #primary_phone').type(phoneNumber);
         cy.get('button').contains('Add contact').click();
+     }
+
+     isContactExistInClient(contactName: string){
+         cy.scrollTo('bottom');
+         cy.get('.clientContacts-module__wrapper___2kQuz tbody td:nth-child(1)').should('contain.text', contactName);
      }
 }

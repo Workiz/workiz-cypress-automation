@@ -80,12 +80,12 @@ describe('Clients tests', () => {
         })
     });
 
-    it('After adding contact to client it will appear in client contacts',() =>{
+    it.only('After adding contact to client it will appear in client contacts',() =>{
         let name = RandomFunctions.generateRandomString(7);
         let allClientsPage = pageRouter.goToClientsPage();
         let client = allClientsPage.createClient();
         client.addContact(name, Constans.PHONE);
         cy.reload();
-
+        client.addNoteToClient(name)
     });
 })
