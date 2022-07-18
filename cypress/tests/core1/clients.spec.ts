@@ -80,7 +80,7 @@ describe('Clients tests', () => {
         })
     });
 
-    it.only('After adding contact to client it will appear in client contacts',() =>{
+    it('After adding contact to client it will appear in client contacts',() =>{
         let name = RandomFunctions.generateRandomString(7);
         let allClientsPage = pageRouter.goToClientsPage();
         let client = allClientsPage.createClient();
