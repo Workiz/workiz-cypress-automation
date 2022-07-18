@@ -111,15 +111,20 @@ export class ClientPage {
         cy.validateTextAppearInElements('.objectTags-module__objectTags___3CQmo .tag-module__tag___36uWb', tag);
     }
 
-    addContact(contactName: string, phoneNumber: string){
+    addContact(contactName: string, phoneNumber: string) {
         cy.get('.clientContacts-module__wrapper___2kQuz .button.float-right').click();
         cy.get('.right-pane-content #first_name').type(contactName);
         cy.get('.right-pane-content #primary_phone').type(phoneNumber);
         cy.get('button').contains('Add contact').click();
-     }
+    }
 
-     isContactExistInClient(contactName: string){
+    isContactExistInClient(contactName: string){
          cy.scrollTo('bottom');
          cy.get('.clientContacts-module__wrapper___2kQuz tbody td:nth-child(1)').should('contain.text', contactName);
-     }
+    }
+
+    addProperty() {
+        cy.get('_singleTab ').contains('Properties').click();
+        cy.get('.clientProperties-module__container___3Wx7j button').click();
+    }
 }

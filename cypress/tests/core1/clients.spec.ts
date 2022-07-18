@@ -101,4 +101,11 @@ describe('Clients tests', () => {
         cy.reload();
         client.isContactExistInClient(name);
     });
+
+    it('After adding property to Client it will appear in client properties', () => {
+        let name = RandomFunctions.generateRandomString(7);
+        let allClientsPage = pageRouter.goToClientsPage();
+        let client = allClientsPage.createClient();
+
+    });
 })
