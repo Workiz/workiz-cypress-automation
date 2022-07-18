@@ -1,6 +1,5 @@
 import {ClientPage} from "./clientPage"
 import { CreateClientPage } from "./createClientPage";
-import {cli} from "cypress";
 
 export class AllClientsPage {
 
