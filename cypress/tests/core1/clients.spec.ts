@@ -79,7 +79,7 @@ describe('Clients tests', () => {
         })
     });
 
-    it.only('While adding new tag to client it appears on client tags',() =>{
+    it('While adding new tag to client it appears on client tags',() =>{
         let tag = RandomFunctions.generateRandomString(4);
         let allClientsPage = pageRouter.goToClientsPage();
         let client = allClientsPage.createClient();

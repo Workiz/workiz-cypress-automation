@@ -27,7 +27,7 @@ export class ClientPage {
     }
 
     get tag(): Cypress.Chainable<JQuery> {
-        return cy.get(".clientNotes-module__flexCol___2xSY_ div:nth-child(2)");
+        return cy.get(".objectTags-module__objectTags___3CQmo .tag-module__tag___36uWb");
     }
 
     setClientIdAsAlias(clientIdAlias: string) {
@@ -112,6 +112,6 @@ export class ClientPage {
 
     isClientTagContainsTag(tag: string)
     {
-        cy.validateTextAppearInElements('.tag.tag-module__tag___36uWb', tag);
+        cy.validateTextAppearInElements('.objectTags-module__objectTags___3CQmo .tag-module__tag___36uWb', tag);
     };
 }
