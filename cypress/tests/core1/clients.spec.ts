@@ -73,11 +73,24 @@ describe('Clients tests', () => {
         noteElement.should('contain.text', note).then((el) => {
             expect(el.text()).to.be.equal(note);
         })
-        cy.reload()
+        cy.reload();
         noteElement = client.note;
         noteElement.should('contain.text', note).then((el) => {
             expect(el.text()).to.be.equal(note);
         })
+    });
+
+    it('While adding new tag to client it appears on client tags',() =>{
+        let tag = RandomFunctions.generateRandomString(4);
+        let allClientsPage = pageRouter.goToClientsPage();
+        let client = allClientsPage.createClient();
+        client.createNewTag(tag);
+        client.addExitingTag(tag)
+        cy.reload();
+        client.isClientTagContainsTag(tag);
+        cy.get(client.alias).then((clientId) =>{
+            pageRouter.goToClientsPage().isClientContainsTag(clientId, tag);
+        });
     });
 
     it('After adding contact to client it will appear in client contacts',() =>{
