@@ -26,10 +26,6 @@ export class ClientPage {
         return cy.get(".clientNotes-module__flexCol___2xSY_ div:nth-child(2)");
     }
 
-    get tag(): Cypress.Chainable<JQuery> {
-        return cy.get(".objectTags-module__objectTags___3CQmo .tag-module__tag___36uWb");
-    }
-
     setClientIdAsAlias(clientIdAlias: string) {
         cy.location('href').should('contains', 'client').then((fullUrl) => {
             const clientId = fullUrl.split('/')[5];
