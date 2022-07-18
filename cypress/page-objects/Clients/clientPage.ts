@@ -100,15 +100,14 @@ export class ClientPage {
     createNewTag(tag: string) {
         this.openTagDialog();
         cy.get("span.objectTags-module__link___266ge").click();
-        cy.get("[name='tag_name']").click();
+        cy.get("[name='tag_name']").type(tag);
         cy.get(".button.button-module__container___i9TLF ").contains('Save').click();
         cy.get(".client-module__tags___2g9Z1").click();
     }
 
     addExitingTag(tag: string) {
         this.openTagDialog();
-        cy.get(".objectTags-module__tagsWrapper___vUCcB .green-bg ").contains(tag).click();
-        cy.get("[name='tag_name']").click();
+        cy.get('.objectTags-module__tagsWrapper___vUCcB .green-bg ', {timeout: 10000}).filter(`:contains("${tag}")`).click();
     }
 
     isClientTagContainsTag(tag: string)
