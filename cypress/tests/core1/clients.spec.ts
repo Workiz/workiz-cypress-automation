@@ -86,6 +86,6 @@ describe('Clients tests', () => {
         let client = allClientsPage.createClient();
         client.addContact(name, Constans.PHONE);
         cy.reload();
-        client.addNoteToClient(name)
+        client.isContactExistInClient(name);
     });
 })
