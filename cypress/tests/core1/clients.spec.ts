@@ -98,7 +98,7 @@ describe('Clients tests', () => {
         let client = allClientsPage.createClient();
         allClientsPage =client.DeleteClient();
         cy.get(client.alias).then((clientId) =>{
-        let isClientExist = allClientsPage.IsClientsTableContainsClientId(clientId)
+        let isClientExist = allClientsPage.isClientsTableContainsClientId(clientId)
         });
     });
 
