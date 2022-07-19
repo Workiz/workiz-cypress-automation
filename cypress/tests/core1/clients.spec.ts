@@ -111,7 +111,7 @@ describe('Clients tests', () => {
         client.isContactExistInClient(name);
     });
 
-    it.only('After adding property to Client it will appear in client properties', () => {
+    it('After adding property to Client it will appear in client properties', () => {
         let name = RandomFunctions.generateRandomString(7);
         let allClientsPage = pageRouter.goToClientsPage();
         let client = allClientsPage.createClient();
