@@ -132,7 +132,7 @@ export class ClientPage {
     }
 
     addProperty() {
-        cy.get('._singleTab ').contains('Properties').click();
+        this.goToPropertyTab();
         cy.get('.clientProperties-module__container___3Wx7j button').click();
         cy.get('._single_tab_contents._selected #location_name').type("nick name");
         cy.get('._single_tab_contents._selected #address').type("second property");
@@ -140,6 +140,10 @@ export class ClientPage {
         cy.get('._single_tab_contents._selected #zipcode').type("dummy zipcode");
         cy.selectFromDropDown('css', '._selected  input[name="state"]', 'Alabama');
         cy.get('._single_tab_contents._selected button.margin-left').click();
+    }
+
+    goToPropertyTab(){
+        cy.get('._singleTab ').contains('Properties').click();
     }
 
     DeleteClient(): AllClientsPage{

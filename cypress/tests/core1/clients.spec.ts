@@ -117,6 +117,7 @@ describe('Clients tests', () => {
         let client = allClientsPage.createClient();
         client.addProperty();
         cy.reload();
-        cy.get('._selected .rt-tr-group .rt-td:nth-child(1)').its('length').should('equal', 2);
+        client.goToPropertyTab();
+        cy.get('.rt-tr-group.pointer .rt-td:nth-child(1)').its('length').should('equal', 2);
     });
 })
