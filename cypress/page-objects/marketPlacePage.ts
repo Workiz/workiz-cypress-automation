@@ -1,6 +1,10 @@
 import { AngiPage } from "./angiIntegrationPage";
 
 export class MarketPlacePage {
+    goMatchingYourQuickBooksTaxRatesLinkFromQuickBooksOnlinePage() {
+        cy.get("section[data-testid='quickbooks_feature_card']").click();
+        cy.get("a").contains('Matching your QuickBooks tax rates').invoke('removeAttr', 'target').click(); 
+    }
     
     goToConnectingToQuickBooksLinkFromQuickBooksOnlinePage() {
         cy.get("section[data-testid='quickbooks_feature_card']").click();

@@ -69,10 +69,16 @@ describe('MarketPlace tests', () => {
         cy.url().should('include', '3092163-setting-up-custom-fields-by-job-type');
     });
 
-    it.only('Connecting to QuickBooks Online link Works properly',() =>{
+    it('Using Connecting to QuickBooks Online link Works properly',() =>{
         let marketPlacePage = pageRouter.goToMarketPlacePage();
         marketPlacePage.goToConnectingToQuickBooksLinkFromQuickBooksOnlinePage();
         cy.url().should('include', 'how-to-sync-your-quickbooks-online-account-with-workiz');
+    });
+
+    it.only('Using matching Your QuickBooks Tax Rates Link Works Properly',() =>{
+        let marketPlacePage = pageRouter.goToMarketPlacePage();
+        marketPlacePage.goMatchingYourQuickBooksTaxRatesLinkFromQuickBooksOnlinePage();
+        cy.url().should('include', 'match-up-your-workiz-tax-rates-with-your-quickbooks-account');
     });
 });
 
