@@ -79,12 +79,6 @@ export class ClientPage {
         return new AllClientsPage();
     }
 
-    CreateJobToNewJobPage(): JobPage{
-       let createJobPage =  this.ClickCreateJob();
-       createJobPage.jobType = JobTypeConsts.SERVICE;
-       return createJobPage.SubmitToJob();
-    }
-
     createLeadToNewLeadPage(): LeadPage {
         let createLeadPage = this.ClickCreateLead();
         return createLeadPage.SubmitToLead();

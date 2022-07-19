@@ -19,7 +19,7 @@ describe('Clients tests', () => {
         let allClientsPage = pageRouter.goToClientsPage();
         let client = allClientsPage.createClient();
         cy.get(client.alias).then((clientId) => {
-            pageRouter.goToClientsPage().isClientsTableContainsClientId(clientId);
+            pageRouter.goToClientsPage().validateClientsTableContainsClientId(clientId);
         });
     });
 
@@ -98,7 +98,7 @@ describe('Clients tests', () => {
         let client = allClientsPage.createClient();
         allClientsPage =client.DeleteClient();
         cy.get(client.alias).then((clientId) =>{
-        let isClientExist = allClientsPage.isClientsTableContainsClientId(clientId)
+        allClientsPage.validateClientsTableNotContainsClientId(clientId)
         });
     });
 
