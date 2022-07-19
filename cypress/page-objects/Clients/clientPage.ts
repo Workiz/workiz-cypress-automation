@@ -8,6 +8,7 @@ import {CreateJobPage} from "../Job/createJobPage";
 import {JobPage} from "../Job/jobPage";
 import {CreateLeadPage} from "../Lead/createLeadPage";
 import {LeadPage} from "../Lead/LeadPage";
+import { AllClientsPage } from "./allClientsPage";
 
 export class ClientPage {
 
@@ -71,6 +72,13 @@ export class ClientPage {
         return createJobPage.SubmitToJob();
     }
 
+    private ClickDeleteClient(): AllClientsPage{
+        this.ClickActionMenu();
+        cy.get('a').contains('Delete Client').click();
+        cy.get('button').contains('Yes delete it').click();
+        return new AllClientsPage();
+    }
+
     createLeadToNewLeadPage(): LeadPage {
         let createLeadPage = this.ClickCreateLead();
         return createLeadPage.SubmitToLead();
@@ -132,5 +140,9 @@ export class ClientPage {
         cy.get('._single_tab_contents._selected #zipcode').type("dummy zipcode");
         cy.selectFromDropDown('css', '._selected  input[name="state"]', 'Alabama');
         cy.get('._single_tab_contents._selected button.margin-left').click();
+    }
+
+    DeleteClient(): AllClientsPage{
+        return this.ClickDeleteClient();
     }
 }

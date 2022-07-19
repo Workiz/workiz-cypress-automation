@@ -14,7 +14,7 @@ export class AllClientsPage {
         return new CreateClientPage;
     }
 
-    isClientsTableContainsClientId(clientId: JQuery<HTMLElement>)
+    validateClientsTableContainsClientId(clientId: JQuery<HTMLElement>)
     {
         cy.validateTextAppearInElements('.rt-tbody .rt-td:nth-child(1)', clientId.toString());
     };
@@ -30,4 +30,10 @@ export class AllClientsPage {
     {
         cy.get('.rt-tr-group.pointer .rt-td', {timeout: 10000}).filter(`:contains("${clientId.toString()}")`).siblings('div').find('div').should('contain.text', tag);
     };
+
+    validateClientsTableNotContainsClientId(clientId: JQuery<HTMLElement>)
+    {
+        cy.waitForTableLoaderSpinnerToDisappear();
+        cy.validateTextIsNotAppearInElements('rt-tr-group pointer', '.rt-tbody .rt-td:nth-child(1)', clientId.toString());
+    }
 }

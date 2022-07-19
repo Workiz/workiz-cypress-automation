@@ -19,7 +19,7 @@ describe('Clients tests', () => {
         let allClientsPage = pageRouter.goToClientsPage();
         let client = allClientsPage.createClient();
         cy.get(client.alias).then((clientId) => {
-            pageRouter.goToClientsPage().isClientsTableContainsClientId(clientId);
+            pageRouter.goToClientsPage().validateClientsTableContainsClientId(clientId);
         });
     });
 
@@ -90,6 +90,15 @@ describe('Clients tests', () => {
         client.isClientTagContainsTag(tag);
         cy.get(client.alias).then((clientId) => {
             pageRouter.goToClientsPage().isClientContainsTag(clientId, tag);
+        });
+    });
+
+    it('After deleting client it will not appear in the client report',() =>{
+        let allClientsPage = pageRouter.goToClientsPage();
+        let client = allClientsPage.createClient();
+        allClientsPage =client.DeleteClient();
+        cy.get(client.alias).then((clientId) =>{
+        allClientsPage.validateClientsTableNotContainsClientId(clientId)
         });
     });
 
