@@ -68,4 +68,12 @@ describe('MarketPlace tests', () => {
         marketPlacePage.goToCustomFieldsByJobLinkFromCustomFieldsAddOnPage();
         cy.url().should('include', '3092163-setting-up-custom-fields-by-job-type');
     });
+
+    it.only('Connecting to QuickBooks Online link Works properly',() =>{
+        let marketPlacePage = pageRouter.goToMarketPlacePage();
+        marketPlacePage.goToConnectingToQuickBooksLinkFromQuickBooksOnlinePage();
+        cy.url().should('include', 'how-to-sync-your-quickbooks-online-account-with-workiz');
+    });
 });
+
+

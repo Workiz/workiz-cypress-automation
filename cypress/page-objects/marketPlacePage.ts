@@ -2,6 +2,11 @@ import { AngiPage } from "./angiIntegrationPage";
 
 export class MarketPlacePage {
     
+    goToConnectingToQuickBooksLinkFromQuickBooksOnlinePage() {
+        cy.get("section[data-testid='quickbooks_feature_card']").click();
+        cy.get("a").contains('Connecting to QuickBooks Online').invoke('removeAttr', 'target').click(); 
+    }
+    
     readonly VisibleWidgets = 'div.FeatureCard-module__title___1KBvT';
 
     goToCustomFieldsByJobLinkFromCustomFieldsAddOnPage() {
