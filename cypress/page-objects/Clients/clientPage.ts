@@ -124,11 +124,13 @@ export class ClientPage {
     }
 
     addProperty() {
-        cy.get('_singleTab ').contains('Properties').click();
+        cy.get('._singleTab ').contains('Properties').click();
         cy.get('.clientProperties-module__container___3Wx7j button').click();
         cy.get('._single_tab_contents._selected #location_name').type("nick name");
         cy.get('._single_tab_contents._selected #address').type("second property");
         cy.get('._single_tab_contents._selected #city').type("second property");
         cy.get('._single_tab_contents._selected #zipcode').type("dummy zipcode");
+        cy.selectFromDropDown('css', '._selected  input[name="state"]', 'Alabama');
+        cy.get('._single_tab_contents._selected button.margin-left').click();
     }
 }

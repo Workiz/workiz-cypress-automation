@@ -44,6 +44,11 @@ Cypress.Commands.add('selectFromDropDown', (by: string, element: string, valueTo
             cy.get(`.${element}`).parent().find('[tabindex="-1"]').contains(valueToChoose).click();
             break;
         }
+        case 'css': {
+            cy.get(`${element}`).parent().find('.react-select__control').click();
+            cy.get(`${element}`).parent().find('[tabindex="-1"]').contains(valueToChoose).click();
+            break;
+        }
     }
 });
 

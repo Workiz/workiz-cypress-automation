@@ -102,10 +102,12 @@ describe('Clients tests', () => {
         client.isContactExistInClient(name);
     });
 
-    it('After adding property to Client it will appear in client properties', () => {
+    it.only('After adding property to Client it will appear in client properties', () => {
         let name = RandomFunctions.generateRandomString(7);
         let allClientsPage = pageRouter.goToClientsPage();
         let client = allClientsPage.createClient();
-
+        client.addProperty();
+        cy.reload();
+        cy.get('._selected .rt-tr-group .rt-td:nth-child(1)').its('length').should('equal', 2);
     });
 })
