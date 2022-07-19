@@ -100,6 +100,8 @@ describe('Clients tests', () => {
         client.createNewTag(tag);
         client.addExitingTag(tag)
         cy.reload();
+        client.deleteTag(tag);
+        cy.reload();
         client.validateClientDontContainsTag(tag);
         cy.get(client.alias).then((clientId) => {
             pageRouter.goToClientsPage().validateClientDontContainsTag(clientId, tag);

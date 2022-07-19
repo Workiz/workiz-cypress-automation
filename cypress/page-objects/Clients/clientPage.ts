@@ -114,6 +114,12 @@ export class ClientPage {
         cy.get('.objectTags-module__tagsWrapper___vUCcB .green-bg ', {timeout: 10000}).filter(`:contains("${tag}")`).click();
     }
 
+    deleteTag(tag: string) {
+        this.openTagDialog();
+        cy.get('.objectTags-module__objectTags___3CQmo .tag-module__tag___36uWb', {timeout: 10000}).filter(`:contains("${tag}")`).children('i').click();
+        cy.get('button').contains('Yes').click();
+    }
+
     validateClientTagContainsTag(tag: string)
     {
         cy.validateTextAppearInElements('.objectTags-module__objectTags___3CQmo .tag-module__tag___36uWb', tag);
