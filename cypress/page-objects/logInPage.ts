@@ -2,6 +2,12 @@ import { HomePage } from "./homePage";
 import { ResetPasswordPage } from "./resetPasswordPage";
 
 export class LogInPage {
+    logInWithAccount6(): HomePage {
+        cy.visit('');
+        let email = Cypress.env("email6");
+        let pwd = Cypress.env("password6");
+        return this.logIn(email,pwd);
+    }
 
     logInWithAccount1(): HomePage {
         cy.visit('');
@@ -14,6 +20,13 @@ export class LogInPage {
         cy.visit('');
         let email = Cypress.env("email2");
         let pwd = Cypress.env("password2");
+        return this.logIn(email,pwd);
+    }
+
+    logInWithAccount3(): HomePage {
+        cy.visit('');
+        let email = Cypress.env("email3");
+        let pwd = Cypress.env("password3");
         return this.logIn(email,pwd);
     }
 
