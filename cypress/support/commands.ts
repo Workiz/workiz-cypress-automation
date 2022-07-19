@@ -65,8 +65,6 @@ Cypress.Commands.add('validateTextAppearInElements', (selector: string, textToFi
 });
 
 Cypress.Commands.add('validateTextIsNotAppearInElements', (loadTableLocator: string ,selector: string, textToFind: string) => {
-
-    //cy.wait(15000);
     let allElementsText = new Array<string>;
     cy.get('div', {timeout: 10000}).should('be.visible', loadTableLocator,{timeout: 10000}).then(() => {
         cy.get(selector, {timeout: 10000}).each(($el, index, $list) => {

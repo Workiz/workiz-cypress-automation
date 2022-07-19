@@ -93,7 +93,7 @@ describe('Clients tests', () => {
         });
     });
 
-    it.only('After deleting client it will not appear in the client report',() =>{
+    it('After deleting client it will not appear in the client report',() =>{
         let allClientsPage = pageRouter.goToClientsPage();
         let client = allClientsPage.createClient();
         allClientsPage =client.DeleteClient();
