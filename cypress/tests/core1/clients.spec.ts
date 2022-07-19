@@ -87,9 +87,22 @@ describe('Clients tests', () => {
         client.createNewTag(tag);
         client.addExitingTag(tag)
         cy.reload();
-        client.isClientTagContainsTag(tag);
+        client.validateClientTagContainsTag(tag);
         cy.get(client.alias).then((clientId) => {
-            pageRouter.goToClientsPage().isClientContainsTag(clientId, tag);
+            pageRouter.goToClientsPage().validateClientContainsTag(clientId, tag);
+        });
+    });
+
+    it.only('After deleting tag from client tag will not appear anymore', () => {
+        let tag = RandomFunctions.generateRandomString(4);
+        let allClientsPage = pageRouter.goToClientsPage();
+        let client = allClientsPage.createClient();
+        client.createNewTag(tag);
+        client.addExitingTag(tag)
+        cy.reload();
+        client.validateClientDontContainsTag(tag);
+        cy.get(client.alias).then((clientId) => {
+            pageRouter.goToClientsPage().validateClientDontContainsTag(clientId, tag);
         });
     });
 

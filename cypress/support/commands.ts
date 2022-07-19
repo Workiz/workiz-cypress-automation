@@ -11,7 +11,7 @@ declare global {
             openSettingsMenu(): void
             selectFromDropDown(by: string, element: string, valueToChoose: string): void
             validateTextAppearInElements(selector: string, textToFind: string): void
-            validateTextIsNotAppearInElements(loadTableLocator: string, selector: string, textToFind: string): void
+            validateTextIsNotAppearInElements(elementContainer: string, selector: string, textToFind: string): void
             waitForTableLoaderSpinnerToDisappear(): void
         }
     }
@@ -69,9 +69,9 @@ Cypress.Commands.add('validateTextAppearInElements', (selector: string, textToFi
     })
 });
 
-Cypress.Commands.add('validateTextIsNotAppearInElements', (loadTableLocator: string ,selector: string, textToFind: string) => {
+Cypress.Commands.add('validateTextIsNotAppearInElements', (elementContainer: string ,selector: string, textToFind: string) => {
     let allElementsText = new Array<string>;
-    cy.get('div', {timeout: 10000}).should('be.visible', loadTableLocator,{timeout: 10000}).then(() => {
+    cy.get('div', {timeout: 10000}).should('be.visible', elementContainer,{timeout: 10000}).then(() => {
         cy.get(selector, {timeout: 10000}).each(($el, index, $list) => {
             allElementsText.push($el.text());
             if ($el.text() == textToFind) {

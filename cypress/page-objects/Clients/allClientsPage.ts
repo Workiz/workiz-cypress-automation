@@ -26,10 +26,15 @@ export class AllClientsPage {
         }
     }
 
-    isClientContainsTag(clientId: JQuery<HTMLElement>, tag: string)
+    validateClientContainsTag(clientId: JQuery<HTMLElement>, tag: string)
     {
         cy.get('.rt-tr-group.pointer .rt-td', {timeout: 10000}).filter(`:contains("${clientId.toString()}")`).siblings('div').find('div').should('contain.text', tag);
     };
+
+    validateClientDontContainsTag(clientId: JQuery<HTMLElement>, tag: string)
+    {
+        cy.get('.rt-tr-group.pointer .rt-td', {timeout: 10000}).filter(`:contains("${clientId.toString()}")`).siblings('div').find('div').should('not.contain.text', tag);
+    }
 
     validateClientsTableNotContainsClientId(clientId: JQuery<HTMLElement>)
     {

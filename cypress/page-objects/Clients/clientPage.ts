@@ -114,9 +114,14 @@ export class ClientPage {
         cy.get('.objectTags-module__tagsWrapper___vUCcB .green-bg ', {timeout: 10000}).filter(`:contains("${tag}")`).click();
     }
 
-    isClientTagContainsTag(tag: string)
+    validateClientTagContainsTag(tag: string)
     {
         cy.validateTextAppearInElements('.objectTags-module__objectTags___3CQmo .tag-module__tag___36uWb', tag);
+    }
+
+    validateClientDontContainsTag(tag: string)
+    {
+        cy.validateTextIsNotAppearInElements('client-module__clientTags___2Ry3o','.objectTags-module__objectTags___3CQmo .tag-module__tag___36uWb', tag);
     }
 
     addContact(contactName: string, phoneNumber: string) {
