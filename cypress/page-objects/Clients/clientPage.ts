@@ -8,6 +8,7 @@ import {CreateJobPage} from "../Job/createJobPage";
 import {JobPage} from "../Job/jobPage";
 import {CreateLeadPage} from "../Lead/createLeadPage";
 import {LeadPage} from "../Lead/LeadPage";
+import { AllClientsPage } from "./allClientsPage";
 
 export class ClientPage {
 
@@ -71,6 +72,13 @@ export class ClientPage {
         return createJobPage.SubmitToJob();
     }
 
+    private ClickDeleteClient(): AllClientsPage{
+        this.ClickActionMenu();
+        cy.get('a').contains('Delete Client').click();
+        cy.get('button').contains('Yes delete it').click();
+        return new AllClientsPage();
+    }
+
     createLeadToNewLeadPage(): LeadPage {
         let createLeadPage = this.ClickCreateLead();
         return createLeadPage.SubmitToLead();
@@ -121,5 +129,9 @@ export class ClientPage {
      isContactExistInClient(contactName: string){
          cy.scrollTo('bottom');
          cy.get('.clientContacts-module__wrapper___2kQuz tbody td:nth-child(1)').should('contain.text', contactName);
+     }
+
+     DeleteClient(): AllClientsPage{
+        return this.ClickDeleteClient();
      }
 }
