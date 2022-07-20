@@ -5,9 +5,8 @@ export class AllClientsPage {
 
     createClient(): ClientPage {
         let createClientPage = this.clickOnCreateClient();
-        let name = createClientPage.fillClientsDetails();
-        createClientPage.save();
-        return new ClientPage(name);
+        createClientPage.fillClientsDetails();
+        return createClientPage.save();
     }
 
     private clickOnCreateClient(): CreateClientPage {
@@ -42,4 +41,9 @@ export class AllClientsPage {
         cy.waitForTableLoaderSpinnerToDisappear();
         cy.validateTextIsNotAppearInElements('rt-tr-group pointer', '.rt-tbody .rt-td:nth-child(1)', clientId.toString());
     }
+
+    goToClient(clientId: JQuery<HTMLElement>)
+    {
+        cy.get('.rt-tr-group.pointer .rt-td', {timeout: 10000}).filter(`:contains("${clientId.toString()}")`).click();
+    };
 }

@@ -15,21 +15,20 @@ export class ClientPage {
     private static clientCounter: number = 0;
     alias: string;
     private _note: string | undefined;
-    private readonly _firstName: string;
+    private _tag: string | undefined;
+    firstNameAlias: string;
 
-    constructor(name: string) {
+    constructor() {
         this.alias = 'client' + ++ClientPage.clientCounter;
         this.setClientIdAsAlias(this.alias);
         this.alias = RandomFunctions.generateRandomAliasName(this.alias);
-        this._firstName = name;
+        this.firstNameAlias = 'clientName' + ++ClientPage.clientCounter;
+        this.setClientIdAsAlias(this.firstNameAlias);
+        this.firstNameAlias = RandomFunctions.generateRandomAliasName(this.firstNameAlias);
     }
 
     get note(): Cypress.Chainable<JQuery> {
         return cy.get(".clientNotes-module__flexCol___2xSY_ div:nth-child(2)");
-    }
-
-    get name(): string {
-        return this._firstName;
     }
 
     setClientIdAsAlias(clientIdAlias: string) {
@@ -37,6 +36,13 @@ export class ClientPage {
             const clientId = fullUrl.split('/')[5];
             cy.wrap(clientId).as(`${clientIdAlias}`);
         });
+    }
+
+    setClientNameAsAlias(clientNameAlias: string) {
+        cy.get('name="first_name"').then((element) => {
+            const clientName = element.text();
+            cy.wrap(clientName).as(`${clientNameAlias}`);
+        })
     }
 
     private ClickActionMenu() {
@@ -164,5 +170,11 @@ export class ClientPage {
 
     DeleteClient(): AllClientsPage{
         return this.ClickDeleteClient();
+    }
+
+    setParentClient(parentClientName: JQuery<HTMLElement>){
+        cy.scrollTo('bottom');
+        cy.get('.setParentClient-module__container___1IloT .sajInput.sajInput.sizef.icon-search').type(parentClientName.toString());
+        cy.get('button').contains('Save').click();
     }
 }

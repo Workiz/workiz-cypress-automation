@@ -1,11 +1,12 @@
 import { Constans } from "../../infrastructure/consts";
 import { RandomFunctions } from "../../support/randomFunctions";
+import { ClientPage } from "./clientPage";
 
 export class CreateClientPage {
 
     readonly firstNameLocator: string = "[name='first_name']";
     
-    fillClientsDetails():string {
+    fillClientsDetails():void{
         let firstName: string = RandomFunctions.generateRandomString(8);
         cy.get(`${this.firstNameLocator}`).type(firstName);
         cy.get('[name="primary_phone"]').type(Constans.PHONE);
@@ -18,12 +19,12 @@ export class CreateClientPage {
                 cy.get(`${this.firstNameLocator}`).clear().type(firstName);
             }
         })
-        return firstName;
     }
 
-    save():void {
+    save(): ClientPage {
         cy.get('button').contains('Save').click();
         cy.url().should('contain', 'client/');
+        return new ClientPage();
     }
 
 }

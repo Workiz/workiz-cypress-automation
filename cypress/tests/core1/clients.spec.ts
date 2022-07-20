@@ -126,8 +126,7 @@ describe('Clients tests', () => {
         client.isContactExistInClient(name);
     });
 
-    it('After adding property to Client it will appear in client properties', () => {
-        let name = RandomFunctions.generateRandomString(7);
+    it('After adding property to Client it will appear in client properties', () => {let name = RandomFunctions.generateRandomString(7);
         let allClientsPage = pageRouter.goToClientsPage();
         let client = allClientsPage.createClient();
         client.addProperty();
@@ -140,5 +139,13 @@ describe('Clients tests', () => {
         let allClientsPage = pageRouter.goToClientsPage();
         let parentClient = allClientsPage.createClient();
         let childClient = allClientsPage.createClient()
+        cy.get(parentClient.firstNameAlias).then((clientName) =>{
+            childClient.setParentClient(clientName);
+        });
+        allClientsPage = pageRouter.goToClientsPage();
+
+        cy.get(parentClient.alias).then((clientId) =>{
+            allClientsPage.goToClient(clientId);
+        });
     });
 })
