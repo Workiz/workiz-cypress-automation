@@ -378,7 +378,7 @@ describe('MarketPlace tests', () => {
         cy.get('h2.thin').should('have.text', 'Franchise');
     }); 
 
-    it.only('Validate Map/GPS activation',() =>{
+    it('Validate Map/GPS activation',() =>{
         const mapTestIdSelector = 'map_feature_card';
         const marketPlacePage = pageRouter.goToMarketPlacePage();
         marketPlacePage.TurnOnWidget(mapTestIdSelector);
@@ -400,7 +400,34 @@ describe('MarketPlace tests', () => {
         marketPlacePage.clickOnLinkToPage();
         cy.url().should('include', 'map');
         cy.get('#mapid').should('be.visible');
-        
+    }); 
+
+    it.only('Validate Leads activation',() =>{
+        const leadsTestIdSelector = 'leads_feature_card';
+        const marketPlacePage = pageRouter.goToMarketPlacePage();
+        marketPlacePage.TurnOnWidget(leadsTestIdSelector);
+        const marketPlacePageSecondTime = pageRouter.goToMarketPlacePage();
+        const widgetStatus = marketPlacePageSecondTime.getWidgewtStatus(leadsTestIdSelector);
+        widgetStatus.should('have.text', 'Feature active');
+        const settingsPage = pageRouter.goToSettingsPage();
+        cy.validateTextAppearInElements(settingsPage.widgetsSelector, 'Lead Status');
+        cy.validateTextAppearInElements(settingsPage.widgetsSelector, 'Auto Leads');
+        cy.validateTextAppearInElements('#big-menu li', 'Leads');
+
+        const marketPlacePageThirdTime = pageRouter.goToMarketPlacePage();
+        marketPlacePageSecondTime.disableFeature(leadsTestIdSelector);
+        cy.go('back');
+        const widgetStatusAfterDisabled = marketPlacePageThirdTime.getWidgewtStatus(leadsTestIdSelector);
+        widgetStatusAfterDisabled.should('have.text', 'Feature not active');
+        const settingsPageAfterDisabled = pageRouter.goToSettingsPage();
+        cy.validateTextIsNotAppearInElements(settingsPage.widgetsSelector, 'Lead Status');
+        cy.validateTextIsNotAppearInElements(settingsPage.widgetsSelector, 'Auto Leads');
+        cy.validateTextIsNotAppearInElements('#big-menu li', 'Leads');
+
+        pageRouter.goToMarketPlacePage();
+        marketPlacePage.TurnOnWidget(leadsTestIdSelector);
+        marketPlacePage.clickOnLinkToPage();
+        cy.url().should('include', 'root/leads');
     }); 
 }); 
     
