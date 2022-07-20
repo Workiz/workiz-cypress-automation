@@ -23,7 +23,7 @@ export class ClientPage {
         this.setClientIdAsAlias(this.alias);
         this.alias = RandomFunctions.generateRandomAliasName(this.alias);
         this.firstNameAlias = 'clientName' + ++ClientPage.clientCounter;
-        this.setClientIdAsAlias(this.firstNameAlias);
+        this.setClientNameAsAlias(this.firstNameAlias);
         this.firstNameAlias = RandomFunctions.generateRandomAliasName(this.firstNameAlias);
     }
 
@@ -39,7 +39,7 @@ export class ClientPage {
     }
 
     setClientNameAsAlias(clientNameAlias: string) {
-        cy.get('name="first_name"').then((element) => {
+        cy.get("[name='first_name']").then((element) => {
             const clientName = element.text();
             cy.wrap(clientName).as(`${clientNameAlias}`);
         })
@@ -168,6 +168,10 @@ export class ClientPage {
         cy.get('._singleTab ').contains('Properties').click();
     }
 
+    goToSubClientsTab(){
+        cy.get('._singleTab ').contains('Sub clients').click();
+    }
+
     DeleteClient(): AllClientsPage{
         return this.ClickDeleteClient();
     }
@@ -175,6 +179,13 @@ export class ClientPage {
     setParentClient(parentClientName: JQuery<HTMLElement>){
         cy.scrollTo('bottom');
         cy.get('.setParentClient-module__container___1IloT .sajInput.sajInput.sizef.icon-search').type(parentClientName.toString());
+        cy.get('.relative .sajComplete .sajComplete-suggestion', {timeout: 10000}).click({force: true});
         cy.get('button').contains('Save').click();
+    }
+
+    validateParentClientContainsChildClient(childClientName: JQuery<HTMLElement>)
+    {
+        this.goToSubClientsTab();
+        cy.validateTextAppearInElements('._selected .rt-td ._clearLink', childClientName.toString());
     }
 }

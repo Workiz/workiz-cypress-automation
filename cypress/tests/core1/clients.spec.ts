@@ -135,17 +135,24 @@ describe('Clients tests', () => {
         cy.get('.rt-tr-group.pointer .rt-td:nth-child(1)').its('length').should('equal', 2);
     });
 
-    it('After setting client as parent he will contains sub client', () => {
+    it.only('After setting client as parent he will contains sub client', () => {
         let allClientsPage = pageRouter.goToClientsPage();
         let parentClient = allClientsPage.createClient();
-        let childClient = allClientsPage.createClient()
-        cy.get(parentClient.firstNameAlias).then((clientName) =>{
-            childClient.setParentClient(clientName);
-        });
         allClientsPage = pageRouter.goToClientsPage();
+        let childClient = allClientsPage.createClient()
+        cy.get(parentClient.firstNameAlias).then((parentClientName) =>{
+            childClient.setParentClient(parentClientName);
+            allClientsPage = pageRouter.goToClientsPage();
+            cy.get(childClient.alias).then((childClientId) => {
+                allClientsPage.validateChildClientContainsParentClient(childClientId, parentClientName);
+            });
+        });
+        cy.get(parentClient.alias).then((parentClientId) => {
+            let parentClient =allClientsPage.goToClient(parentClientId);
+            cy.get(childClient.firstNameAlias).then((childClientName) => {
+                parentClient.validateParentClientContainsChildClient(childClientName);
+            });
 
-        cy.get(parentClient.alias).then((clientId) =>{
-            allClientsPage.goToClient(clientId);
         });
     });
 })
