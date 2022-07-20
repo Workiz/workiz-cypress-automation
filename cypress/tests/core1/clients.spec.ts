@@ -93,7 +93,7 @@ describe('Clients tests', () => {
         });
     });
 
-    it.only('After deleting tag from client tag will not appear anymore', () => {
+    it('After deleting tag from client tag will not appear anymore', () => {
         let tag = RandomFunctions.generateRandomString(4);
         let allClientsPage = pageRouter.goToClientsPage();
         let client = allClientsPage.createClient();
