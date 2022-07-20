@@ -278,7 +278,7 @@ describe('MarketPlace tests', () => {
 
     //Activation Tests
     
-    it.only('Validate Custom Document activation',() =>{
+    it('Validate Custom Document activation',() =>{
         const customDocumentTestIdSelector = 'customdoc_feature_card';
         const marketPlacePage = pageRouter.goToMarketPlacePage();
         marketPlacePage.TurnOnWidget(customDocumentTestIdSelector);
@@ -303,28 +303,105 @@ describe('MarketPlace tests', () => {
         cy.get('.mid-margin-bottom button').should('exist');
         });  
         
-        it.only('Validate Custom Fields activation',() =>{
-            const customFieldsTestIdSelector = 'customFields_feature_card';
-            const marketPlacePage = pageRouter.goToMarketPlacePage();
-            marketPlacePage.TurnOnWidget(customFieldsTestIdSelector);
-            const marketPlacePageSecondTime = pageRouter.goToMarketPlacePage();
-            const widgetStatus = marketPlacePageSecondTime.getWidgewtStatus(customFieldsTestIdSelector);
-            widgetStatus.should('have.text', 'Feature active');
-            const settingsPage = pageRouter.goToSettingsPage();
-            cy.validateTextAppearInElements(settingsPage.widgetsSelector, 'Custom Fields');
+    it('Validate Custom Fields activation',() =>{
+        const customFieldsTestIdSelector = 'customFields_feature_card';
+        const marketPlacePage = pageRouter.goToMarketPlacePage();
+        marketPlacePage.TurnOnWidget(customFieldsTestIdSelector);
+        const marketPlacePageSecondTime = pageRouter.goToMarketPlacePage();
+        const widgetStatus = marketPlacePageSecondTime.getWidgewtStatus(customFieldsTestIdSelector);
+        widgetStatus.should('have.text', 'Feature active');
+        const settingsPage = pageRouter.goToSettingsPage();
+        cy.validateTextAppearInElements(settingsPage.widgetsSelector, 'Custom Fields');
 
-            const marketPlacePageThirdTime = pageRouter.goToMarketPlacePage();
-            marketPlacePageSecondTime.disableFeature(customFieldsTestIdSelector);
-            cy.go('back');
-            const widgetStatusAfterDisabled = marketPlacePageThirdTime.getWidgewtStatus(customFieldsTestIdSelector);
-            widgetStatusAfterDisabled.should('have.text', 'Feature not active');
-            pageRouter.goToSettingsPage();
-            cy.validateTextIsNotAppearInElements(settingsPage.widgetsSelector, 'Custom Fields');
+        const marketPlacePageThirdTime = pageRouter.goToMarketPlacePage();
+        marketPlacePageSecondTime.disableFeature(customFieldsTestIdSelector);
+        cy.go('back');
+        const widgetStatusAfterDisabled = marketPlacePageThirdTime.getWidgewtStatus(customFieldsTestIdSelector);
+        widgetStatusAfterDisabled.should('have.text', 'Feature not active');
+        pageRouter.goToSettingsPage();
+        cy.validateTextIsNotAppearInElements(settingsPage.widgetsSelector, 'Custom Fields');
 
-            pageRouter.goToMarketPlacePage();
-            marketPlacePage.TurnOnWidget(customFieldsTestIdSelector);
+        pageRouter.goToMarketPlacePage();
+        marketPlacePage.TurnOnWidget(customFieldsTestIdSelector);
+        marketPlacePage.clickOnLinkToPage();
+        cy.url().should('include', 'root/custom_fields');
+        cy.get('h2.thin').should('have.text', 'Custom Fields');
+        });  
 
-            });  
+    it('Validate Online Booking activation',() =>{
+        const onlineBookingTestIdSelector = 'booking_feature_card';
+        const marketPlacePage = pageRouter.goToMarketPlacePage();
+        marketPlacePage.TurnOnWidget(onlineBookingTestIdSelector);
+        const marketPlacePageSecondTime = pageRouter.goToMarketPlacePage();
+        const widgetStatus = marketPlacePageSecondTime.getWidgewtStatus(onlineBookingTestIdSelector);
+        widgetStatus.should('have.text', 'Feature active');
+        const settingsPage = pageRouter.goToSettingsPage();
+        cy.validateTextAppearInElements(settingsPage.widgetsSelector, 'Online Booking');
+
+        const marketPlacePageThirdTime = pageRouter.goToMarketPlacePage();
+        marketPlacePageSecondTime.disableFeature(onlineBookingTestIdSelector);
+        cy.go('back');
+        const widgetStatusAfterDisabled = marketPlacePageThirdTime.getWidgewtStatus(onlineBookingTestIdSelector);
+        widgetStatusAfterDisabled.should('have.text', 'Feature not active');
+        pageRouter.goToSettingsPage();
+        cy.validateTextIsNotAppearInElements(settingsPage.widgetsSelector, 'Online Booking');
+
+        pageRouter.goToMarketPlacePage();
+        marketPlacePage.TurnOnWidget(onlineBookingTestIdSelector);
+        marketPlacePage.clickOnLinkToPage();
+        cy.url().should('include', 'root/booking_settings');
+        cy.get('.BookingSettingsCards__preview___1laod').should('be.visible');
+    }); 
+    
+    it('Validate Franchise activation',() =>{
+        const franchiseTestIdSelector = 'franchises_feature_card';
+        const marketPlacePage = pageRouter.goToMarketPlacePage();
+        marketPlacePage.TurnOnWidget(franchiseTestIdSelector);
+        const marketPlacePageSecondTime = pageRouter.goToMarketPlacePage();
+        const widgetStatus = marketPlacePageSecondTime.getWidgewtStatus(franchiseTestIdSelector);
+        widgetStatus.should('have.text', 'Feature active');
+        const settingsPage = pageRouter.goToSettingsPage();
+        cy.validateTextAppearInElements(settingsPage.widgetsSelector, 'Franchises Management');
+
+        const marketPlacePageThirdTime = pageRouter.goToMarketPlacePage();
+        marketPlacePageSecondTime.disableFeature(franchiseTestIdSelector);
+        cy.go('back');
+        const widgetStatusAfterDisabled = marketPlacePageThirdTime.getWidgewtStatus(franchiseTestIdSelector);
+        widgetStatusAfterDisabled.should('have.text', 'Feature not active');
+        const settingsPageAfterDisabled = pageRouter.goToSettingsPage();
+        cy.validateTextIsNotAppearInElements(settingsPageAfterDisabled.widgetsSelector, 'Franchises Management');
+
+        pageRouter.goToMarketPlacePage();
+        marketPlacePage.TurnOnWidget(franchiseTestIdSelector);
+        marketPlacePage.clickOnLinkToPage();
+        cy.url().should('include', 'root/franchise');
+        cy.get('h2.thin').should('have.text', 'Franchise');
+    }); 
+
+    it.only('Validate Map/GPS activation',() =>{
+        const mapTestIdSelector = 'map_feature_card';
+        const marketPlacePage = pageRouter.goToMarketPlacePage();
+        marketPlacePage.TurnOnWidget(mapTestIdSelector);
+        const marketPlacePageSecondTime = pageRouter.goToMarketPlacePage();
+        const widgetStatus = marketPlacePageSecondTime.getWidgewtStatus(mapTestIdSelector);
+        widgetStatus.should('have.text', 'Feature active');
+        cy.validateTextAppearInElements('#big-menu li', 'Map');
+
+        const marketPlacePageThirdTime = pageRouter.goToMarketPlacePage();
+        marketPlacePageSecondTime.disableFeature(mapTestIdSelector);
+        cy.go('back');
+        const widgetStatusAfterDisabled = marketPlacePageThirdTime.getWidgewtStatus(mapTestIdSelector);
+        widgetStatusAfterDisabled.should('have.text', 'Feature not active');
+        cy.reload();
+        cy.validateTextIsNotAppearInElements('#big-menu li', 'Map');
+        
+        pageRouter.goToMarketPlacePage();
+        marketPlacePage.TurnOnWidget(mapTestIdSelector);
+        marketPlacePage.clickOnLinkToPage();
+        cy.url().should('include', 'map');
+        cy.get('#mapid').should('be.visible');
+        
+    }); 
 }); 
     
 

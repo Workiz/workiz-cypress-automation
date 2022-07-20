@@ -14,6 +14,7 @@ declare global {
             validateTextIsNotAppearInElements(selector: string, textToFind: string): void
             validateTextIsNotAppearInTableElements(loadTableLocator: string, selector: string, textToFind: string): void
             waitForTableLoaderSpinnerToDisappear(): void
+            waitForToasterToDisappear(): void
         }
     }
 }
@@ -104,7 +105,12 @@ Cypress.Commands.add('validateTextIsNotAppearInTableElements', (loadTableLocator
 Cypress.Commands.add('waitForTableLoaderSpinnerToDisappear', () => {
     cy.get('.ReactTable .spinnerDots', {timeout: 10000}).should('be.visible');
     cy.get('.ReactTable .spinnerDots', {timeout: 10000}).should('not.exist');
-})
+});
+
+Cypress.Commands.add('waitForToasterToDisappear', () => {
+    cy.get('.toastr', {timeout: 10000}).should('be.visible');
+    cy.get('.toastr', {timeout: 10000}).should('not.exist');
+});
 
 
 

@@ -1,6 +1,9 @@
 import { AngiPage } from "./angiIntegrationPage";
 
 export class MarketPlacePage {
+    clickOnLinkToPage() {
+        cy.get('.StatusBox-module__action_button___1wXRB').click();
+    }
     readonly VisibleWidgets = 'div.FeatureCard-module__title___1KBvT';
    
     public get getOnlyIntegrationType(): Cypress.Chainable<JQuery> {
