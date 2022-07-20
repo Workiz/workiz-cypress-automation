@@ -168,7 +168,7 @@ export class ClientPage {
     }
 
     goToSubClientsTab(){
-        cy.get('._singleTab ').contains('Sub clients').click();
+        cy.get('._singleTab:nth-child(9)').should('contain.text','Sub clients').click();
     }
 
     DeleteClient(): AllClientsPage{
