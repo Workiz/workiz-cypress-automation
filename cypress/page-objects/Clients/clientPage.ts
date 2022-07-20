@@ -177,9 +177,12 @@ export class ClientPage {
 
     setParentClient(parentClientName: JQuery<HTMLElement>){
         cy.scrollTo('bottom');
-        cy.get('.setParentClient-module__container___1IloT .sajInput.sajInput.sizef.icon-search').type(parentClientName.toString()).type(' ', {delay: 2000});
-        cy.get('.relative .sajComplete .sajComplete-suggestion', {timeout: 10000}).click({force: true});
-        cy.get('.sbmt_bar .button.iFfWBzvt7RjPTzzA73jT ').contains('Save').click();
+        cy.get('.setParentClient-module__container___1IloT .sajInput.sajInput.sizef.icon-search').type(parentClientName.toString()).type(' ', {delay: 2000}).then(() => {
+            cy.get('.sajComplete-suggestion').should('have.length', 1).and('contain', parentClientName.toString()).click();
+
+            // cy.get('.relative .sajComplete .sajComplete-suggestion', {timeout: 10000}).click({force: true});
+            cy.get('.sbmt_bar .button.iFfWBzvt7RjPTzzA73jT ').contains('Save').click();
+        });
     }
 
     validateParentClientContainsChildClient(childClientName: JQuery<HTMLElement>)
