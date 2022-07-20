@@ -1,6 +1,7 @@
 import { LogInPage } from "../../page-objects/logInPage";
 import { PageRouter } from "../../page-objects/router";
 import { MarketPlaceLabels } from "../../infrastructure/marketPlaceLabels";
+import { contains } from "cypress/types/jquery";
 
 describe('MarketPlace tests', () => {
     let pageRouter: PageRouter;
@@ -183,6 +184,98 @@ describe('MarketPlace tests', () => {
         cy.url().should('include', 'how-to-create-and-manage-inventory-containers');
     }); 
 
+    //Chatbot Links
+    it('Using Chatbot link works properly',() =>{
+        let marketPlacePage = pageRouter.goToMarketPlacePage();
+        marketPlacePage.goToChatBot();
+        cy.url().should('include', 'name=chatbot');
+    }); 
+
+    //Subconstractor Links
+    it('Using ProU sers Vs Subcontractors link works properly',() =>{
+        let marketPlacePage = pageRouter.goToMarketPlacePage();
+        marketPlacePage.GoToMarketPlaceLink('subcontractors_feature_card', 'Pro users VS subcontractors');
+        cy.url().should('include', 'paid-users-vs-free-subcontractors');
+    }); 
+
+    //Developer for api Links
+    it('Using Developer documentation link works properly',() =>{
+        let marketPlacePage = pageRouter.goToMarketPlacePage();
+        marketPlacePage.GoToMarketPlaceLink('sdeveloper_feature_card', 'Developer documentation');
+        cy.url().should('include', 'developer.workiz.com');
+    }); 
+
+    //Googles Local Services Ads Links
+    it('Using Connecting your schedule to Googles Local Services Ads link works properly',() =>{
+        let marketPlacePage = pageRouter.goToMarketPlacePage();
+        marketPlacePage.GoToMarketPlaceLink('googleLocal_feature_card', 'Connecting your schedule to Googles Local Services Ads');
+        cy.url().should('include', 'how-to-highlight-your-business-on-google-and-get-more-jobs');
+    }); 
+
+    //Mailchimp Links
+    it('Using Mailchamp widget link works properly',() =>{
+        let marketPlacePage = pageRouter.goToMarketPlacePage();
+        marketPlacePage.goToMaliChamp();
+        cy.url().should('include', 'name=mailchimp');
+    });
+
+    //Thumbteck Links
+    it('Using Connecting to Thumbtack link works properly',() =>{
+        let marketPlacePage = pageRouter.goToMarketPlacePage();
+        marketPlacePage.GoToMarketPlaceLink('thumbtack_feature_card', 'Connecting to Thumbtack');
+        cy.url().should('include', 'how-to-respond-faster-to-thumbtack-leads-and-close-more-jobs');
+    });
+
+    //Gusto Links
+    it('Using Connecting to Gusto link works properly',() =>{
+        let marketPlacePage = pageRouter.goToMarketPlacePage();
+        marketPlacePage.GoToMarketPlaceLink('gusto_feature_card', 'Connecting to Gusto');
+        cy.url().should('include', 'how-to-sync-your-gusto-payroll-account-with-workiz');
+    });
+
+    // CompanyCam
+    it('Using Connecting to CompanyCam link works properly',() =>{
+        let marketPlacePage = pageRouter.goToMarketPlacePage();
+        marketPlacePage.GoToMarketPlaceLink('companyCam_feature_card', 'Connecting to CompanyCam');
+        cy.url().should('include', 'integrate-companycam-workiz');
+    });
+
+    // Zoom integration page
+    it('Using Zoom and Workiz link works properly',() =>{
+        let marketPlacePage = pageRouter.goToMarketPlacePage();
+        marketPlacePage.GoToMarketPlaceLink('zoom_feature_card', 'Using Zoom and Workiz');
+        cy.url().should('include', 'workiz-zoom-video-meetings');
+    });
+
+    //CalenderSync Link
+    it('Using Subscribing to your Workiz schedule link works properly',() =>{
+        let marketPlacePage = pageRouter.goToMarketPlacePage();
+        marketPlacePage.GoToMarketPlaceLink('calSync_feature_card', 'Subscribing to your Workiz schedule');
+        cy.url().should('include', 'how-to-sync-workiz-schedule-with-your-personal-calendar');
+    });
+    
+    //Zapier Links Link
+    it('Using Workiz and Zapier link works properly',() =>{
+        let marketPlacePage = pageRouter.goToMarketPlacePage();
+        marketPlacePage.GoToMarketPlaceLink('zapier_feature_card', 'Using Workiz and Zapier');
+        cy.url().should('include', 'how-to-connect-workiz-to-other-apps-with-zapier-integration');
+    });   
+    
+    it('Using Creating a Zap link works properly',() =>{
+        let marketPlacePage = pageRouter.goToMarketPlacePage();
+        marketPlacePage.GoToMarketPlaceLink('zapier_feature_card', 'Creating a Zap');
+        cy.url().should('include', 'zapier-quick-start-guide/quick-start-create-zap/');
+    });  
+
+    //searchkings
+    it('Using Creating a Zap link works properly',() =>{
+        let marketPlacePage = pageRouter.goToMarketPlacePage();
+        const searchKingsModal = marketPlacePage.OpenSearchKingModal();
+        searchKingsModal.should('contain.text', 'Grow Your Service Business and Reach More Clients With SearchKings').click().then(() =>{
+        cy.get('button.PartnerModal-module__ml10___15YK9').should('be.enabled');
+        });        
+    }); 
+    
 });
 
 

@@ -68,4 +68,18 @@ export class MarketPlacePage {
     goToWorkizServicePhonePage() {
         cy.get("section[data-testid='workizPhone_feature_card']").click();
     }
+
+    goToChatBot() {
+        cy.get("section[data-testid='chatbot_feature_card']").click();
+    }
+
+    goToMaliChamp() {
+        cy.get("section[data-testid='mailchimp_feature_card']").click();
+    }
+
+    OpenSearchKingModal(): Cypress.Chainable<JQuery> {
+        cy.get("section[data-testid='searchKings_feature_card']").click();
+        cy.get("article .button").click();
+        return cy.get(".modal-bg h4");
+    }
 }
