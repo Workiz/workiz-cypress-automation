@@ -1,4 +1,8 @@
 export class CustomDocumentsPage {
+    
+    getAddNewDocumentButton(): Cypress.Chainable<JQuery> {
+        return cy.get('.button').contains('Add Custom Document')
+    }
 
     createCustomDocument(documentName: string,templateName: string) {
         this.clickOnAddCustomDocument();

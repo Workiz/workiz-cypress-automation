@@ -12,8 +12,14 @@ import { AllInvoicesPage } from './Invoice/allInvoicesPage';
 import { AllEstimatesPage } from './Estimate/allEstimatesPage';
 import { CustomDocumentsPage } from './customDocumentsPage';
 import { FranchisePage } from './franchisePage';
+import { SettingsPage } from './SettingsPage';
 
 export class PageRouter {
+    goToSettingsPage(): SettingsPage {
+        cy.visit('root/settings');
+        cy.get('div h4._widgetTitle:nth-child(1)').should('contain','General Settings');
+        return new SettingsPage;
+    }
 
     goToFranchisePage(): FranchisePage {
         cy.get('#title-bar span[data-testid="pop-menu-span"]').click();

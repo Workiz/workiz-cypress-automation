@@ -1,9 +1,8 @@
 import { AngiPage } from "./angiIntegrationPage";
 
 export class MarketPlacePage {
-
     readonly VisibleWidgets = 'div.FeatureCard-module__title___1KBvT';
-
+   
     public get getOnlyIntegrationType(): Cypress.Chainable<JQuery> {
         cy.get("span").contains('Integration').click();
         return cy.get(this.VisibleWidgets);
@@ -81,5 +80,31 @@ export class MarketPlacePage {
         cy.get("section[data-testid='searchKings_feature_card']").click();
         cy.get("article .button").click();
         return cy.get(".modal-bg h4");
+    }
+
+    TurnOnWidget(widgetTestIdSelector: string) {
+        cy.get(`section[data-testid='${widgetTestIdSelector}']`).click();
+        cy.get('section .StatusBox-module__subLabel___1yzYV').then(($el) =>{
+            if ($el.text() == 'Feature not active') 
+            {   
+                this.PressOnActiveButtonToActivateFeature()
+            }
+        });
+    }
+    private PressOnActiveButtonToActivateFeature() {
+        cy.get('label[class=toggleSwitch-module__toggleSwitchLabel___3NEBn]').click().then(() =>{
+            cy.get('section .StatusBox-module__subLabel___1yzYV').should('have.text', 'Feature active');
+        });
+    };
+
+    getWidgewtStatus(widgetTestIdSelector: string): Cypress.Chainable<JQuery> {
+        cy.get(`section[data-testid='${widgetTestIdSelector}']`).click();
+        return cy.get('section .StatusBox-module__subLabel___1yzYV');
+    }
+
+    disableFeature() {
+        cy.get('label[class=toggleSwitch-module__toggleSwitchLabel___3NEBn]').click().then(() => {
+            cy.get('section .StatusBox-module__subLabel___1yzYV').should('have.text', 'Feature not active');
+        })
     }
 }

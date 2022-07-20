@@ -275,7 +275,33 @@ describe('MarketPlace tests', () => {
         cy.get('button.PartnerModal-module__ml10___15YK9').should('be.enabled');
         });        
     }); 
+
+    //Activation Tests
     
-});
+    it.only('Validate Custom Document activation',() =>{
+        const customFieldsTestIdSelector = 'customdoc_feature_card';
+        const marketPlacePage = pageRouter.goToMarketPlacePage();
+        const searchKingsModal = marketPlacePage.TurnOnWidget(customFieldsTestIdSelector);
+        const marketPlacePageSecondTime = pageRouter.goToMarketPlacePage();
+        const widgetStatus = marketPlacePageSecondTime.getWidgewtStatus(customFieldsTestIdSelector);
+        widgetStatus.should('have.text', 'Feature active');
+        marketPlacePageSecondTime.disableFeature();
+        const settingsPlacePage = pageRouter.goToSettingsPage();
+        settingsPlacePage.goToCustomDocumentsPage();
+        cy.get('.mid-margin-bottom button').should('not.exist');
+
+        const marketPlacePageThirdTime = pageRouter.goToMarketPlacePage();
+        marketPlacePageThirdTime.TurnOnWidget(customFieldsTestIdSelector);
+        const marketPlacePageFourthTime = pageRouter.goToMarketPlacePage();
+        marketPlacePageFourthTime.getWidgewtStatus(customFieldsTestIdSelector);
+        widgetStatus.should('have.text', 'Feature active');
+
+        const settingsPlacePageSecondTime = pageRouter.goToSettingsPage();
+        settingsPlacePageSecondTime.goToCustomDocumentsPage();
+        cy.url().should('include', 'root/documents');
+        cy.get('.mid-margin-bottom button').should('exist');
+        });        
+}); 
+    
 
 
