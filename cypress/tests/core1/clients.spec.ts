@@ -98,11 +98,11 @@ describe('Clients tests', () => {
         let allClientsPage = pageRouter.goToClientsPage();
         let client = allClientsPage.createClient();
         client.createNewTag(tag);
-        client.addExitingTag(tag)
+        client.addExitingTag(tag);
         cy.reload();
         client.deleteTag(tag);
         cy.reload();
-        client.validateClientDontContainsTag(tag);
+        client.validateClientDontContainsAnyTag();
         cy.get(client.alias).then((clientId) => {
             pageRouter.goToClientsPage().validateClientDontContainsTag(clientId, tag);
         });

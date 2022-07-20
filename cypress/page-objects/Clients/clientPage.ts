@@ -125,9 +125,9 @@ export class ClientPage {
         cy.validateTextAppearInElements('.objectTags-module__objectTags___3CQmo .tag-module__tag___36uWb', tag);
     }
 
-    validateClientDontContainsTag(tag: string)
+    validateClientDontContainsAnyTag()
     {
-        cy.validateTextIsNotAppearInElements('client-module__clientTags___2Ry3o','.objectTags-module__objectTags___3CQmo .tag-module__tag___36uWb', tag);
+        cy.get('.client-module__tags___2g9Z1.client-module__sidesPadding___1hogD .tag-module__tag___36uWb').should('not.exist');
     }
 
     addContact(contactName: string, phoneNumber: string) {
