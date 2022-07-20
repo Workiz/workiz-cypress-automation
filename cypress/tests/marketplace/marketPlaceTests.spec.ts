@@ -201,14 +201,14 @@ describe('MarketPlace tests', () => {
     //Developer for api Links
     it('Using Developer documentation link works properly',() =>{
         let marketPlacePage = pageRouter.goToMarketPlacePage();
-        marketPlacePage.GoToMarketPlaceLink('sdeveloper_feature_card', 'Developer documentation');
+        marketPlacePage.GoToMarketPlaceLink('developer_feature_card', 'Developer documentation');
         cy.url().should('include', 'developer.workiz.com');
     }); 
 
     //Googles Local Services Ads Links
     it('Using Connecting your schedule to Googles Local Services Ads link works properly',() =>{
         let marketPlacePage = pageRouter.goToMarketPlacePage();
-        marketPlacePage.GoToMarketPlaceLink('googleLocal_feature_card', 'Connecting your schedule to Googles Local Services Ads');
+        marketPlacePage.GoToMarketPlaceLink('googleLocal_feature_card', 'Connecting your schedule to Google');
         cy.url().should('include', 'how-to-highlight-your-business-on-google-and-get-more-jobs');
     }); 
 
