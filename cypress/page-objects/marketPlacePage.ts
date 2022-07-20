@@ -91,6 +91,15 @@ export class MarketPlacePage {
             }
         });
     }
+
+    disableFeature(widgetTestIdSelector: string) {
+        cy.get(`section[data-testid='${widgetTestIdSelector}']`).click();
+        cy.get('label[class=toggleSwitch-module__toggleSwitchLabel___3NEBn]').click().then(() => {
+        cy.get('section .StatusBox-module__subLabel___1yzYV').should('have.text', 'Feature not active');
+    });
+
+
+}
     private PressOnActiveButtonToActivateFeature() {
         cy.get('label[class=toggleSwitch-module__toggleSwitchLabel___3NEBn]').click().then(() =>{
             cy.get('section .StatusBox-module__subLabel___1yzYV').should('have.text', 'Feature active');
@@ -102,9 +111,5 @@ export class MarketPlacePage {
         return cy.get('section .StatusBox-module__subLabel___1yzYV');
     }
 
-    disableFeature() {
-        cy.get('label[class=toggleSwitch-module__toggleSwitchLabel___3NEBn]').click().then(() => {
-            cy.get('section .StatusBox-module__subLabel___1yzYV').should('have.text', 'Feature not active');
-        })
-    }
+    
 }

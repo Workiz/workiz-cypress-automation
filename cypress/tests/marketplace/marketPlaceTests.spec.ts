@@ -279,28 +279,52 @@ describe('MarketPlace tests', () => {
     //Activation Tests
     
     it.only('Validate Custom Document activation',() =>{
-        const customFieldsTestIdSelector = 'customdoc_feature_card';
+        const customDocumentTestIdSelector = 'customdoc_feature_card';
         const marketPlacePage = pageRouter.goToMarketPlacePage();
-        const searchKingsModal = marketPlacePage.TurnOnWidget(customFieldsTestIdSelector);
+        marketPlacePage.TurnOnWidget(customDocumentTestIdSelector);
         const marketPlacePageSecondTime = pageRouter.goToMarketPlacePage();
-        const widgetStatus = marketPlacePageSecondTime.getWidgewtStatus(customFieldsTestIdSelector);
+        const widgetStatus = marketPlacePageSecondTime.getWidgewtStatus(customDocumentTestIdSelector);
         widgetStatus.should('have.text', 'Feature active');
-        marketPlacePageSecondTime.disableFeature();
+        cy.go('back');
+        marketPlacePageSecondTime.disableFeature(customDocumentTestIdSelector);
         const settingsPlacePage = pageRouter.goToSettingsPage();
         settingsPlacePage.goToCustomDocumentsPage();
         cy.get('.mid-margin-bottom button').should('not.exist');
 
         const marketPlacePageThirdTime = pageRouter.goToMarketPlacePage();
-        marketPlacePageThirdTime.TurnOnWidget(customFieldsTestIdSelector);
+        marketPlacePageThirdTime.TurnOnWidget(customDocumentTestIdSelector);
         const marketPlacePageFourthTime = pageRouter.goToMarketPlacePage();
-        marketPlacePageFourthTime.getWidgewtStatus(customFieldsTestIdSelector);
+        marketPlacePageFourthTime.getWidgewtStatus(customDocumentTestIdSelector);
         widgetStatus.should('have.text', 'Feature active');
 
         const settingsPlacePageSecondTime = pageRouter.goToSettingsPage();
         settingsPlacePageSecondTime.goToCustomDocumentsPage();
         cy.url().should('include', 'root/documents');
         cy.get('.mid-margin-bottom button').should('exist');
-        });        
+        });  
+        
+        it.only('Validate Custom Fields activation',() =>{
+            const customFieldsTestIdSelector = 'customFields_feature_card';
+            const marketPlacePage = pageRouter.goToMarketPlacePage();
+            marketPlacePage.TurnOnWidget(customFieldsTestIdSelector);
+            const marketPlacePageSecondTime = pageRouter.goToMarketPlacePage();
+            const widgetStatus = marketPlacePageSecondTime.getWidgewtStatus(customFieldsTestIdSelector);
+            widgetStatus.should('have.text', 'Feature active');
+            const settingsPage = pageRouter.goToSettingsPage();
+            cy.validateTextAppearInElements(settingsPage.widgetsSelector, 'Custom Fields');
+
+            const marketPlacePageThirdTime = pageRouter.goToMarketPlacePage();
+            marketPlacePageSecondTime.disableFeature(customFieldsTestIdSelector);
+            cy.go('back');
+            const widgetStatusAfterDisabled = marketPlacePageThirdTime.getWidgewtStatus(customFieldsTestIdSelector);
+            widgetStatusAfterDisabled.should('have.text', 'Feature not active');
+            pageRouter.goToSettingsPage();
+            cy.validateTextIsNotAppearInElements(settingsPage.widgetsSelector, 'Custom Fields');
+
+            pageRouter.goToMarketPlacePage();
+            marketPlacePage.TurnOnWidget(customFieldsTestIdSelector);
+
+            });  
 }); 
     
 

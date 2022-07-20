@@ -11,7 +11,8 @@ declare global {
             openSettingsMenu(): void
             selectFromDropDown(by: string, element: string, valueToChoose: string): void
             validateTextAppearInElements(selector: string, textToFind: string): void
-            validateTextIsNotAppearInElements(loadTableLocator: string, selector: string, textToFind: string): void
+            validateTextIsNotAppearInElements(selector: string, textToFind: string): void
+            validateTextIsNotAppearInTableElements(loadTableLocator: string, selector: string, textToFind: string): void
             waitForTableLoaderSpinnerToDisappear(): void
         }
     }
@@ -69,7 +70,22 @@ Cypress.Commands.add('validateTextAppearInElements', (selector: string, textToFi
     })
 });
 
-Cypress.Commands.add('validateTextIsNotAppearInElements', (loadTableLocator: string ,selector: string, textToFind: string) => {
+Cypress.Commands.add('validateTextIsNotAppearInElements', (selector: string, textToFind: string) => {
+
+    let allElementsText = new Array<string>;
+    cy.get(selector, {timeout: 10000}).should('have.length.greaterThan', 1).each(($el, index, $list) => {
+        allElementsText.push($el.text());
+        if ($el.text() == textToFind) {
+            expect($el.text()).to.not.be.eq(textToFind);
+            return false;
+        } else if (index == $list.length - 1) {
+            console.log(`these are all the texts were in the elements and didnt equal to text: ${allElementsText}`)
+            expect($el.text()).to.not.be.eq(textToFind);
+        }
+    })
+});
+
+Cypress.Commands.add('validateTextIsNotAppearInTableElements', (loadTableLocator: string ,selector: string, textToFind: string) => {
     let allElementsText = new Array<string>;
     cy.get('div', {timeout: 10000}).should('be.visible', loadTableLocator,{timeout: 10000}).then(() => {
         cy.get(selector, {timeout: 10000}).each(($el, index, $list) => {

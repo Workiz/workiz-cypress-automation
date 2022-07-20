@@ -39,6 +39,6 @@ export class AllClientsPage {
     validateClientsTableNotContainsClientId(clientId: JQuery<HTMLElement>)
     {
         cy.waitForTableLoaderSpinnerToDisappear();
-        cy.validateTextIsNotAppearInElements('rt-tr-group pointer', '.rt-tbody .rt-td:nth-child(1)', clientId.toString());
+        cy.validateTextIsNotAppearInTableElements('rt-tr-group pointer', '.rt-tbody .rt-td:nth-child(1)', clientId.toString());
     }
 }
