@@ -151,13 +151,13 @@ describe('MarketPlace tests', () => {
     });  
 
     //Metro Areas Links
-    it.only('Setting up service areas link works properly in Metro Areas',() =>{
+    it('Setting up service areas link works properly in Metro Areas',() =>{
         let marketPlacePage = pageRouter.goToMarketPlacePage();
         marketPlacePage.goToSettingUpServiceAreasLink();
         cy.url().should('include', 'how-to-manage-multiple-service-areas');
     });  
 
-    it.only('Assigning a team by service area link works properly in Metro Areas',() =>{
+    it('Assigning a team by service area link works properly in Metro Areas',() =>{
         let marketPlacePage = pageRouter.goToMarketPlacePage();
         marketPlacePage.goToSettingAssigningTeamByServiceAreaLink();
         cy.url().should('include', 'filtering-field-techs-for-jobs-using-skills-and-service-areas');
