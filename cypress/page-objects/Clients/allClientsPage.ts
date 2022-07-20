@@ -50,6 +50,6 @@ export class AllClientsPage {
 
     validateChildClientContainsParentClient(childClientId: JQuery<HTMLElement>, parentClientName: JQuery<HTMLElement>)
     {
-        cy.get('.rt-tr-group.pointer .rt-td', {timeout: 10000}).filter(`:contains("${childClientId.toString()}")`).should('contain.text', parentClientName.toString());
+        cy.get('.rt-tr-group.pointer .rt-tr', {timeout: 10000}).filter(`:contains("${childClientId.toString()}")`).should('contain.text', parentClientName.toString());
     }
 }

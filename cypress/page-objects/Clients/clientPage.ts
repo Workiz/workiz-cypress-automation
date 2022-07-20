@@ -39,9 +39,8 @@ export class ClientPage {
     }
 
     setClientNameAsAlias(clientNameAlias: string) {
-        cy.get("[name='first_name']").then((element) => {
-            const clientName = element.text();
-            cy.wrap(clientName).as(`${clientNameAlias}`);
+        cy.get("[name='first_name']").invoke('attr', 'value').then((firstName) => {
+            cy.wrap(firstName).as(`${clientNameAlias}`);
         })
     }
 
@@ -178,9 +177,9 @@ export class ClientPage {
 
     setParentClient(parentClientName: JQuery<HTMLElement>){
         cy.scrollTo('bottom');
-        cy.get('.setParentClient-module__container___1IloT .sajInput.sajInput.sizef.icon-search').type(parentClientName.toString());
+        cy.get('.setParentClient-module__container___1IloT .sajInput.sajInput.sizef.icon-search').type(parentClientName.toString()).type(' ', {delay: 2000});
         cy.get('.relative .sajComplete .sajComplete-suggestion', {timeout: 10000}).click({force: true});
-        cy.get('button').contains('Save').click();
+        cy.get('.sbmt_bar .button.iFfWBzvt7RjPTzzA73jT ').contains('Save').click();
     }
 
     validateParentClientContainsChildClient(childClientName: JQuery<HTMLElement>)
