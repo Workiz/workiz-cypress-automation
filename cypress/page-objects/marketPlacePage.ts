@@ -1,18 +1,8 @@
 import { AngiPage } from "./angiIntegrationPage";
 
 export class MarketPlacePage {
-    
-    readonly VisibleWidgets = 'div.FeatureCard-module__title___1KBvT';
 
-    goToCustomFieldsByJobLinkFromCustomFieldsAddOnPage() {
-        cy.get("section[data-testid='customFields_feature_card']").click();
-        cy.get("a").contains('Custom fields by job type').invoke('removeAttr', 'target').click();   
-    }
-    
-    goToHowToCreateCutsomFieldsLinkFromCustomFieldsAddOnPage() {
-        cy.get("section[data-testid='customFields_feature_card']").click();
-        cy.get("a").contains('How to create custom fields for jobs and clients').invoke('removeAttr', 'target').click();
-    }
+    readonly VisibleWidgets = 'div.FeatureCard-module__title___1KBvT';
 
     public get getOnlyIntegrationType(): Cypress.Chainable<JQuery> {
         cy.get("span").contains('Integration').click();
@@ -62,4 +52,34 @@ export class MarketPlacePage {
          cy.get('section[data-testid="angi_feature_card"]').click();
          return new AngiPage;
      }
+
+     GoToMarketPlaceLink(widgetTestIdSelector: string, linkToBeClicked: string) {
+        cy.get(`section[data-testid='${widgetTestIdSelector}']`).click();
+        cy.get("a").contains(`${linkToBeClicked}`).invoke('removeAttr', 'target').click(); 
+    }
+    goToLedasWidget() {
+        cy.get("section[data-testid='leads_feature_card']").click();
+    }
+
+    goToCustomReportsLinkPage() {
+        cy.get("section[data-testid='customReports_feature_card']").click();
+    }
+  
+    goToWorkizServicePhonePage() {
+        cy.get("section[data-testid='workizPhone_feature_card']").click();
+    }
+
+    goToChatBot() {
+        cy.get("section[data-testid='chatbot_feature_card']").click();
+    }
+
+    goToMaliChamp() {
+        cy.get("section[data-testid='mailchimp_feature_card']").click();
+    }
+
+    OpenSearchKingModal(): Cypress.Chainable<JQuery> {
+        cy.get("section[data-testid='searchKings_feature_card']").click();
+        cy.get("article .button").click();
+        return cy.get(".modal-bg h4");
+    }
 }
