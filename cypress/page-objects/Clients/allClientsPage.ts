@@ -5,8 +5,9 @@ export class AllClientsPage {
 
     createClient(): ClientPage {
         let createClientPage = this.clickOnCreateClient();
-        createClientPage.fillClientsDetails();
-        return createClientPage.save();
+        let name = createClientPage.fillClientsDetails();
+        createClientPage.save();
+        return new ClientPage(name);
     }
 
     private clickOnCreateClient(): CreateClientPage {

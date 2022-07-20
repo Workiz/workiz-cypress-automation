@@ -15,16 +15,21 @@ export class ClientPage {
     private static clientCounter: number = 0;
     alias: string;
     private _note: string | undefined;
-    private _tag: string | undefined;
+    private readonly _firstName: string;
 
-    constructor() {
+    constructor(name: string) {
         this.alias = 'client' + ++ClientPage.clientCounter;
         this.setClientIdAsAlias(this.alias);
         this.alias = RandomFunctions.generateRandomAliasName(this.alias);
+        this._firstName = name;
     }
 
     get note(): Cypress.Chainable<JQuery> {
         return cy.get(".clientNotes-module__flexCol___2xSY_ div:nth-child(2)");
+    }
+
+    get name(): string {
+        return this._firstName;
     }
 
     setClientIdAsAlias(clientIdAlias: string) {

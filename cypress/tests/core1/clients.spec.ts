@@ -135,4 +135,10 @@ describe('Clients tests', () => {
         client.goToPropertyTab();
         cy.get('.rt-tr-group.pointer .rt-td:nth-child(1)').its('length').should('equal', 2);
     });
+
+    it('After setting client as parent he will contains sub client', () => {
+        let allClientsPage = pageRouter.goToClientsPage();
+        let parentClient = allClientsPage.createClient();
+        let childClient = allClientsPage.createClient()
+    });
 })
