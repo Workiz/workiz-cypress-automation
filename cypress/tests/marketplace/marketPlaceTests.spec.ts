@@ -219,6 +219,19 @@ describe('MarketPlace tests', () => {
         cy.url().should('include', 'name=mailchimp');
     });
 
+    //angi Links
+    it('Using Connecting to Thumbtack link works properly',() =>{
+        let marketPlacePage = pageRouter.goToMarketPlacePage();
+        marketPlacePage.GoToMarketPlaceLink('angi_feature_card', 'How to land more jobs using the Angi Leads integration');
+        cy.url().should('include', 'how-to-land-more-jobs-using-the-angi-leads-homeadvisor-pro-integration');
+    });
+
+    it('Using Connecting to Thumbtack link works properly',() =>{
+        let marketPlacePage = pageRouter.goToMarketPlacePage();
+        marketPlacePage.GoToMarketPlaceLink('angi_feature_card', 'How to find your Angi Leads ID');
+        cy.url().should('include', 'how-to-find-your-angi-leads-homeadvisor-pro-id');
+    });
+
     //Thumbteck Links
     it('Using Connecting to Thumbtack link works properly',() =>{
         let marketPlacePage = pageRouter.goToMarketPlacePage();
@@ -638,7 +651,7 @@ describe('MarketPlace tests', () => {
         cy.url().should('include', 'thumbtack');
     });
 
-    it.only('Validate Mailchimp activation',() =>{
+    it('Validate Mailchimp activation',() =>{
         const mailchimpTestIdSelector = 'mailchimp_feature_card';
         const marketPlacePage = pageRouter.goToMarketPlacePage();
         marketPlacePage.TurnOnWidget(mailchimpTestIdSelector);
@@ -657,6 +670,40 @@ describe('MarketPlace tests', () => {
         marketPlacePage.clickOnLinkToPage();
         cy.url().should('include', 'root/mailchimp');
         cy.get('h2.thin').should('have.text', 'Mailchimp Integration');
+    });
+
+    it('Validate Calendar sync activation',() =>{
+        const calanderSyncTestIdSelector = 'calSync_feature_card';
+        const marketPlacePage = pageRouter.goToMarketPlacePage();
+        marketPlacePage.TurnOnWidget(calanderSyncTestIdSelector);
+        const marketPlacePageSecondTime = pageRouter.goToMarketPlacePage();
+        const widgetStatus = marketPlacePageSecondTime.getWidgewtStatus(calanderSyncTestIdSelector);
+        widgetStatus.should('have.text', 'Feature active');
+
+        const marketPlacePageThirdTime = pageRouter.goToMarketPlacePage();
+        marketPlacePageSecondTime.disableFeature(calanderSyncTestIdSelector);
+        cy.go('back');
+        const widgetStatusAfterDisabled = marketPlacePageThirdTime.getWidgewtStatus(calanderSyncTestIdSelector);
+        widgetStatusAfterDisabled.should('have.text', 'Feature not active');
+      
+        pageRouter.goToMarketPlacePage();
+        marketPlacePage.TurnOnWidget(calanderSyncTestIdSelector);
+        marketPlacePage.clickOnLinkToPage();
+        cy.url().should('include', 'calendarsync');
+        cy.get('h2.thin').should('have.text', 'Calendar');
+    });
+
+    it('Validate Zapier activation',() =>{
+        pageRouter.goToMarketPlacePage();
+        cy.get("section[data-testid='zapier_feature_card']").click();
+        cy.get('h4').should('contain.text', 'You are connected to Zapier');
+        
+    });
+
+    it('Validate Zapier activation',() =>{
+        pageRouter.goToMarketPlacePage();
+        cy.get("section[data-testid='zapier_feature_card']").click();
+        cy.get('h4').should('contain.text', 'You are connected to Zapier');
         
     });
 }); 
