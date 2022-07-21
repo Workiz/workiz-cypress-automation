@@ -1,6 +1,7 @@
 import { LogInPage } from "../../page-objects/logInPage";
 import { PageRouter } from "../../page-objects/router";
 import { MarketPlaceLabels } from "../../infrastructure/marketPlaceLabels";
+import { TeamPage } from "../../page-objects/teamPage";
 
 describe('MarketPlace tests', () => {
     let pageRouter: PageRouter;
@@ -497,7 +498,7 @@ describe('MarketPlace tests', () => {
         cy.get('#comanies_tbl_wrapper', {timeout: 10000}).should('be.visible');
     }); 
 
-    it.only('Validate Inventory activation',() =>{
+    it('Validate Inventory activation',() =>{
         const inventoryTestIdSelector = 'inventory_feature_card';
         const marketPlacePage = pageRouter.goToMarketPlacePage();
         marketPlacePage.TurnOnWidget(inventoryTestIdSelector);
@@ -521,7 +522,7 @@ describe('MarketPlace tests', () => {
         cy.get('._title').should('have.text', 'Inventory');
     }); 
 
-    it.only('Validate Chatbot activation',() =>{
+    it('Validate Chatbot activation',() =>{
         const chatBotTestIdSelector = 'chatbot_feature_card';
         const marketPlacePage = pageRouter.goToMarketPlacePage();
         marketPlacePage.TurnOnWidget(chatBotTestIdSelector);
@@ -544,8 +545,123 @@ describe('MarketPlace tests', () => {
         marketPlacePage.clickOnLinkToPage();
         cy.url().should('include', 'root/chatbotSettings');
         cy.get('h2.thin').should('have.text', 'Chatbot');
+    });
+    
+    it('Validate Subconstractor activation',() =>{
+        const subConstractorTestIdSelector = 'subcontractors_feature_card';
+        const marketPlacePage = pageRouter.goToMarketPlacePage();
+        marketPlacePage.TurnOnWidget(subConstractorTestIdSelector);
+        const marketPlacePageSecondTime = pageRouter.goToMarketPlacePage();
+        const widgetStatus = marketPlacePageSecondTime.getWidgewtStatus(subConstractorTestIdSelector);
+        widgetStatus.should('have.text', 'Feature active');
+
+        const marketPlacePageThirdTime = pageRouter.goToMarketPlacePage();
+        marketPlacePageSecondTime.disableFeature(subConstractorTestIdSelector);
+        cy.go('back');
+        const widgetStatusAfterDisabled = marketPlacePageThirdTime.getWidgewtStatus(subConstractorTestIdSelector);
+        widgetStatusAfterDisabled.should('have.text', 'Feature not active');
+        const teamPage = pageRouter.goToTeamPage();
+        teamPage.clickAddNewUser();
+        cy.get("div[name='is_login']").should('not.exist');
+      
+        pageRouter.goToMarketPlacePage();
+        marketPlacePage.TurnOnWidget(subConstractorTestIdSelector);
+        marketPlacePage.clickOnLinkToPage();
+        cy.url().should('include', 'root/team');
+        teamPage.clickAddNewUser();
+        cy.validateTextAppearInElements("div[name='is_login']", 'Subcontractor');
     }); 
+
+    it('Validate Api for developers activation',() =>{
+        const apiForDeveloperTestIdSelector = 'developer_feature_card';
+        const marketPlacePage = pageRouter.goToMarketPlacePage();
+        marketPlacePage.TurnOnWidget(apiForDeveloperTestIdSelector);
+        const marketPlacePageSecondTime = pageRouter.goToMarketPlacePage();
+        const widgetStatus = marketPlacePageSecondTime.getWidgewtStatus(apiForDeveloperTestIdSelector);
+        widgetStatus.should('have.text', 'Feature active');
+        const settingsPage = pageRouter.goToSettingsPage();
+        cy.validateTextAppearInElements(settingsPage.widgetsSelector, 'Developer');
+
+        const marketPlacePageThirdTime = pageRouter.goToMarketPlacePage();
+        marketPlacePageSecondTime.disableFeature(apiForDeveloperTestIdSelector);
+        cy.go('back');
+        const widgetStatusAfterDisabled = marketPlacePageThirdTime.getWidgewtStatus(apiForDeveloperTestIdSelector);
+        widgetStatusAfterDisabled.should('have.text', 'Feature not active');
+        const settingsPageAfterDisabled = pageRouter.goToSettingsPage();
+        cy.validateTextIsNotAppearInElements(settingsPageAfterDisabled.widgetsSelector, 'Developer');
+      
+        pageRouter.goToMarketPlacePage();
+        marketPlacePage.TurnOnWidget(apiForDeveloperTestIdSelector);
+        marketPlacePage.clickOnLinkToPage();
+        cy.url().should('include', 'root/developer');
+        cy.get('h2.thin').should('have.text', 'Developer');
+    });
+
+    it('Validate Google local Service activation',() =>{
+        const googleLocalServiceTestIdSelector = 'googleLocal_feature_card';
+        const marketPlacePage = pageRouter.goToMarketPlacePage();
+        marketPlacePage.TurnOnWidget(googleLocalServiceTestIdSelector);
+        const marketPlacePageSecondTime = pageRouter.goToMarketPlacePage();
+        const widgetStatus = marketPlacePageSecondTime.getWidgewtStatus(googleLocalServiceTestIdSelector);
+        widgetStatus.should('have.text', 'Feature active');
+
+        const marketPlacePageThirdTime = pageRouter.goToMarketPlacePage();
+        marketPlacePageSecondTime.disableFeature(googleLocalServiceTestIdSelector);
+        cy.go('back');
+        const widgetStatusAfterDisabled = marketPlacePageThirdTime.getWidgewtStatus(googleLocalServiceTestIdSelector);
+        widgetStatusAfterDisabled.should('have.text', 'Feature not active');
+      
+        pageRouter.goToMarketPlacePage();
+        marketPlacePage.TurnOnWidget(googleLocalServiceTestIdSelector);
+        marketPlacePage.clickOnLinkToPage();
+        cy.url().should('include', 'root/googleLocal');
+        cy.get('h2.thin').should('have.text', 'Local Services Ads');
+    });
+
+    it('Validate Thumbtack activation',() =>{
+        const thumbtackTestIdSelector = 'thumbtack_feature_card';
+        const marketPlacePage = pageRouter.goToMarketPlacePage();
+        marketPlacePage.TurnOnWidget(thumbtackTestIdSelector);
+        const marketPlacePageSecondTime = pageRouter.goToMarketPlacePage();
+        const widgetStatus = marketPlacePageSecondTime.getWidgewtStatus(thumbtackTestIdSelector);
+        widgetStatus.should('have.text', 'Feature active');
+
+        const marketPlacePageThirdTime = pageRouter.goToMarketPlacePage();
+        marketPlacePageSecondTime.disableFeature(thumbtackTestIdSelector);
+        cy.go('back');
+        const widgetStatusAfterDisabled = marketPlacePageThirdTime.getWidgewtStatus(thumbtackTestIdSelector);
+        widgetStatusAfterDisabled.should('have.text', 'Feature not active');
+      
+        pageRouter.goToMarketPlacePage();
+        marketPlacePage.TurnOnWidget(thumbtackTestIdSelector);
+        marketPlacePage.clickOnLinkToPage();
+        cy.url().should('include', 'thumbtack');
+    });
+
+    it.only('Validate Mailchimp activation',() =>{
+        const mailchimpTestIdSelector = 'mailchimp_feature_card';
+        const marketPlacePage = pageRouter.goToMarketPlacePage();
+        marketPlacePage.TurnOnWidget(mailchimpTestIdSelector);
+        const marketPlacePageSecondTime = pageRouter.goToMarketPlacePage();
+        const widgetStatus = marketPlacePageSecondTime.getWidgewtStatus(mailchimpTestIdSelector);
+        widgetStatus.should('have.text', 'Feature active');
+
+        const marketPlacePageThirdTime = pageRouter.goToMarketPlacePage();
+        marketPlacePageSecondTime.disableFeature(mailchimpTestIdSelector);
+        cy.go('back');
+        const widgetStatusAfterDisabled = marketPlacePageThirdTime.getWidgewtStatus(mailchimpTestIdSelector);
+        widgetStatusAfterDisabled.should('have.text', 'Feature not active');
+      
+        pageRouter.goToMarketPlacePage();
+        marketPlacePage.TurnOnWidget(mailchimpTestIdSelector);
+        marketPlacePage.clickOnLinkToPage();
+        cy.url().should('include', 'root/mailchimp');
+        cy.get('h2.thin').should('have.text', 'Mailchimp Integration');
+        
+    });
 }); 
+
+
     
 
 
