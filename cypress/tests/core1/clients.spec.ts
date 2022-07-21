@@ -126,7 +126,8 @@ describe('Clients tests', () => {
         client.isContactExistInClient(name);
     });
 
-    it('After adding property to Client it will appear in client properties', () => {let name = RandomFunctions.generateRandomString(7);
+    it('After adding property to Client it will appear in client properties', () => {
+        let name = RandomFunctions.generateRandomString(7);
         let allClientsPage = pageRouter.goToClientsPage();
         let client = allClientsPage.createClient();
         client.addProperty();
@@ -135,7 +136,7 @@ describe('Clients tests', () => {
         cy.get('.rt-tr-group.pointer .rt-td:nth-child(1)').its('length').should('equal', 2);
     });
 
-    it.only('After setting client as parent he will contains sub client', () => {
+    it('After setting client as parent he will contains sub client', () => {
         let allClientsPage = pageRouter.goToClientsPage();
         let parentClient = allClientsPage.createClient();
         allClientsPage = pageRouter.goToClientsPage();
