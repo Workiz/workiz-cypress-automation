@@ -1,7 +1,6 @@
 import { LogInPage } from "../../page-objects/logInPage";
 import { PageRouter } from "../../page-objects/router";
 import { MarketPlaceLabels } from "../../infrastructure/marketPlaceLabels";
-import { contains } from "cypress/types/jquery";
 
 describe('MarketPlace tests', () => {
     let pageRouter: PageRouter;
@@ -402,7 +401,7 @@ describe('MarketPlace tests', () => {
         cy.get('#mapid').should('be.visible');
     }); 
 
-    it.only('Validate Leads activation',() =>{
+    it('Validate Leads activation',() =>{
         const leadsTestIdSelector = 'leads_feature_card';
         const marketPlacePage = pageRouter.goToMarketPlacePage();
         marketPlacePage.TurnOnWidget(leadsTestIdSelector);
@@ -428,6 +427,123 @@ describe('MarketPlace tests', () => {
         marketPlacePage.TurnOnWidget(leadsTestIdSelector);
         marketPlacePage.clickOnLinkToPage();
         cy.url().should('include', 'root/leads');
+    }); 
+
+    it('Validate task activation',() =>{
+        const tasksTestIdSelector = 'tasks_feature_card';
+        const marketPlacePage = pageRouter.goToMarketPlacePage();
+        marketPlacePage.TurnOnWidget(tasksTestIdSelector);
+        const marketPlacePageSecondTime = pageRouter.goToMarketPlacePage();
+        const widgetStatus = marketPlacePageSecondTime.getWidgewtStatus(tasksTestIdSelector);
+        widgetStatus.should('have.text', 'Feature active');
+
+        const marketPlacePageThirdTime = pageRouter.goToMarketPlacePage();
+        marketPlacePageSecondTime.disableFeature(tasksTestIdSelector);
+        cy.go('back');
+        const widgetStatusAfterDisabled = marketPlacePageThirdTime.getWidgewtStatus(tasksTestIdSelector);
+        widgetStatusAfterDisabled.should('have.text', 'Feature not active');
+
+        pageRouter.goToMarketPlacePage();
+        marketPlacePage.TurnOnWidget(tasksTestIdSelector);
+    }); 
+
+    it('Validate Metro Area activation',() =>{
+        const metroAreaTestIdSelector = 'metros_feature_card';
+        const marketPlacePage = pageRouter.goToMarketPlacePage();
+        marketPlacePage.TurnOnWidget(metroAreaTestIdSelector);
+        const marketPlacePageSecondTime = pageRouter.goToMarketPlacePage();
+        const widgetStatus = marketPlacePageSecondTime.getWidgewtStatus(metroAreaTestIdSelector);
+        widgetStatus.should('have.text', 'Feature active');
+        const settingsPage = pageRouter.goToSettingsPage();
+        cy.validateTextAppearInElements(settingsPage.widgetsSelector, 'Metro Areas');
+
+        const marketPlacePageThirdTime = pageRouter.goToMarketPlacePage();
+        marketPlacePageSecondTime.disableFeature(metroAreaTestIdSelector);
+        cy.go('back');
+        const widgetStatusAfterDisabled = marketPlacePageThirdTime.getWidgewtStatus(metroAreaTestIdSelector);
+        widgetStatusAfterDisabled.should('have.text', 'Feature not active');
+        const settingsPageAfterDisabled = pageRouter.goToSettingsPage();
+        cy.validateTextIsNotAppearInElements(settingsPageAfterDisabled.widgetsSelector, 'Metro Areas');
+
+        pageRouter.goToMarketPlacePage();
+        marketPlacePage.TurnOnWidget(metroAreaTestIdSelector);
+        marketPlacePage.clickOnLinkToPage();
+        cy.url().should('include', 'root/metro_areas');
+        cy.get('h2.thin').should('have.text', 'Metro Areas');
+    }); 
+
+    it('Validate External Companies activation',() =>{
+        const externalCompanyTestIdSelector = 'external_feature_card';
+        const marketPlacePage = pageRouter.goToMarketPlacePage();
+        marketPlacePage.TurnOnWidget(externalCompanyTestIdSelector);
+        const marketPlacePageSecondTime = pageRouter.goToMarketPlacePage();
+        const widgetStatus = marketPlacePageSecondTime.getWidgewtStatus(externalCompanyTestIdSelector);
+        widgetStatus.should('have.text', 'Feature active');
+        const settingsPage = pageRouter.goToSettingsPage();
+        cy.validateTextAppearInElements(settingsPage.widgetsSelector, 'External Companies');
+
+        const marketPlacePageThirdTime = pageRouter.goToMarketPlacePage();
+        marketPlacePageSecondTime.disableFeature(externalCompanyTestIdSelector);
+        cy.go('back');
+        const widgetStatusAfterDisabled = marketPlacePageThirdTime.getWidgewtStatus(externalCompanyTestIdSelector);
+        widgetStatusAfterDisabled.should('have.text', 'Feature not active');
+        const settingsPageAfterDisabled = pageRouter.goToSettingsPage();
+        cy.validateTextIsNotAppearInElements(settingsPageAfterDisabled.widgetsSelector, 'External Companies');
+
+        pageRouter.goToMarketPlacePage();
+        marketPlacePage.TurnOnWidget(externalCompanyTestIdSelector);
+        marketPlacePage.clickOnLinkToPage();
+        cy.url().should('include', 'companies');
+        cy.get('#comanies_tbl_wrapper', {timeout: 10000}).should('be.visible');
+    }); 
+
+    it.only('Validate Inventory activation',() =>{
+        const inventoryTestIdSelector = 'inventory_feature_card';
+        const marketPlacePage = pageRouter.goToMarketPlacePage();
+        marketPlacePage.TurnOnWidget(inventoryTestIdSelector);
+        const marketPlacePageSecondTime = pageRouter.goToMarketPlacePage();
+        const widgetStatus = marketPlacePageSecondTime.getWidgewtStatus(inventoryTestIdSelector);
+        widgetStatus.should('have.text', 'Feature active');
+        cy.validateTextAppearInElements('#big-menu li', 'Inventory');
+
+        const marketPlacePageThirdTime = pageRouter.goToMarketPlacePage();
+        marketPlacePageSecondTime.disableFeature(inventoryTestIdSelector);
+        cy.go('back');
+        const widgetStatusAfterDisabled = marketPlacePageThirdTime.getWidgewtStatus(inventoryTestIdSelector);
+        widgetStatusAfterDisabled.should('have.text', 'Feature not active');
+        cy.reload();
+        cy.validateTextIsNotAppearInElements('#big-menu li', 'Inventory');
+
+        pageRouter.goToMarketPlacePage();
+        marketPlacePage.TurnOnWidget(inventoryTestIdSelector);
+        marketPlacePage.clickOnLinkToPage();
+        cy.url().should('include', 'root/inventory');
+        cy.get('._title').should('have.text', 'Inventory');
+    }); 
+
+    it.only('Validate Chatbot activation',() =>{
+        const chatBotTestIdSelector = 'chatbot_feature_card';
+        const marketPlacePage = pageRouter.goToMarketPlacePage();
+        marketPlacePage.TurnOnWidget(chatBotTestIdSelector);
+        const marketPlacePageSecondTime = pageRouter.goToMarketPlacePage();
+        const widgetStatus = marketPlacePageSecondTime.getWidgewtStatus(chatBotTestIdSelector);
+        widgetStatus.should('have.text', 'Feature active');
+        const settingsPage = pageRouter.goToSettingsPage();
+        cy.validateTextAppearInElements(settingsPage.widgetsSelector, 'Chatbot Settings');
+
+        const marketPlacePageThirdTime = pageRouter.goToMarketPlacePage();
+        marketPlacePageSecondTime.disableFeature(chatBotTestIdSelector);
+        cy.go('back');
+        const widgetStatusAfterDisabled = marketPlacePageThirdTime.getWidgewtStatus(chatBotTestIdSelector);
+        widgetStatusAfterDisabled.should('have.text', 'Feature not active');
+        const settingsPageAfterDisabled = pageRouter.goToSettingsPage();
+        cy.validateTextIsNotAppearInElements(settingsPageAfterDisabled.widgetsSelector, 'Chatbot Settings');
+      
+        pageRouter.goToMarketPlacePage();
+        marketPlacePage.TurnOnWidget(chatBotTestIdSelector);
+        marketPlacePage.clickOnLinkToPage();
+        cy.url().should('include', 'root/chatbotSettings');
+        cy.get('h2.thin').should('have.text', 'Chatbot');
     }); 
 }); 
     
