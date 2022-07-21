@@ -41,4 +41,15 @@ export class AllClientsPage {
         cy.waitForTableLoaderSpinnerToDisappear();
         cy.validateTextIsNotAppearInTableElements('rt-tr-group pointer', '.rt-tbody .rt-td:nth-child(1)', clientId.toString());
     }
+
+    goToClient(clientId: JQuery<HTMLElement>): ClientPage
+    {
+        cy.get('.rt-tr-group.pointer .rt-td', {timeout: 10000}).filter(`:contains("${clientId.toString()}")`).click();
+        return new ClientPage();
+    }
+
+    validateChildClientContainsParentClient(childClientId: JQuery<HTMLElement>, parentClientName: JQuery<HTMLElement>)
+    {
+        cy.get('.rt-tr-group.pointer .rt-tr', {timeout: 10000}).filter(`:contains("${childClientId.toString()}")`).should('contain.text', parentClientName.toString());
+    }
 }

@@ -16,11 +16,15 @@ export class ClientPage {
     alias: string;
     private _note: string | undefined;
     private _tag: string | undefined;
+    firstNameAlias: string;
 
     constructor() {
         this.alias = 'client' + ++ClientPage.clientCounter;
         this.setClientIdAsAlias(this.alias);
         this.alias = RandomFunctions.generateRandomAliasName(this.alias);
+        this.firstNameAlias = 'clientName' + ++ClientPage.clientCounter;
+        this.setClientNameAsAlias(this.firstNameAlias);
+        this.firstNameAlias = RandomFunctions.generateRandomAliasName(this.firstNameAlias);
     }
 
     get note(): Cypress.Chainable<JQuery> {
@@ -32,6 +36,12 @@ export class ClientPage {
             const clientId = fullUrl.split('/')[5];
             cy.wrap(clientId).as(`${clientIdAlias}`);
         });
+    }
+
+    setClientNameAsAlias(clientNameAlias: string) {
+        cy.get("[name='first_name']").invoke('attr', 'value').then((firstName) => {
+            cy.wrap(firstName).as(`${clientNameAlias}`);
+        })
     }
 
     private ClickActionMenu() {
@@ -157,7 +167,25 @@ export class ClientPage {
         cy.get('._singleTab ').contains('Properties').click();
     }
 
+    goToSubClientsTab(){
+        cy.get('._singleTab:nth-child(9)').should('contain.text','Sub clients').click();
+    }
+
     DeleteClient(): AllClientsPage{
         return this.ClickDeleteClient();
+    }
+
+    setParentClient(parentClientName: JQuery<HTMLElement>){
+        cy.scrollTo('bottom');
+        cy.get('.setParentClient-module__container___1IloT .sajInput.sajInput.sizef.icon-search').type(parentClientName.toString()).type(' ', {delay: 2000}).then(() => {
+            cy.get('.sajComplete-suggestion').should('have.length', 1).click();
+            cy.get('.sbmt_bar .button.iFfWBzvt7RjPTzzA73jT ').contains('Save').click();
+        });
+    }
+
+    validateParentClientContainsChildClient(childClientName: JQuery<HTMLElement>)
+    {
+        this.goToSubClientsTab();
+        cy.validateTextAppearInElements('._selected .rt-td ._clearLink', childClientName.toString());
     }
 }
