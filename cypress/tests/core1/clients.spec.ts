@@ -153,7 +153,30 @@ describe('Clients tests', () => {
             cy.get(childClient.firstNameAlias).then((childClientName) => {
                 parentClient.validateParentClientContainsChildClient(childClientName);
             });
+        });
+    });
 
+    it.only('AfterDeletingSubClientParentHeWilNotAppearAsParent', () => {
+        let allClientsPage = pageRouter.goToClientsPage();
+        let parentClient = allClientsPage.createClient();
+        allClientsPage = pageRouter.goToClientsPage();
+        let childClient = allClientsPage.createClient()
+        cy.get(parentClient.firstNameAlias).then((parentClientName) =>{
+            childClient.setParentClient(parentClientName);
+            allClientsPage = pageRouter.goToClientsPage();
+            cy.get(childClient.alias).then((childClientId) => {
+                allClientsPage.validateChildClientContainsParentClient(childClientId, parentClientName);
+                let childClient =allClientsPage.goToClient(childClientId);
+                childClient.deleteParentClient();
+                allClientsPage = pageRouter.goToClientsPage();
+                allClientsPage.validateChildClientDontContainsParentClient(childClientId, parentClientName);
+            });
+        });
+        cy.get(parentClient.alias).then((parentClientId) => {
+            let parentClient =allClientsPage.goToClient(parentClientId);
+            cy.get(childClient.firstNameAlias).then((childClientName) => {
+                parentClient.validateParentClientDontContainsChildClient(childClientName);
+            });
         });
     });
 })

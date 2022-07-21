@@ -183,9 +183,21 @@ export class ClientPage {
         });
     }
 
+    deleteParentClient(){
+        cy.scrollTo('bottom');
+        cy.get('.clear_parent_client').click()
+        cy.get('button').contains('Confirm').click();
+    }
+
     validateParentClientContainsChildClient(childClientName: JQuery<HTMLElement>)
     {
         this.goToSubClientsTab();
         cy.validateTextAppearInElements('._selected .rt-td ._clearLink', childClientName.toString());
+    }
+
+    validateParentClientDontContainsChildClient(childClientName: JQuery<HTMLElement>)
+    {
+        this.goToSubClientsTab();
+        cy.validateTextIsNotAppearInTableElements('._selected .ReactTable', '._selected .rt-td ._clearLink', childClientName.toString());
     }
 }
