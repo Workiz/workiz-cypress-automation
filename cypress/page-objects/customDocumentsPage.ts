@@ -17,6 +17,7 @@ export class CustomDocumentsPage {
     }
 
     chooseAndSaveTemplate(templateName: string) {
+        cy.get('._dsTemplate.card').should('have.length', 9);
         cy.get('h4.no-margin-bottom').contains(templateName).click();
         cy.get('.rrt-button.rrt-ok-btn.toastr-control').click();
     }
@@ -26,7 +27,9 @@ export class CustomDocumentsPage {
     }
 
     clickOnSaveButton() {
-        cy.get('.button').contains('Save').click();
+        //Only this is working, clining 2 times. if u will remove one line test will faild
+        cy.get('.margin-right').contains('Save').click();
+        cy.get('.margin-right').contains('Save').click();
     }
 
     isDocumentsPageContainsDocumentName(documentName: string) {
