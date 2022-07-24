@@ -199,4 +199,11 @@ export class ClientPage {
     {
         cy.get(this.subClientLocator).should('not.exist','Sub clients');
     }
+
+    createJobForChildClientFromSubClientTab(childClientName: JQuery<HTMLElement>)
+    {
+        this.goToSubClientsTab();
+        cy.get('._selected .rt-tr-group', {timeout: 10000}).filter(`:contains("${childClientName.toString()}")`).find("[data-testid='pop-menu-span']").click();
+        cy.get('a').contains('Create Job').click();
+    }
 }
