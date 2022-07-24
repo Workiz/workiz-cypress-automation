@@ -14,4 +14,10 @@ export class AllJobsPage {
             cy.get('div').contains('Job ID').click();
         }
     }
+
+    validateJobExistByJobIdAndClient(jobId: JQuery<HTMLElement>, clientName: JQuery<HTMLElement>)
+    {
+        this.sortJobTableById(false);
+        cy.get('.rt-tr-group.pointer .rt-tr', {timeout: 10000}).filter(`:contains("${jobId.toString()}")`).should('contain.text', clientName.toString());
+    }
 }

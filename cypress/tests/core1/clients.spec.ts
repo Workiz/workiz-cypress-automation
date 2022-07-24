@@ -185,23 +185,18 @@ describe('Clients tests', () => {
         let parentClient = allClientsPage.createClient();
         allClientsPage = pageRouter.goToClientsPage();
         let childClient = allClientsPage.createClient();
-
         cy.get(parentClient.firstNameAlias).then((parentClientName) =>{
             childClient.setParentClient(parentClientName);
-
-            // cy.get(childClient.alias).then((childClientId) => {
-            //     allClientsPage.validateChildClientContainsParentClient(childClientId, parentClientName);
-            //     let childClient =allClientsPage.goToClient(childClientId);
-            //     childClient.deleteParentClient();
-            //     allClientsPage = pageRouter.goToClientsPage();
-            //     allClientsPage.validateChildClientDontContainsParentClient(childClientId, parentClientName);
-            // });
         });
         allClientsPage = pageRouter.goToClientsPage();
         cy.get(parentClient.alias).then((parentClientId) => {
             let parentClient =allClientsPage.goToClient(parentClientId);
             cy.get(childClient.firstNameAlias).then((childClientName) => {
-                parentClient.createJobForChildClientFromSubClientTab(childClientName);
+               let job = parentClient.createJobForChildClientFromSubClientTab(childClientName);
+                cy.get(job.alias).then((jobId) => {
+                    let allJobsPage = pageRouter.goToJobsPage();
+                    allJobsPage.validateJobExistByJobIdAndClient(jobId, childClientName)
+                });
             });
         });
     });
