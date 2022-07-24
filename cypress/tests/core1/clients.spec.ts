@@ -156,7 +156,7 @@ describe('Clients tests', () => {
         });
     });
 
-    it.only('AfterDeletingSubClientParentHeWilNotAppearAsParent', () => {
+    it('AfterDeletingSubClientParentHeWilNotAppearAsParent', () => {
         let allClientsPage = pageRouter.goToClientsPage();
         let parentClient = allClientsPage.createClient();
         allClientsPage = pageRouter.goToClientsPage();
