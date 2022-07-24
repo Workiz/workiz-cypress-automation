@@ -52,4 +52,9 @@ export class AllClientsPage {
     {
         cy.get('.rt-tr-group.pointer .rt-tr', {timeout: 10000}).filter(`:contains("${childClientId.toString()}")`).should('contain.text', parentClientName.toString());
     }
+
+    validateChildClientDontContainsParentClient(childClientId: JQuery<HTMLElement>, parentClientName: JQuery<HTMLElement>)
+    {
+        cy.get('.rt-tr-group.pointer .rt-tr', {timeout: 10000}).filter(`:contains("${childClientId.toString()}")`).should('not.contain.text', parentClientName.toString());
+    }
 }

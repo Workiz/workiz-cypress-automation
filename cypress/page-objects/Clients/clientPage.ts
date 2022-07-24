@@ -11,7 +11,7 @@ import {LeadPage} from "../Lead/LeadPage";
 import { AllClientsPage } from "./allClientsPage";
 
 export class ClientPage {
-
+    readonly subClientLocator: string = "._singleTab:nth-child(9)";
     private static clientCounter: number = 0;
     alias: string;
     private _note: string | undefined;
@@ -168,7 +168,7 @@ export class ClientPage {
     }
 
     goToSubClientsTab(){
-        cy.get('._singleTab:nth-child(9)').should('contain.text','Sub clients').click();
+        cy.get(this.subClientLocator).should('contain.text','Sub clients').click();
     }
 
     DeleteClient(): AllClientsPage{
@@ -183,9 +183,20 @@ export class ClientPage {
         });
     }
 
+    deleteParentClient(){
+        cy.scrollTo('bottom');
+        cy.get('.clear_parent_client').click()
+        cy.get('button').contains('Confirm').click();
+    }
+
     validateParentClientContainsChildClient(childClientName: JQuery<HTMLElement>)
     {
         this.goToSubClientsTab();
         cy.validateTextAppearInElements('._selected .rt-td ._clearLink', childClientName.toString());
+    }
+
+    validateParentClientDontContainsChildClient(childClientName: JQuery<HTMLElement>)
+    {
+        cy.get(this.subClientLocator).should('not.exist','Sub clients');
     }
 }
