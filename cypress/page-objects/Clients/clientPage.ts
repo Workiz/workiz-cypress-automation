@@ -188,7 +188,7 @@ export class ClientPage {
     }
 
     setParentClient(parentClientName: JQuery<HTMLElement>){
-        cy.scrollTo('bottom');
+        cy.scrollTo(0,200);
         cy.get('.setParentClient-module__container___1IloT .sajInput.sajInput.sizef.icon-search').type(parentClientName.toString()).type(' ', {delay: 2000}).then(() => {
             cy.get('.sajComplete-suggestion').should('have.length', 1).click();
             cy.get('.sbmt_bar .button.iFfWBzvt7RjPTzzA73jT ').contains('Save').click();
@@ -196,7 +196,7 @@ export class ClientPage {
     }
 
     deleteParentClient(){
-        cy.scrollTo('bottom');
+        cy.scrollTo(0,200);
         cy.get('.clear_parent_client').click()
         cy.get('button').contains('Confirm').click();
     }
@@ -247,7 +247,7 @@ export class ClientPage {
 
     private createLeadForSubClient(childClientName: JQuery<HTMLElement>): CreateLeadPage
     {
-        cy.get('._selected .rt-tr-group', {timeout: 10000}).filter(`:contains("${childClientName.toString()}")`).find("[data-testid='pop-menu-span']").click();
+        this.chooseSubClient(childClientName);
         this.chooseCreateLead();
         return new CreateLeadPage();
     }
