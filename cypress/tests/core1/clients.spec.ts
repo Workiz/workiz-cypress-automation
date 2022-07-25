@@ -160,7 +160,7 @@ describe('Clients tests', () => {
         let allClientsPage = pageRouter.goToClientsPage();
         let parentClient = allClientsPage.createClient();
         allClientsPage = pageRouter.goToClientsPage();
-        let childClient = allClientsPage.createClient()
+        let childClient = allClientsPage.createClient();
         cy.get(parentClient.firstNameAlias).then((parentClientName) =>{
             childClient.setParentClient(parentClientName);
             allClientsPage = pageRouter.goToClientsPage();
@@ -176,6 +176,27 @@ describe('Clients tests', () => {
             let parentClient =allClientsPage.goToClient(parentClientId);
             cy.get(childClient.firstNameAlias).then((childClientName) => {
                 parentClient.validateParentClientDontContainsChildClient(childClientName);
+            });
+        });
+    });
+
+    it('Creating job for sub client inside parent will create it as it should', () => {
+        let allClientsPage = pageRouter.goToClientsPage();
+        let parentClient = allClientsPage.createClient();
+        allClientsPage = pageRouter.goToClientsPage();
+        let childClient = allClientsPage.createClient();
+        cy.get(parentClient.firstNameAlias).then((parentClientName) =>{
+            childClient.setParentClient(parentClientName);
+        });
+        allClientsPage = pageRouter.goToClientsPage();
+        cy.get(parentClient.alias).then((parentClientId) => {
+            let parentClient =allClientsPage.goToClient(parentClientId);
+            cy.get(childClient.firstNameAlias).then((childClientName) => {
+               let job = parentClient.createJobForChildClientFromSubClientTab(childClientName);
+                cy.get(job.alias).then((jobId) => {
+                    let allJobsPage = pageRouter.goToJobsPage();
+                    allJobsPage.validateJobExistByJobIdAndClient(jobId, childClientName)
+                });
             });
         });
     });
