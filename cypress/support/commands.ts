@@ -15,6 +15,7 @@ declare global {
             validateTextIsNotAppearInTableElements(loadTableLocator: string, selector: string, textToFind: string): void
             waitForTableLoaderSpinnerToDisappear(): void
             waitForToasterToDisappear(): void
+            selectFromMultiSelectDropDown(by: string, element: string, valueToChoose: string): void
         }
     }
 }
@@ -111,6 +112,31 @@ Cypress.Commands.add('waitForToasterToDisappear', () => {
     cy.get('.toastr', {timeout: 10000}).should('be.visible');
     cy.get('.toastr', {timeout: 10000}).should('not.exist');
 });
+
+Cypress.Commands.add('selectFromMultiSelectDropDown', (by: string, element: string, valueToChoose: string) => {
+    switch (by) {
+        case 'attr': {
+            cy.get(`input[${element}]`).parent().find('.react-select__indicators').click();
+            cy.get(`input[${element}]`).parent().find('.react-select__menu').find('div').contains(valueToChoose).click();
+            break;
+        }
+        case 'id': {
+            cy.get(`#${element}`).parent().find('.react-select__indicators').click();
+            cy.get(`#${element}`).parent().find('.react-select__menu').find('div').contains(valueToChoose).click();
+            break;
+        }
+        case 'class': {
+            cy.get(`.${element}`).parent().find('.react-select__indicators').click();
+            cy.get(`.${element}`).parent().find('.react-select__menu').find('div').contains(valueToChoose).click();
+            break;
+        }
+        case 'css': {
+            cy.get(`${element}`).parent().find('.react-select__indicators').click();
+            cy.get(`${element}`).parent().find('.react-select__menu').find('div').contains(valueToChoose).click();
+            break;
+        }
+    }
+})
 
 
 
