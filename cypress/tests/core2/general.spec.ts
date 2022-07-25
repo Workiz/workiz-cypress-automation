@@ -8,12 +8,11 @@ describe('general tests',() => {
 
     beforeEach(() => {
         pageRouter = new PageRouter;
-
+        let loginPage = new LogInPage;
+        loginPage.logInWithAccount2();
     });
 
     it('After changing tech user role to dispatch his role on team page will be dispatch',() => {
-        let loginPage = new LogInPage;
-        loginPage.logInWithAccount2();
         const email = RandomFunctions.generateRandomEmail();
         const fullName = RandomFunctions.generateFullName();
         const role = "tech";
@@ -35,10 +34,7 @@ describe('general tests',() => {
         userRole.should('equal',` ${UserRoles.Dispatch}`);
     });
 
-    it('After remove user it will not appear on active users screen',() => {
-        let loginPage = new LogInPage;
-        loginPage.logInWithAccount2();
-        
+    it('After remove user it will not appear on active users screen',() => {        
         const email = RandomFunctions.generateRandomEmail();
         const fullName = RandomFunctions.generateFullName();
         const role = "tech";
