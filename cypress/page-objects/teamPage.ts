@@ -3,6 +3,23 @@ import { Constans } from "./../infrastructure/consts"
 import { UserPage } from "./userPage";
 
 export class TeamPage {
+
+    public get getActiveUsers() {
+        this.cleanTeamFilter();
+        cy.selectFromMultiSelectDropDown('class','_med','Active');
+        let activeUsersTable = cy.get('.rt-table').should('exist');
+        cy.get('.rt-table .rt-tbody .rt-td').should('have.length.greaterThan',0);
+        return activeUsersTable;
+    }
+
+    public get getDisabledUsers() {
+        this.cleanTeamFilter();
+        cy.selectFromMultiSelectDropDown('class','_med','Disabled');
+        cy.get(':nth-child(6) > .rt-resizable-header-content').click().click();
+        let disabledUsersTable = cy.get('.rt-table').should('exist');
+        cy.get('.rt-table .rt-tbody .rt-td').should('have.length.greaterThan',0);
+        return disabledUsersTable;
+    }
     
     goToTeamUser(email: string): UserPage {
         cy.get('#searchString').type(email);
