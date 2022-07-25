@@ -6,4 +6,9 @@ export class AllLeadsPage {
         const idToSearch = leadId.toString()+'Quick view';
         cy.validateTextAppearInElements('.rt-td .leads-module__quickJob___365MB', idToSearch);
     }
+
+    validateLeadExistByJobIdAndClient(LeadId: JQuery<HTMLElement>, clientName: JQuery<HTMLElement>)
+    {
+        cy.get('.rt-tr-group .rt-tr', {timeout: 10000}).filter(`:contains("${LeadId.toString()}")`).should('contain.text', clientName.toString());
+    }
 }

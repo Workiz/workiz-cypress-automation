@@ -201,7 +201,7 @@ describe('Clients tests', () => {
         });
     });
 
-    it('Creating lead for sub client inside parent will create it as it should', () => {
+    it.only('Creating lead for sub client inside parent will create it as it should', () => {
         let allClientsPage = pageRouter.goToClientsPage();
         let parentClient = allClientsPage.createClient();
         allClientsPage = pageRouter.goToClientsPage();
@@ -215,8 +215,8 @@ describe('Clients tests', () => {
             cy.get(childClient.firstNameAlias).then((childClientName) => {
                 let lead = parentClient.createLeadForChildClientFromSubClientTab(childClientName);
                 cy.get(lead.alias).then((leadId) => {
-                    let allJobsPage = pageRouter.goToJobsPage();
-                    allJobsPage.validateJobExistByJobIdAndClient(leadId, childClientName)
+                    let allLeadsPage = pageRouter.goToLeadsPage();
+                    allLeadsPage.validateLeadExistByJobIdAndClient(leadId, childClientName)
                 });
             });
         });
