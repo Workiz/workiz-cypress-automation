@@ -1,7 +1,15 @@
 import { SQLQueries } from "../support/dbRequests";
 import { Constans } from "./../infrastructure/consts"
+import { UserPage } from "./userPage";
 
-export class TeamPage{
+export class TeamPage {
+    
+    goToTeamUser(email: string): UserPage {
+        cy.get('#searchString').type(email);
+        cy.get('._tblLbl').contains(email).click();
+        cy.location('href').should('contain','/user/');
+        return new UserPage;
+    }
 
     getUserInvitation(email: string) {
         SQLQueries.getInvitationHashByEmail(email);
@@ -34,11 +42,11 @@ export class TeamPage{
     }
 
     cleanTeamFilter(): void {
-        cy.get('.react-select__multi-value__remove').click();
+        cy.get('.react-select__multi-value__remove').click({ force: true });
     }
 
     addFilterFromDropDown(chooseFromDropdown: string):void {
-        cy.get('.react-select__dropdown-indicator').click();
+        cy.get('._med > .react-select__control > .react-select__indicators > .react-select__indicator > .css-19bqh2r').click();
         cy.contains(chooseFromDropdown).click();
     }
 
