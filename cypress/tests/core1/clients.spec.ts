@@ -213,10 +213,10 @@ describe('Clients tests', () => {
         cy.get(parentClient.alias).then((parentClientId) => {
             let parentClient =allClientsPage.goToClient(parentClientId);
             cy.get(childClient.firstNameAlias).then((childClientName) => {
-                let job = parentClient.createInvoiceForChildClientFromSubClientTab(childClientName);
-                cy.get(job.alias).then((jobId) => {
+                let invoice = parentClient.createInvoiceForChildClientFromSubClientTab(childClientName);
+                cy.get(invoice.alias).then((invoiceId) => {
                     let allInvoicesPage = pageRouter.goToInvoicePage();
-                    allInvoicesPage.validateInvoiceExistByJobIdAndClient(jobId, childClientName)
+                    allInvoicesPage.validateInvoiceExistByJobIdAndClient(invoiceId, childClientName)
                 });
             });
         });

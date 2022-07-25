@@ -213,7 +213,7 @@ export class ClientPage {
         cy.get('._selected .rt-tr-group', {timeout: 10000}).filter(`:contains("${childClientName.toString()}")`).find("[data-testid='pop-menu-span']").click();
     }
 
-    private createJobForSubClient(childClientName: JQuery<HTMLElement>)
+    private createJobForSubClient(childClientName: JQuery<HTMLElement>): CreateJobPage
     {
         this.chooseSubClient(childClientName);
         this.chooseCreateJob();
@@ -228,17 +228,16 @@ export class ClientPage {
         return childJob.SubmitToJob();
     }
 
-    private createInvoiceForSubClient(childClientName: JQuery<HTMLElement>)
+    private createInvoiceForSubClient(childClientName: JQuery<HTMLElement>): InvoicePage
     {
         this.chooseSubClient(childClientName);
         this.chooseCreateInvoice();
-        return new CreateInvoicePage();
+        return new InvoicePage();
     }
 
     createInvoiceForChildClientFromSubClientTab(childClientName: JQuery<HTMLElement>): InvoicePage
     {
         this.goToSubClientsTab();
-        let childInvoice = this.createInvoiceForSubClient(childClientName);
-        return childInvoice.SubmitToInvoice();
+        return this.createInvoiceForSubClient(childClientName);
     }
 }
