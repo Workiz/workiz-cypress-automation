@@ -52,6 +52,10 @@ export class ClientPage {
         cy.get('a').contains('Create Job').click();
     }
 
+    private chooseCreateInvoice(){
+        cy.get('a').contains('Create Invoice').click();
+    }
+
     private ClickCreateJob(): CreateJobPage {
         this.ClickActionMenu();
         this.chooseCreateJob();
@@ -66,7 +70,7 @@ export class ClientPage {
 
     private ClickCreateInvoice(): CreateInvoicePage {
         this.ClickActionMenu();
-        cy.get('a').contains('Create Invoice').click();
+        this.chooseCreateInvoice();
         return new CreateInvoicePage();
     }
 
@@ -204,9 +208,14 @@ export class ClientPage {
         cy.get(this.subClientLocator).should('not.exist','Sub clients');
     }
 
-    private createJobForSubClient(childClientName: JQuery<HTMLElement>)
+    private chooseSubClient(childClientName: JQuery<HTMLElement>)
     {
         cy.get('._selected .rt-tr-group', {timeout: 10000}).filter(`:contains("${childClientName.toString()}")`).find("[data-testid='pop-menu-span']").click();
+    }
+
+    private createJobForSubClient(childClientName: JQuery<HTMLElement>)
+    {
+        this.chooseSubClient(childClientName);
         this.chooseCreateJob();
         return new CreateJobPage();
     }
@@ -217,5 +226,19 @@ export class ClientPage {
         let childJob = this.createJobForSubClient(childClientName);
         childJob.jobType = JobTypeConsts.SERVICE;
         return childJob.SubmitToJob();
+    }
+
+    private createInvoiceForSubClient(childClientName: JQuery<HTMLElement>)
+    {
+        this.chooseSubClient(childClientName);
+        this.chooseCreateInvoice();
+        return new CreateInvoicePage();
+    }
+
+    createInvoiceForChildClientFromSubClientTab(childClientName: JQuery<HTMLElement>): InvoicePage
+    {
+        this.goToSubClientsTab();
+        let childInvoice = this.createInvoiceForSubClient(childClientName);
+        return childInvoice.SubmitToInvoice();
     }
 }

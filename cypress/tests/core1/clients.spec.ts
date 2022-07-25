@@ -200,4 +200,25 @@ describe('Clients tests', () => {
             });
         });
     });
+
+    it('Creating invoice for sub client inside parent will create it as it should', () => {
+        let allClientsPage = pageRouter.goToClientsPage();
+        let parentClient = allClientsPage.createClient();
+        allClientsPage = pageRouter.goToClientsPage();
+        let childClient = allClientsPage.createClient();
+        cy.get(parentClient.firstNameAlias).then((parentClientName) =>{
+            childClient.setParentClient(parentClientName);
+        });
+        allClientsPage = pageRouter.goToClientsPage();
+        cy.get(parentClient.alias).then((parentClientId) => {
+            let parentClient =allClientsPage.goToClient(parentClientId);
+            cy.get(childClient.firstNameAlias).then((childClientName) => {
+                let job = parentClient.createInvoiceForChildClientFromSubClientTab(childClientName);
+                cy.get(job.alias).then((jobId) => {
+                    let allInvoicesPage = pageRouter.goToInvoicePage();
+                    allInvoicesPage.validateInvoiceExistByJobIdAndClient(jobId, childClientName)
+                });
+            });
+        });
+    });
 })
