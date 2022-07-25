@@ -200,4 +200,25 @@ describe('Clients tests', () => {
             });
         });
     });
+
+    it('Creating lead for sub client inside parent will create it as it should', () => {
+        let allClientsPage = pageRouter.goToClientsPage();
+        let parentClient = allClientsPage.createClient();
+        allClientsPage = pageRouter.goToClientsPage();
+        let childClient = allClientsPage.createClient();
+        cy.get(parentClient.firstNameAlias).then((parentClientName) =>{
+            childClient.setParentClient(parentClientName);
+        });
+        allClientsPage = pageRouter.goToClientsPage();
+        cy.get(parentClient.alias).then((parentClientId) => {
+            let parentClient =allClientsPage.goToClient(parentClientId);
+            cy.get(childClient.firstNameAlias).then((childClientName) => {
+                let lead = parentClient.createLeadForChildClientFromSubClientTab(childClientName);
+                cy.get(lead.alias).then((leadId) => {
+                    let allJobsPage = pageRouter.goToJobsPage();
+                    allJobsPage.validateJobExistByJobIdAndClient(leadId, childClientName)
+                });
+            });
+        });
+    });
 })

@@ -58,9 +58,13 @@ export class ClientPage {
         return new CreateJobPage();
     }
 
+    private chooseCreateLead(){
+        cy.get('a').contains('Create Lead').click();
+    }
+
     private ClickCreateLead(): CreateLeadPage {
         this.ClickActionMenu();
-        cy.get('a').contains('Create Lead').click();
+        this.chooseCreateLead();
         return new CreateLeadPage();
     }
 
@@ -217,5 +221,19 @@ export class ClientPage {
         let childJob = this.createJobForSubClient(childClientName);
         childJob.jobType = JobTypeConsts.SERVICE;
         return childJob.SubmitToJob();
+    }
+
+    private createLeadForSubClient(childClientName: JQuery<HTMLElement>): CreateLeadPage
+    {
+        cy.get('._selected .rt-tr-group', {timeout: 10000}).filter(`:contains("${childClientName.toString()}")`).find("[data-testid='pop-menu-span']").click();
+        this.chooseCreateLead();
+        return new CreateLeadPage();
+    }
+
+    createLeadForChildClientFromSubClientTab(childClientName: JQuery<HTMLElement>): LeadPage
+    {
+        this.goToSubClientsTab();
+        let childLead = this.createLeadForSubClient(childClientName);
+        return childLead.SubmitToLead();
     }
 }
