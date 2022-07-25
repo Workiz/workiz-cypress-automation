@@ -13,5 +13,12 @@ export class AllJobsPage {
         if (!acSort){
             cy.get('div').contains('Job ID').click();
         }
+        cy.get('.rt-tbody').should('be.visible');
+    }
+
+    validateJobExistByJobIdAndClient(jobId: JQuery<HTMLElement>, clientName: JQuery<HTMLElement>)
+    {
+        this.sortJobTableById(false);
+        cy.get('.rt-tr-group.pointer .rt-tr', {timeout: 10000}).filter(`:contains("${jobId.toString()}")`).should('contain.text', clientName.toString());
     }
 }

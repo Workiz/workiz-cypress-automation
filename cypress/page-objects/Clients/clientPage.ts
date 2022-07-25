@@ -48,9 +48,13 @@ export class ClientPage {
         cy.get("[data-testid='pop-menu-span'] .button").click();
     }
 
+    private chooseCreateJob(){
+        cy.get('a').contains('Create Job').click();
+    }
+
     private ClickCreateJob(): CreateJobPage {
         this.ClickActionMenu();
-        cy.get('a').contains('Create Job').click();
+        this.chooseCreateJob();
         return new CreateJobPage();
     }
 
@@ -198,5 +202,20 @@ export class ClientPage {
     validateParentClientDontContainsChildClient(childClientName: JQuery<HTMLElement>)
     {
         cy.get(this.subClientLocator).should('not.exist','Sub clients');
+    }
+
+    private createJobForSubClient(childClientName: JQuery<HTMLElement>)
+    {
+        cy.get('._selected .rt-tr-group', {timeout: 10000}).filter(`:contains("${childClientName.toString()}")`).find("[data-testid='pop-menu-span']").click();
+        this.chooseCreateJob();
+        return new CreateJobPage();
+    }
+
+    createJobForChildClientFromSubClientTab(childClientName: JQuery<HTMLElement>): JobPage
+    {
+        this.goToSubClientsTab();
+        let childJob = this.createJobForSubClient(childClientName);
+        childJob.jobType = JobTypeConsts.SERVICE;
+        return childJob.SubmitToJob();
     }
 }
