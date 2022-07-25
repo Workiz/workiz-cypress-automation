@@ -13,6 +13,7 @@ export class AllJobsPage {
         if (!acSort){
             cy.get('div').contains('Job ID').click();
         }
+        cy.get('.rt-tbody').should('be.visible');
     }
 
     validateJobExistByJobIdAndClient(jobId: JQuery<HTMLElement>, clientName: JQuery<HTMLElement>)
