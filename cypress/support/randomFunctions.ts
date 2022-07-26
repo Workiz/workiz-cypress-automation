@@ -27,4 +27,8 @@ export class RandomFunctions {
     public static generateRandomAliasName(alisaName: string): string {
         return '\@' +`${alisaName}`;
     }
+
+    public static generateRandomEmailMessage(): string {
+        return 'Automation tests message '+ this.generateRandomString(15);
+    }
 }

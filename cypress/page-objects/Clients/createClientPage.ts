@@ -6,11 +6,12 @@ export class CreateClientPage {
 
     readonly firstNameLocator: string = "[name='first_name']";
     
-    fillClientsDetails():void{
+    fillClientsDetails(email?: string):void{
         let firstName: string = RandomFunctions.generateRandomString(8);
         cy.get(`${this.firstNameLocator}`).type(firstName);
         cy.get('[name="primary_phone"]').type(Constans.PHONE);
         cy.get('[name="address_serach"]').type(Constans.ADDRESS);
+        if(typeof email !== 'undefined') { cy.get('.eight-columns > :nth-child(1) > .validationSpan > ._fLabel > #email_address').type(email) };  
         cy.get('[name="address_serach"]').type(' r', {delay: 2000});
         cy.get('.relative .sajComplete .sajComplete-suggestion', {timeout: 10000}).click({force: true});
         cy.get('[name="zipcode"]').type(Constans.ZIPCODE);
@@ -18,7 +19,7 @@ export class CreateClientPage {
             if(firstNameValue !== firstName){
                 cy.get(`${this.firstNameLocator}`).clear().type(firstName);
             }
-        })
+        });
     }
 
     save(): ClientPage {
@@ -26,5 +27,4 @@ export class CreateClientPage {
         cy.url().should('contain', 'client/');
         return new ClientPage();
     }
-
 }
