@@ -12,7 +12,7 @@ export class MessagingPage {
         this.sendEmail(emailMessage);
     }
 
-    openConversationWithClient(clientName: string) {
+    private openConversationWithClient(clientName: string) {
         this.openSearchContactSearchField();
         this.chooseTheClient(clientName);
     }
@@ -32,11 +32,11 @@ export class MessagingPage {
         this.chooseToSendViaEmail();
     }
 
-    setTheMessage(emailMessage: string) {
+    private setTheMessage(emailMessage: string) {
         cy.get('.textarea').type(emailMessage);
     }
 
-    chooseToSendViaEmail() {
+    private chooseToSendViaEmail() {
         cy.get('.lnr-chevron-up').click();
         cy.get('div._popMenu li a').contains('Email').click();
     }
