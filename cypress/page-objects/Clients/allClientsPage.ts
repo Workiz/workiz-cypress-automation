@@ -3,9 +3,9 @@ import { CreateClientPage } from "./createClientPage";
 
 export class AllClientsPage {
 
-    createClient(): ClientPage {
+    createClient(email?: string): ClientPage {
         let createClientPage = this.clickOnCreateClient();
-        createClientPage.fillClientsDetails();
+        createClientPage.fillClientsDetails(email);
         return createClientPage.save();
     }
 

@@ -55,4 +55,24 @@ describe('general tests',() => {
         let disabledUsers = teamPage.getDisabledUsers;
         disabledUsers.should('contain',email);
     });
+
+    it('After sending to client email message via messaging message will appear in logs messages in DB', () => {
+        let accountPage = pageRouter.goToAccountPage();
+        accountPage.getCompanyEmail();
+       
+        let clientEmail = RandomFunctions.generateRandomEmail();
+        let emailMessage = RandomFunctions.generateRandomEmailMessage();
+        let allClientsPage = pageRouter.goToClientsPage();
+        let client = allClientsPage.createClient(clientEmail);  
+
+        let messagingPage = pageRouter.goToMessagingPage();
+        cy.get(client.firstNameAlias).then((clName) => {
+            let clientName = clName.toString();
+            messagingPage.sendEmailToClient(clientName,emailMessage);
+        });
+        cy.get('@companyEmail').then((accEmail) => {
+            let accountEmail = accEmail.toString();
+            messagingPage.isBodyMessageSent(accountEmail,emailMessage);      
+        });
+    });
 });

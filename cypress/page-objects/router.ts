@@ -13,8 +13,15 @@ import { AllEstimatesPage } from './Estimate/allEstimatesPage';
 import { CustomDocumentsPage } from './customDocumentsPage';
 import { FranchisePage } from './franchisePage';
 import { SettingsPage } from './SettingsPage';
+import { MessagingPage } from './messagingPage';
 
 export class PageRouter {
+    goToMessagingPage(): MessagingPage {
+        cy.get('.topMenu .lnr-bubbles').click();
+        cy.location('href').should('contain','root/messaging');
+        return new MessagingPage;
+    }
+
     goToSettingsPage(): SettingsPage {
         cy.visit('root/settings');
         cy.get('div h4._widgetTitle:nth-child(1)').should('contain','General Settings');
