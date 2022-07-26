@@ -2,9 +2,15 @@ import { SQLQueries } from "../support/dbRequests";
 
 export class MessagingPage {
 
-    isBodyMessageSent(email: string, message: string) {
+    sendSmsToClient(clientName: string, smsMessage: string) {
+        this.openConversationWithClient(clientName);
+        this.setTheMessage(smsMessage);
+        this.clickDefaultSendOption();
+    }
+
+    isBodyMessageSent(email: string, message: string,via: string) {
         cy.wait(5000);
-        SQLQueries.checkIfBodyMessageSent(email,message);
+        SQLQueries.checkIfBodyMessageSent(email,message,via);
     }
 
     sendEmailToClient(clientName: string, emailMessage: string) {
@@ -39,5 +45,9 @@ export class MessagingPage {
     private chooseToSendViaEmail() {
         cy.get('.lnr-chevron-up').click();
         cy.get('div._popMenu li a').contains('Email').click();
+    }
+
+    private clickDefaultSendOption() {
+        cy.get('.button .mobile-hide').click()
     }
 }
