@@ -94,5 +94,20 @@ describe('general tests',() => {
             let accountEmail = accEmail.toString();
             messagingPage.isBodyMessageSent(accountEmail,smsMessage,'sms');                
     });
+
+    it.only('After sending to client message via messaging  client will appear on messaging search', () => {
+        let smsMessage = RandomFunctions.generateRandomMessage();
+        let phoneNumber = Cypress.env("twilioPhoneNumber");
+        let allClientsPage = pageRouter.goToClientsPage();
+        let client = allClientsPage.createClient(undefined,phoneNumber);  
+
+        let messagingPage = pageRouter.goToMessagingPage();
+        cy.get(client.firstNameAlias).then((clName) => {
+            let clientName = clName.toString();
+            messagingPage.sendSmsToClient(clientName,smsMessage);
+            messagingPage = pageRouter.goToMessagingPage();
+            messagingPage.isClientExistsInMessaging(clientName);
+        });
+    });
 });
 });

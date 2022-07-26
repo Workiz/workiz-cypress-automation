@@ -2,6 +2,18 @@ import { SQLQueries } from "../support/dbRequests";
 
 export class MessagingPage {
 
+    isClientExistsInMessaging(clientName: string) {
+        this.searchForClient(clientName);
+        cy.get('.ms_scrollable-content strong').invoke('text').should('contain',clientName);
+    }
+
+    searchForClient(clientName: string) {
+        cy.get('.messaging-module__flex_align_end___3VB42 img:nth-child(1)').click();
+        cy.get('input[placeholder="Search everything..."').type(clientName);
+        cy.get('._smalMenuMsgFirst').should('have.length.greaterThan',0);
+
+    }
+
     sendSmsToClient(clientName: string, smsMessage: string) {
         this.openConversationWithClient(clientName);
         this.setTheMessage(smsMessage);
