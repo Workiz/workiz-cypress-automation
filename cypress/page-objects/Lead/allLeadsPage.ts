@@ -7,8 +7,9 @@ export class AllLeadsPage {
         cy.validateTextAppearInElements('.rt-td .leads-module__quickJob___365MB', idToSearch);
     }
 
-    validateLeadExistByJobIdAndClient(LeadId: JQuery<HTMLElement>, clientName: JQuery<HTMLElement>)
+    validateLeadExistByJobIdAndClient(leadId: JQuery<HTMLElement>, clientName: JQuery<HTMLElement>)
     {
-        cy.get('.rt-tr-group .rt-tr', {timeout: 10000}).filter(`:contains("${LeadId.toString()}")`).should('contain.text', clientName.toString());
+        cy.get('.rt-tr-group.pointer').should('exist');
+        cy.get('.rt-tr-group .rt-tr', {timeout: 10000}).filter(`:contains("${leadId.toString()}")`).should('contain.text', clientName.toString(), { matchCase: false });
     }
 }
