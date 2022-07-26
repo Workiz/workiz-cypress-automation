@@ -242,4 +242,25 @@ describe('Clients tests', () => {
             });
         });
     });
+
+    it.only('Creating estimate for sub client inside parent will create it as it should', () => {
+        let allClientsPage = pageRouter.goToClientsPage();
+        let parentClient = allClientsPage.createClient();
+        allClientsPage = pageRouter.goToClientsPage();
+        let childClient = allClientsPage.createClient();
+        cy.get(parentClient.firstNameAlias).then((parentClientName) =>{
+            childClient.setParentClient(parentClientName);
+        });
+        allClientsPage = pageRouter.goToClientsPage();
+        cy.get(parentClient.alias).then((parentClientId) => {
+            let parentClient =allClientsPage.goToClient(parentClientId);
+            cy.get(childClient.firstNameAlias).then((childClientName) => {
+                let estimate = parentClient.createEstimateForChildClientFromSubClientTab(childClientName);
+                cy.get(estimate.alias).then((estimateId) => {
+                    let allLeadsPage = pageRouter.goToLeadsPage();
+                    allLeadsPage.validateLeadExistByJobIdAndClient(estimateId, childClientName)
+                });
+            });
+        });
+    });
 })
