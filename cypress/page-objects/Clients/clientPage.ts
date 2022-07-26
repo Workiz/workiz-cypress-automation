@@ -62,9 +62,13 @@ export class ClientPage {
         return new CreateJobPage();
     }
 
+    private chooseCreateLead(){
+        cy.get('a').contains('Create Lead').click();
+    }
+
     private ClickCreateLead(): CreateLeadPage {
         this.ClickActionMenu();
-        cy.get('a').contains('Create Lead').click();
+        this.chooseCreateLead();
         return new CreateLeadPage();
     }
 
@@ -184,7 +188,7 @@ export class ClientPage {
     }
 
     setParentClient(parentClientName: JQuery<HTMLElement>){
-        cy.scrollTo('bottom');
+        cy.scrollTo(0,200);
         cy.get('.setParentClient-module__container___1IloT .sajInput.sajInput.sizef.icon-search').type(parentClientName.toString()).type(' ', {delay: 2000}).then(() => {
             cy.get('.sajComplete-suggestion').should('have.length', 1).click();
             cy.get('.sbmt_bar .button.iFfWBzvt7RjPTzzA73jT ').contains('Save').click();
@@ -192,7 +196,7 @@ export class ClientPage {
     }
 
     deleteParentClient(){
-        cy.scrollTo('bottom');
+        cy.scrollTo(0,200);
         cy.get('.clear_parent_client').click()
         cy.get('button').contains('Confirm').click();
     }
@@ -239,5 +243,19 @@ export class ClientPage {
     {
         this.goToSubClientsTab();
         return this.createInvoiceForSubClient(childClientName);
+    }
+
+    private createLeadForSubClient(childClientName: JQuery<HTMLElement>): CreateLeadPage
+    {
+        this.chooseSubClient(childClientName);
+        this.chooseCreateLead();
+        return new CreateLeadPage();
+    }
+
+    createLeadForChildClientFromSubClientTab(childClientName: JQuery<HTMLElement>): LeadPage
+    {
+        this.goToSubClientsTab();
+        let childLead = this.createLeadForSubClient(childClientName);
+        return childLead.SubmitToLead();
     }
 }
