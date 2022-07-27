@@ -115,14 +115,14 @@ describe('general tests',() => {
 
     it.only('User can clock in and clock out', () => {    
         homePage.clockIn();
-        homePage.clockIconStatus();
+        homePage.getClockIconStatus();
         cy.get('@clockStatus').then((statusClock) => {
             let clockStatus = statusClock.toString();
             expect(clockStatus).to.contain('clockGreen');
         });
 
         homePage.clockOut();
-        homePage.clockIconStatus();
+        homePage.getClockIconStatus();
         cy.get('@clockStatus').then((statusClock) => {
             let clockStatus = statusClock.toString();
             expect(clockStatus).to.contain('clockRed');
