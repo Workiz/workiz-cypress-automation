@@ -180,7 +180,7 @@ describe('Clients tests', () => {
         });
     });
 
-    it('Creating job for sub client inside parent will create it as it should', () => {
+    it.only('Creating job for sub client inside parent will create it as it should', () => {
         let allClientsPage = pageRouter.goToClientsPage();
         let parentClient = allClientsPage.createClient();
         allClientsPage = pageRouter.goToClientsPage();
