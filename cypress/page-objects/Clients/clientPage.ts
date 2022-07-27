@@ -66,6 +66,10 @@ export class ClientPage {
         cy.get('a').contains('Create Lead').click();
     }
 
+    private chooseCreateEstimate(){
+        cy.get('a').contains('Create Estimate').click();
+    }
+
     private ClickCreateLead(): CreateLeadPage {
         this.ClickActionMenu();
         this.chooseCreateLead();
@@ -80,7 +84,7 @@ export class ClientPage {
 
     private ClickCreateEstimate(): CreateEstimatePage {
         this.ClickActionMenu();
-        cy.get('a').contains('Create Estimate').click();
+        this.chooseCreateEstimate();
         return new CreateEstimatePage();
     }
 
@@ -181,6 +185,7 @@ export class ClientPage {
 
     goToSubClientsTab(){
         cy.get(this.subClientLocator).should('contain.text','Sub clients').click();
+        cy.get('.rt-tr-group').should('be.visible');
     }
 
     DeleteClient(): AllClientsPage{
@@ -257,5 +262,18 @@ export class ClientPage {
         this.goToSubClientsTab();
         let childLead = this.createLeadForSubClient(childClientName);
         return childLead.SubmitToLead();
+    }
+
+    private createEstimateForSubClient(childClientName: JQuery<HTMLElement>): EstimatePage
+    {
+        this.chooseSubClient(childClientName);
+        this.chooseCreateEstimate();
+        return new EstimatePage();
+    }
+
+    createEstimateForChildClientFromSubClientTab(childClientName: JQuery<HTMLElement>): EstimatePage
+    {
+        this.goToSubClientsTab();
+        return this.createEstimateForSubClient(childClientName);
     }
 }
