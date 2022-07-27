@@ -3,9 +3,9 @@ import { CreateClientPage } from "./createClientPage";
 
 export class AllClientsPage {
 
-    createClient(email?: string): ClientPage {
+    createClient(email?: string, twilioPhoneNumber?: string): ClientPage {
         let createClientPage = this.clickOnCreateClient();
-        createClientPage.fillClientsDetails(email);
+        createClientPage.fillClientsDetails(email,twilioPhoneNumber);
         return createClientPage.save();
     }
 
