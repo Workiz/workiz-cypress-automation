@@ -1,5 +1,29 @@
 
 export class HomePage {
+
+    clockIn() {
+        cy.location('href').should('contain','root/home');
+        cy.openSettingsMenu();
+        cy.get('.pName img').click();
+        cy.get('div.addNewModal').find('div').contains('Currently clocked out');
+        cy.get('.mid-margin-bottom > .button').invoke('text').then((button) => {
+            let clockInButton = button.toString();
+            if(clockInButton == "Clock in") 
+            {
+                cy.get('.mid-margin-bottom > .button').click();
+                cy.waitForToasterToDisappear();
+            }
+        });
+
+    }
+
+    clockIconStatus(){
+        cy.openSettingsMenu();
+        cy.get('.pName img').invoke('attr','src').then((src) => {
+            cy.wrap(src).as('clockStatus');
+        });
+    }
+
     public get getDashboaredElements(): Cypress.Chainable<JQuery> {
         return cy.get(".styles__title___1-_xq", { timeout: 10000 } );
     }

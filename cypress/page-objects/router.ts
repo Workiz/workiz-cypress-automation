@@ -12,7 +12,7 @@ import { AllInvoicesPage } from './Invoice/allInvoicesPage';
 import { AllEstimatesPage } from './Estimate/allEstimatesPage';
 import { CustomDocumentsPage } from './customDocumentsPage';
 import { FranchisePage } from './franchisePage';
-import { SettingsPage } from './SettingsPage';
+import { SettingsPage } from './settingsPage';
 import { MessagingPage } from './messagingPage';
 
 export class PageRouter {
