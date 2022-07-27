@@ -222,7 +222,7 @@ describe('Clients tests', () => {
         });
     });
 
-    it.only('Creating lead for sub client inside parent will create it as it should', () => {
+    it('Creating lead for sub client inside parent will create it as it should', () => {
         let allClientsPage = pageRouter.goToClientsPage();
         let parentClient = allClientsPage.createClient();
         allClientsPage = pageRouter.goToClientsPage();
@@ -257,8 +257,8 @@ describe('Clients tests', () => {
             cy.get(childClient.firstNameAlias).then((childClientName) => {
                 let estimate = parentClient.createEstimateForChildClientFromSubClientTab(childClientName);
                 cy.get(estimate.alias).then((estimateId) => {
-                    let allLeadsPage = pageRouter.goToLeadsPage();
-                    allLeadsPage.validateLeadExistByJobIdAndClient(estimateId, childClientName)
+                    let allEstimatesPage = pageRouter.goToEstimatePage();
+                    allEstimatesPage.validateEstimateExistByEstimateIdAndClient(estimateId, childClientName)
                 });
             });
         });

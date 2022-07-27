@@ -185,6 +185,7 @@ export class ClientPage {
 
     goToSubClientsTab(){
         cy.get(this.subClientLocator).should('contain.text','Sub clients').click();
+        cy.get('.rt-tr-group').should('be.visible');
     }
 
     DeleteClient(): AllClientsPage{
@@ -266,6 +267,7 @@ export class ClientPage {
     private createEstimateForSubClient(childClientName: JQuery<HTMLElement>): EstimatePage
     {
         this.chooseSubClient(childClientName);
+        this.chooseCreateEstimate();
         return new EstimatePage();
     }
 
