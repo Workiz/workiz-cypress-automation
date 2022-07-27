@@ -95,7 +95,7 @@ describe('general tests',() => {
             messagingPage.isBodyMessageSent(accountEmail,smsMessage,'sms');                
     });
 
-    it.only('After sending to client message via messaging  client will appear on messaging search', () => {
+    it('After sending to client message via messaging  client will appear on messaging search', () => {
         let smsMessage = RandomFunctions.generateRandomMessage();
         let phoneNumber = Cypress.env("twilioPhoneNumber");
         let allClientsPage = pageRouter.goToClientsPage();
