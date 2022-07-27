@@ -1,15 +1,17 @@
 import { UserRoles } from "../../infrastructure/userRoles";
+import { HomePage } from "../../page-objects/homePage";
 import { LogInPage } from "../../page-objects/logInPage";
 import { PageRouter } from "../../page-objects/router";
 import { RandomFunctions } from "../../support/randomFunctions";
 
 describe('general tests',() => {
     let pageRouter: PageRouter;
+    let homePage: HomePage;
 
     beforeEach(() => {
         pageRouter = new PageRouter;
         let loginPage = new LogInPage;
-        loginPage.logInWithAccount2();
+        homePage = loginPage.logInWithAccount2();
     });
 
     it('After changing tech user role to dispatch his role on team page will be dispatch',() => {
@@ -108,6 +110,22 @@ describe('general tests',() => {
             messagingPage.sendSmsToClient(clientName,smsMessage);
             messagingPage = pageRouter.goToMessagingPage();
             messagingPage.isClientExistsInMessaging(clientName);
+        });
+    });
+
+    it.only('User can clock in and clock out', () => {    
+        homePage.clockIn();
+        homePage.getClockIconStatus();
+        cy.get('@clockStatus').then((statusClock) => {
+            let clockStatus = statusClock.toString();
+            expect(clockStatus).to.contain('clockGreen');
+        });
+
+        homePage.clockOut();
+        homePage.getClockIconStatus();
+        cy.get('@clockStatus').then((statusClock) => {
+            let clockStatus = statusClock.toString();
+            expect(clockStatus).to.contain('clockRed');
         });
     });
 });
