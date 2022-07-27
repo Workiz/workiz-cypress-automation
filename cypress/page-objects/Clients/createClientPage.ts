@@ -12,7 +12,7 @@ export class CreateClientPage {
         if(typeof twilioPhoneNumber !== 'undefined') { cy.get('[name="primary_phone"]').type(twilioPhoneNumber) }
         else { cy.get('[name="primary_phone"]').type(Constans.PHONE) };
         cy.get('[name="address_serach"]').type(Constans.ADDRESS);
-        if(typeof email !== 'undefined') { cy.get('.eight-columns > :nth-child(1) > .validationSpan > ._fLabel > #email_address').type(email) };  
+        if(typeof email !== 'undefined') { cy.get('.fieldset [name="email_address"]').type(email) };  
         cy.get('[name="address_serach"]').type(' r', {delay: 2000});
         cy.get('.relative .sajComplete .sajComplete-suggestion', {timeout: 10000}).click({force: true});
         cy.get('[name="zipcode"]').type(Constans.ZIPCODE);
