@@ -96,7 +96,6 @@ describe('general tests',() => {
     });
 });
 
-
     it('After sending to client message via messaging  client will appear on messaging search', () => {
         let smsMessage = RandomFunctions.generateRandomMessage();
         let phoneNumber = Cypress.env("twilioPhoneNumber");
