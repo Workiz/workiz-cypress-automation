@@ -1,3 +1,4 @@
+import { HomePageLabels } from "../../infrastructure/homePageLabels";
 import { UserRoles } from "../../infrastructure/userRoles";
 import { HomePage } from "../../page-objects/homePage";
 import { LogInPage } from "../../page-objects/logInPage";
@@ -113,19 +114,38 @@ describe('general tests',() => {
         });
     });
 
-    it.only('User can clock in and clock out', () => {    
+    it('User can clock in and clock out', () => {    
         homePage.clockIn();
-        homePage.clockIconStatus();
+        homePage.getclockIconStatus();
         cy.get('@clockStatus').then((statusClock) => {
             let clockStatus = statusClock.toString();
             expect(clockStatus).to.contain('clockGreen');
         });
 
         homePage.clockOut();
-        homePage.clockIconStatus();
+        homePage.getclockIconStatus();
         cy.get('@clockStatus').then((statusClock) => {
             let clockStatus = statusClock.toString();
             expect(clockStatus).to.contain('clockRed');
         });
+    });
+
+    it('Left aside menu contains all titles', () => {
+        let leftMenuElements = homePage.getLeftMenuLabelsElements;
+        leftMenuElements.should('have.length', 12);
+        leftMenuElements.each((item, index, list) => {
+            cy.wrap(item).should("contain.text", HomePageLabels.listForDefaultAccount[index])
+        });
+    });
+
+    it('Make sure all possible widgets appears on dashboard', () => {
+        let widgetsElements = homePage.getDashboaredElements;
+        widgetsElements.should('have.length', 16);
+        widgetsElements.each((item,index,list) => {
+            cy.wrap(item).should('contain.text',HomePageLabels.listWidgetsForDefaultAccount[index])
+        });
+    });
+
+    it('MakeSureLeftAsideMenuLinksWorksWhileItMinimized', () => {
     });
 });

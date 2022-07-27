@@ -10,7 +10,7 @@ export class HomePage {
             let clockInButton = button.toString();
             if(clockInButton == "Clock Out") 
             {
-                this.clockInOutModalButton();
+                this.clockOnInOutModalButton();
             }
         });
     }
@@ -24,17 +24,17 @@ export class HomePage {
             let clockInButton = button.toString();
             if(clockInButton == "Clock in") 
             {
-                this.clockInOutModalButton();
+                this.clockOnInOutModalButton();
             }
         });
     }
 
-    clockInOutModalButton() {
+    clockOnInOutModalButton() {
         cy.get('.mid-margin-bottom > .button').click();
         cy.waitForToasterToDisappear();
     }
 
-    clockIconStatus() {
+    getclockIconStatus() {
         cy.openSettingsMenu();
         cy.get('.pName img').invoke('attr','src').then((src) => {
             cy.wrap(src).as('clockStatus');
