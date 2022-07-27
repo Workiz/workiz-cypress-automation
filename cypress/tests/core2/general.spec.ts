@@ -113,12 +113,19 @@ describe('general tests',() => {
         });
     });
 
-    it.only('User can clock in', () => {    
+    it.only('User can clock in and clock out', () => {    
         homePage.clockIn();
         homePage.clockIconStatus();
         cy.get('@clockStatus').then((statusClock) => {
             let clockStatus = statusClock.toString();
             expect(clockStatus).to.contain('clockGreen');
+        });
+
+        homePage.clockOut();
+        homePage.clockIconStatus();
+        cy.get('@clockStatus').then((statusClock) => {
+            let clockStatus = statusClock.toString();
+            expect(clockStatus).to.contain('clockRed');
         });
     });
 });

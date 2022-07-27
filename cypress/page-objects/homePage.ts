@@ -1,6 +1,20 @@
 
 export class HomePage {
 
+    clockOut() {
+        cy.location('href').should('contain','root/home');
+        cy.openSettingsMenu();
+        cy.get('.pName img').click();
+        cy.get('div.addNewModal').find('div').contains('Clocked in since');
+        cy.get('.mid-margin-bottom > .button').invoke('text').then((button) => {
+            let clockInButton = button.toString();
+            if(clockInButton == "Clock Out") 
+            {
+                this.clockInOutModalButton();
+            }
+        });
+    }
+
     clockIn() {
         cy.location('href').should('contain','root/home');
         cy.openSettingsMenu();
@@ -10,17 +24,21 @@ export class HomePage {
             let clockInButton = button.toString();
             if(clockInButton == "Clock in") 
             {
-                cy.get('.mid-margin-bottom > .button').click();
-                cy.waitForToasterToDisappear();
+                this.clockInOutModalButton();
             }
         });
-
     }
 
-    clockIconStatus(){
+    clockInOutModalButton() {
+        cy.get('.mid-margin-bottom > .button').click();
+        cy.waitForToasterToDisappear();
+    }
+
+    clockIconStatus() {
         cy.openSettingsMenu();
         cy.get('.pName img').invoke('attr','src').then((src) => {
             cy.wrap(src).as('clockStatus');
+            cy.get('#title-bar').click();
         });
     }
 
