@@ -216,7 +216,7 @@ describe('Clients tests', () => {
                 let invoice = parentClient.createInvoiceForChildClientFromSubClientTab(childClientName);
                 cy.get(invoice.alias).then((invoiceId) => {
                     let allInvoicesPage = pageRouter.goToInvoicePage();
-                    allInvoicesPage.validateInvoiceExistByJobIdAndClient(invoiceId, childClientName)
+                    allInvoicesPage.validateInvoiceExistByInvoiceIdAndClient(invoiceId, childClientName)
                 });
             });
         });
@@ -237,7 +237,7 @@ describe('Clients tests', () => {
                 let lead = parentClient.createLeadForChildClientFromSubClientTab(childClientName);
                 cy.get(lead.alias).then((leadId) => {
                     let allLeadsPage = pageRouter.goToLeadsPage();
-                    allLeadsPage.validateLeadExistByJobIdAndClient(leadId, childClientName)
+                    allLeadsPage.validateLeadExistByLeadIdAndClient(leadId, childClientName)
                 });
             });
         });
