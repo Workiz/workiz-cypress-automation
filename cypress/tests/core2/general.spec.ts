@@ -94,6 +94,8 @@ describe('general tests',() => {
             let accountEmail = accEmail.toString();
             messagingPage.isBodyMessageSent(accountEmail,smsMessage,'sms');                
     });
+});
+
 
     it('After sending to client message via messaging  client will appear on messaging search', () => {
         let smsMessage = RandomFunctions.generateRandomMessage();
@@ -109,5 +111,4 @@ describe('general tests',() => {
             messagingPage.isClientExistsInMessaging(clientName);
         });
     });
-});
 });
