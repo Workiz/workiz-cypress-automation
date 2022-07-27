@@ -15,7 +15,7 @@ export class TeamPage {
     public get getDisabledUsers() {
         this.cleanTeamFilter();
         cy.selectFromMultiSelectDropDown('class','_med','Disabled');
-        cy.get(':nth-child(6) > .rt-resizable-header-content').click().click();
+        cy.sortTableColumnById(':nth-child(6) > .rt-resizable-header-content', false);
         let disabledUsersTable = cy.get('.rt-table').should('exist');
         cy.get('.rt-table .rt-tbody .rt-td').should('have.length.greaterThan',0);
         return disabledUsersTable;

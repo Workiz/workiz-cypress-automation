@@ -29,7 +29,7 @@ describe('Clients tests', () => {
         let job = client.createJobToNewJobPage();
         cy.get(job.alias).then((jobId) => {
             let jobsPage = pageRouter.goToJobsPage();
-            jobsPage.sortJobTableById(false);
+            cy.sortTableColumnById(".rt-table .rt-th:nth-child(2)", false);
             jobsPage.isJobsTableContainsJobId(jobId);
         });
     });
@@ -222,7 +222,7 @@ describe('Clients tests', () => {
         });
     });
 
-    it.only('Creating lead for sub client inside parent will create it as it should', () => {
+    it('Creating lead for sub client inside parent will create it as it should', () => {
         let allClientsPage = pageRouter.goToClientsPage();
         let parentClient = allClientsPage.createClient();
         allClientsPage = pageRouter.goToClientsPage();

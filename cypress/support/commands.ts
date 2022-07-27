@@ -16,6 +16,7 @@ declare global {
             waitForTableLoaderSpinnerToDisappear(): void
             waitForToasterToDisappear(): void
             selectFromMultiSelectDropDown(by: string, element: string, valueToChoose: string): void
+            sortTableColumnById(columnLocator: string, acSort: boolean): void
         }
     }
 }
@@ -136,6 +137,14 @@ Cypress.Commands.add('selectFromMultiSelectDropDown', (by: string, element: stri
             break;
         }
     }
+})
+
+Cypress.Commands.add('sortTableColumnById', (columnLocator: string, acSort: boolean) => {
+    cy.get(columnLocator).click();
+    if (!acSort) {
+        cy.get(columnLocator).click();
+    }
+    cy.get('.rt-tbody').should('be.visible');
 })
 
 
