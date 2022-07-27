@@ -61,9 +61,9 @@ describe('general tests',() => {
         accountPage.getCompanyEmail();
        
         let clientEmail = RandomFunctions.generateRandomEmail();
-        let emailMessage = RandomFunctions.generateRandomEmailMessage();
+        let emailMessage = RandomFunctions.generateRandomMessage();
         let allClientsPage = pageRouter.goToClientsPage();
-        let client = allClientsPage.createClient(clientEmail);  
+        let client = allClientsPage.createClient(clientEmail,undefined);  
 
         let messagingPage = pageRouter.goToMessagingPage();
         cy.get(client.firstNameAlias).then((clName) => {
@@ -72,7 +72,42 @@ describe('general tests',() => {
         });
         cy.get('@companyEmail').then((accEmail) => {
             let accountEmail = accEmail.toString();
-            messagingPage.isBodyMessageSent(accountEmail,emailMessage);      
+            messagingPage.isBodyMessageSent(accountEmail,emailMessage,'email');      
+        });
+    });
+
+    it('After sending to client sms message via messaging message will appear in logs messages in DB', () => {
+        let accountPage = pageRouter.goToAccountPage();
+        accountPage.getCompanyEmail();
+
+        let smsMessage = RandomFunctions.generateRandomMessage();
+        let phoneNumber = Cypress.env("twilioPhoneNumber");
+        let allClientsPage = pageRouter.goToClientsPage();
+        let client = allClientsPage.createClient(undefined,phoneNumber);  
+
+        let messagingPage = pageRouter.goToMessagingPage();
+        cy.get(client.firstNameAlias).then((clName) => {
+            let clientName = clName.toString();
+            messagingPage.sendSmsToClient(clientName,smsMessage);
+        });
+        cy.get('@companyEmail').then((accEmail) => {
+            let accountEmail = accEmail.toString();
+            messagingPage.isBodyMessageSent(accountEmail,smsMessage,'sms');                
+    });
+});
+
+    it('After sending to client message via messaging  client will appear on messaging search', () => {
+        let smsMessage = RandomFunctions.generateRandomMessage();
+        let phoneNumber = Cypress.env("twilioPhoneNumber");
+        let allClientsPage = pageRouter.goToClientsPage();
+        let client = allClientsPage.createClient(undefined,phoneNumber);  
+
+        let messagingPage = pageRouter.goToMessagingPage();
+        cy.get(client.firstNameAlias).then((clName) => {
+            let clientName = clName.toString();
+            messagingPage.sendSmsToClient(clientName,smsMessage);
+            messagingPage = pageRouter.goToMessagingPage();
+            messagingPage.isClientExistsInMessaging(clientName);
         });
     });
 });
