@@ -1,5 +1,6 @@
 import { HomePageLabels } from "../../infrastructure/homePageLabels";
 import { UserRoles } from "../../infrastructure/userRoles";
+import { CommonOps } from "../../page-objects/common";
 import { HomePage } from "../../page-objects/homePage";
 import { LogInPage } from "../../page-objects/logInPage";
 import { PageRouter } from "../../page-objects/router";
@@ -8,10 +9,12 @@ import { RandomFunctions } from "../../support/randomFunctions";
 describe('general tests',() => {
     let pageRouter: PageRouter;
     let homePage: HomePage;
+    let common: CommonOps;
 
     beforeEach(() => {
         pageRouter = new PageRouter;
         let loginPage = new LogInPage;
+        common = new CommonOps;
         homePage = loginPage.logInWithAccount2();
     });
 
@@ -114,16 +117,18 @@ describe('general tests',() => {
         });
     });
 
-    it('User can clock in and clock out', () => {    
-        homePage.clockIn();
-        homePage.getClockIconStatus();
+    it('User can clock in', () => {    
+        common.clockIn()
+        common.getClockIconStatus();
         cy.get('@clockStatus').then((statusClock) => {
             let clockStatus = statusClock.toString();
             expect(clockStatus).to.contain('clockGreen');
         });
-
-        homePage.clockOut();
-        homePage.getClockIconStatus();
+    });
+    
+    it('User can clock out', () => {
+        common.clockOut();
+        common.getClockIconStatus();
         cy.get('@clockStatus').then((statusClock) => {
             let clockStatus = statusClock.toString();
             expect(clockStatus).to.contain('clockRed');
@@ -146,6 +151,8 @@ describe('general tests',() => {
         });
     });
 
-    it('MakeSureLeftAsideMenuLinksWorksWhileItMinimized', () => {
+    it.only('MakeSureLeftAsideMenuLinksWorksWhileItMinimized', () => {
+        common.minimizeLeftMenu();
+        common.checkLinksWorksOnAsideMenuMinimized();
     });
 });
