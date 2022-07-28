@@ -29,7 +29,7 @@ describe('Clients tests', () => {
         let job = client.createJobToNewJobPage();
         cy.get(job.alias).then((jobId) => {
             let jobsPage = pageRouter.goToJobsPage();
-            jobsPage.sortJobTableById(false);
+            cy.sortTableColumnById(".rt-table .rt-th:nth-child(2)", false);
             jobsPage.isJobsTableContainsJobId(jobId);
         });
     });
@@ -216,7 +216,7 @@ describe('Clients tests', () => {
                 let invoice = parentClient.createInvoiceForChildClientFromSubClientTab(childClientName);
                 cy.get(invoice.alias).then((invoiceId) => {
                     let allInvoicesPage = pageRouter.goToInvoicePage();
-                    allInvoicesPage.validateInvoiceExistByJobIdAndClient(invoiceId, childClientName)
+                    allInvoicesPage.validateInvoiceExistByInvoiceIdAndClient(invoiceId, childClientName)
                 });
             });
         });
@@ -237,13 +237,13 @@ describe('Clients tests', () => {
                 let lead = parentClient.createLeadForChildClientFromSubClientTab(childClientName);
                 cy.get(lead.alias).then((leadId) => {
                     let allLeadsPage = pageRouter.goToLeadsPage();
-                    allLeadsPage.validateLeadExistByJobIdAndClient(leadId, childClientName)
+                    allLeadsPage.validateLeadExistByLeadIdAndClient(leadId, childClientName)
                 });
             });
         });
     });
 
-    it.only('Creating estimate for sub client inside parent will create it as it should', () => {
+    it('Creating estimate for sub client inside parent will create it as it should', () => {
         let allClientsPage = pageRouter.goToClientsPage();
         let parentClient = allClientsPage.createClient();
         allClientsPage = pageRouter.goToClientsPage();

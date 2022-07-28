@@ -11,7 +11,7 @@ import {LeadPage} from "../Lead/LeadPage";
 import { AllClientsPage } from "./allClientsPage";
 
 export class ClientPage {
-    readonly subClientLocator: string = "._singleTab:nth-child(9)";
+    readonly subClientTabLocator: string = "._singleTab:nth-child(9)";
     private static clientCounter: number = 0;
     alias: string;
     private _note: string | undefined;
@@ -48,7 +48,7 @@ export class ClientPage {
         cy.get("[data-testid='pop-menu-span'] .button").click();
     }
 
-    private chooseCreateJob(){
+    private chooseCreateJobFromActionMenu(){
         cy.get('a').contains('Create Job').click();
     }
 
@@ -58,7 +58,7 @@ export class ClientPage {
 
     private ClickCreateJob(): CreateJobPage {
         this.ClickActionMenu();
-        this.chooseCreateJob();
+        this.chooseCreateJobFromActionMenu();
         return new CreateJobPage();
     }
 
@@ -184,7 +184,7 @@ export class ClientPage {
     }
 
     goToSubClientsTab(){
-        cy.get(this.subClientLocator).should('contain.text','Sub clients').click();
+        cy.get(this.subClientTabLocator).should('contain.text','Sub clients').click();
         cy.get('.rt-tr-group').should('be.visible');
     }
 
@@ -214,18 +214,18 @@ export class ClientPage {
 
     validateParentClientDontContainsChildClient(childClientName: JQuery<HTMLElement>)
     {
-        cy.get(this.subClientLocator).should('not.exist','Sub clients');
+        cy.get(this.subClientTabLocator).should('not.exist','Sub clients');
     }
 
     private chooseSubClient(childClientName: JQuery<HTMLElement>)
     {
-        cy.get('._selected .rt-tr-group', {timeout: 10000}).filter(`:contains("${childClientName.toString()}")`).find("[data-testid='pop-menu-span']").click();
+        cy.get('._selected .rt-tr-group .rt-td:nth-child(1)', {timeout: 10000}).should('contain.text', childClientName.toString(),{ matchCase: false }).siblings('div').children('div').children('div').children('span').click();
     }
 
     private createJobForSubClient(childClientName: JQuery<HTMLElement>): CreateJobPage
     {
         this.chooseSubClient(childClientName);
-        this.chooseCreateJob();
+        this.chooseCreateJobFromActionMenu();
         return new CreateJobPage();
     }
 

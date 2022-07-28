@@ -8,17 +8,9 @@ export class AllJobsPage {
         cy.validateTextAppearInElements('.rt-tbody .rt-td:nth-child(2) .jobs-module__quickJob___3NbDw', idToSearch )
     }
 
-    sortJobTableById(acSort: boolean){
-        cy.get('div').contains('Job ID').click();
-        if (!acSort){
-            cy.get('div').contains('Job ID').click();
-        }
-        cy.get('.rt-tbody').should('be.visible');
-    }
-
     validateJobExistByJobIdAndClient(jobId: JQuery<HTMLElement>, clientName: JQuery<HTMLElement>)
     {
-        this.sortJobTableById(false);
-        cy.get('.rt-tr-group.pointer .rt-tr', {timeout: 10000}).filter(`:contains("${jobId.toString()}")`).should('contain.text', clientName.toString());
+        cy.sortTableColumnById(".rt-table .rt-th:nth-child(2)",false);
+        cy.get('.rt-tbody .rt-td:nth-child(2) .jobs-module__quickJob___3NbDw', {timeout: 10000}).contains(jobId.toString()).parent().siblings('div').children('span').children('a').should('contain.text', clientName.toString(), { matchCase: false });
     }
 }
