@@ -243,7 +243,7 @@ describe('Clients tests', () => {
         });
     });
 
-    it.only('Creating estimate for sub client inside parent will create it as it should', () => {
+    it('Creating estimate for sub client inside parent will create it as it should', () => {
         let allClientsPage = pageRouter.goToClientsPage();
         let parentClient = allClientsPage.createClient();
         allClientsPage = pageRouter.goToClientsPage();
