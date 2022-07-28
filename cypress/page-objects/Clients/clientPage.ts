@@ -219,7 +219,7 @@ export class ClientPage {
 
     private chooseSubClient(childClientName: JQuery<HTMLElement>)
     {
-        cy.get('._selected .rt-tr-group', {timeout: 10000}).filter(`:contains("${childClientName.toString()}")`).find("[data-testid='pop-menu-span']").click();
+        cy.get('._selected .rt-tr-group .rt-td:nth-child(1)', {timeout: 10000}).should('contain.text', childClientName.toString(),{ matchCase: false }).siblings('div').children('div').children('div').children('span').click();
     }
 
     private createJobForSubClient(childClientName: JQuery<HTMLElement>): CreateJobPage
